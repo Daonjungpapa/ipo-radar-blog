@@ -1,0 +1,3 @@
+baseURL = "https://ipo-radar.example.github.io/"
+languageCode = "ko-kr"
+title = "IPO 퀀트 수급 레이더"
