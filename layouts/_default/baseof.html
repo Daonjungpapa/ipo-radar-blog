@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Title }} 자동 분석 리포트{{ end }}" />
+  <link rel="canonical" href="{{ .Permalink }}" />
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Title }} 자동 분석 리포트{{ end }}" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <style>
+    :root { --navy: #1F4E78; --bg: #F8FAFC; --card: #FFFFFF; --text: #0F172A; --muted: #475569; --border: #E2E8F0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "AppleGothic", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    header { background: var(--navy); color: #fff; padding: 18px 20px; }
+    header .wrap { max-width: 920px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    header a { color: #fff; text-decoration: none; font-weight: 700; font-size: 1.15rem; }
+    main { max-width: 920px; margin: 28px auto; padding: 28px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 2px 8px rgba(15,23,42,0.04); }
+    h1, h2, h3 { color: var(--navy); line-height: 1.35; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.95rem; overflow-x: auto; display: block; }
+    th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; }
+    th { background: var(--navy); color: #fff; font-weight: 600; }
+    tr:nth-child(even) td { background: #F8FAFC; }
+    img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); margin: 16px 0; }
+    blockquote { margin: 18px 0; padding: 14px 18px; background: #EFF6FF; border-left: 4px solid var(--navy); border-radius: 4px; }
+    code { background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    a { color: #1D4ED8; }
+    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 18px; }
+    .post-list { list-style: none; padding: 0; }
+    .post-list li { padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .post-list a { font-size: 1.1rem; font-weight: 600; text-decoration: none; color: var(--navy); }
+    footer { max-width: 920px; margin: 24px auto 48px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
+      <a href="{{ "posts/" | relURL }}" style="font-size:0.95rem;font-weight:500;">전체 리포트</a>
+    </div>
+  </header>
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer>
+    <p>© {{ now.Format "2006" }} {{ .Site.Title }} · Automated Quant &amp; Spec Intelligence</p>
+  </footer>
+</body>
+</html>

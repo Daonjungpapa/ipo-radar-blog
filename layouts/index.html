@@ -1,0 +1,12 @@
+{{ define "main" }}
+<h1>{{ .Site.Title }}</h1>
+<p>데이터 기반 자동 분석 리포트 아카이브입니다.</p>
+<ul class="post-list">
+  {{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <div class="meta">{{ .Date.Format "2006-01-02 15:04" }}{{ with .Description }} · {{ . }}{{ end }}</div>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

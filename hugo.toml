@@ -1,3 +1,10 @@
-baseURL = "https://ipo-radar.example.github.io/"
+baseURL = "https://daonjungpapa.github.io/ipo-radar-blog/"
 languageCode = "ko-kr"
 title = "IPO 퀀트 수급 레이더"
+enableRobotsTXT = true
+
+[permalinks]
+  posts = "/posts/:slug/"
+
+[markup.goldmark.renderer]
+  unsafe = true
