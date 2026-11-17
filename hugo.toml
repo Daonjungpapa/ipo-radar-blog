@@ -4,7 +4,7 @@ title = "IPO 퀀트 수급 레이더"
 enableRobotsTXT = true
 
 [permalinks]
-  posts = "/posts/:slug/"
+  posts = "/posts/:contentbasename/"
 
 [markup.goldmark.renderer]
   unsafe = true
