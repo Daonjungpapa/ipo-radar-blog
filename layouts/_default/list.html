@@ -1,11 +1,91 @@
 {{ define "main" }}
-<h1>{{ .Title | default .Site.Title }}</h1>
-<ul class="post-list">
-  {{ range .Pages.ByDate.Reverse }}
-  <li>
-    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-    <div class="meta">{{ .Date.Format "2006-01-02 15:04" }}{{ with .Description }} · {{ . }}{{ end }}</div>
-  </li>
-  {{ end }}
-</ul>
+{{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
+{{- $isTax := eq .Kind "taxonomy" -}}
+
+<section class="hero-panel">
+  <div class="eyebrow-badge">{{ .Site.Params.trackCode | default "ARCHIVE" }} · {{ if eq .Section "posts" }}REPORT ARCHIVE{{ else if $isTax }}TAXONOMY INDEX{{ else }}TOPIC FEED{{ end }}</div>
+  <h1>{{ if eq .Section "posts" }}전체 리포트 아카이브{{ else }}{{ .Title | default .Site.Title }}{{ end }}</h1>
+  <p class="hero-lead">
+    {{- if eq .Section "posts" -}}
+      {{ .Site.Params.heroSummary }}
+    {{- else if $isTax -}}
+      {{ .Site.Title }} 내 등록된 {{ .Title }} 분류 인덱스입니다. 관심 주제를 선택해 관련 분석 리포트를 모아볼 수 있습니다.
+    {{- else -}}
+      "{{ .Title }}" 주제와 연관된 정량 분석 및 요약 리포트 목록입니다.
+    {{- end -}}
+  </p>
+</section>
+
+{{- if .Site.Taxonomies.categories -}}
+<nav class="taxonomy-strip" aria-label="카테고리 필터">
+  <span class="strip-label">FILTER</span>
+  <a class="chip" href="{{ "posts/" | relURL }}">전체 리포트 <span class="chip-count">{{ len (where .Site.RegularPages "Section" "posts") }}</span></a>
+  {{- range .Site.Taxonomies.categories.ByCount -}}
+  <a class="chip" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="chip-count">{{ .Count }}</span></a>
+  {{- end -}}
+</nav>
+{{- end -}}
+
+{{- if $isTax -}}
+<div class="card-grid">
+  {{- range .Pages -}}
+  <article class="report-card">
+    <div class="card-meta-row">
+      <span class="badge {{ if $isTender }}badge-gold{{ else }}badge-emerald{{ end }}">분류 항목</span>
+      <span class="mono-meta">수록 리포트 {{ len .Pages }}건</span>
+    </div>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <div class="card-footer-row">
+      <span class="mono-meta">{{ .RelPermalink }}</span>
+      <a class="read-more" href="{{ .RelPermalink }}">해당 리포트 모아보기 →</a>
+    </div>
+  </article>
+  {{- end -}}
+</div>
+{{- else -}}
+<section aria-label="리포트 목록">
+  <div class="section-head">
+    <h2>수록 리포트</h2>
+    <span class="section-count">총 {{ len .Pages }}건</span>
+  </div>
+  <div class="card-grid">
+    {{- range .Pages.ByDate.Reverse -}}
+    {{- $rt := .ReadingTime -}}
+    {{- if lt $rt 1 }}{{ $rt = 1 }}{{ end -}}
+    <article class="report-card">
+      <div class="card-meta-row">
+        {{- with .GetTerms "categories" -}}
+          {{- range . -}}
+          <a class="badge {{ if $isTender }}badge-gold{{ else }}badge-emerald{{ end }}" href="{{ .RelPermalink }}" style="text-decoration:none;">{{ .LinkTitle }}</a>
+          {{- end -}}
+        {{- else -}}
+          <span class="badge {{ if $isTender }}badge-gold{{ else }}badge-emerald{{ end }}">{{ $.Site.Params.trackCode | default "REPORT" }}</span>
+        {{- end -}}
+        {{- if not .Date.IsZero -}}
+        <time class="mono-meta" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02 15:04" }}</time>
+        {{- end -}}
+        <span class="mono-meta">· 읽기 약 {{ $rt }}분</span>
+      </div>
+
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+
+      {{- with .Description -}}
+      <p class="card-desc">{{ . }}</p>
+      {{- else -}}
+      <p class="card-desc">{{ .Summary | plainify | truncate 140 }}</p>
+      {{- end -}}
+
+      <div class="card-footer-row">
+        <div class="tag-row">
+          {{- range first 4 (.GetTerms "tags") -}}
+          <a class="tag-pill" href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
+          {{- end -}}
+        </div>
+        <a class="read-more" href="{{ .RelPermalink }}">리포트 전문 보기 →</a>
+      </div>
+    </article>
+    {{- end -}}
+  </div>
+</section>
+{{- end -}}
 {{ end }}
