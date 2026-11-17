@@ -58,7 +58,9 @@
   {{- end -}}
 
   <div class="prose">
+    {{- $imgPrefix := "images/" | relURL -}}
     {{- $rendered := .Content | replaceRE "(?s)<table([^>]*)>(.*?)</table>" "<div class=\"table-wrap\"><table$1>$2</table></div>" -}}
+    {{- $rendered = $rendered | replaceRE `(<img[^>]*\ssrc=["'])/images/` (printf "${1}%s" $imgPrefix) -}}
     {{ $rendered | safeHTML }}
   </div>
 
