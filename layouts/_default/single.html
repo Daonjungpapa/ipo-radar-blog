@@ -133,14 +133,19 @@
     {{- else -}}
     <aside class="editorial-slot" aria-label="리서치 허브 안내">
       <div class="editorial-slot-label">{{ .Site.Params.brandName | default "퀀트 & 입찰 인텔리전스 랩" }} · BRIEFING DESK</div>
+      {{- if $isTender -}}
+      <h4>맞춤형 입찰 알림 파일럿 및 사내 폐쇄망 구축 상담</h4>
+      <p>본 아카이브는 조달청 나라장터(G2B)·공공데이터포털 원문 공고를 기반으로 자동 요약됩니다. 14일 무료 입찰 알림 파일럿 신청, 데이터 정정 제보 및 사내 폐쇄망 시방서 비교 도구 상담은 공식 문의 페이지를 이용해 주세요.</p>
+      {{- else -}}
       <h4>더 많은 퀀트 수급·공공입찰 리포트를 한곳에서 확인하세요</h4>
-      <p>본 아카이브는 DART 전자공시와 나라장터(G2B) 원문 공고를 교차 검증하여 매일 업데이트됩니다. 데이터 오류 제보 및 B2B 구축 문의는 공식 문의 페이지를 이용해 주세요.</p>
+      <p>본 아카이브는 DART 전자공시와 나라장터(G2B) 원문 공고를 교차 검증하여 매일 업데이트됩니다. 공시 데이터 정정 제보 및 아카이브 문의는 공식 문의 페이지를 이용해 주세요.</p>
+      {{- end -}}
       <div class="slot-actions">
         <a class="btn btn-primary" href="{{ "posts/" | relURL }}">전체 리포트 목록</a>
         {{- with .Site.Params.siblingUrl -}}
         <a class="btn btn-outline" href="{{ . }}">{{ $.Site.Params.siblingName }} ↗</a>
         {{- end -}}
-        <a class="btn btn-outline" href="{{ "contact/" | relURL }}">문의 · 데이터 제보</a>
+        <a class="btn btn-outline" href="{{ "contact/" | relURL }}">{{ if $isTender }}14일 무료 파일럿 · B2B 문의{{ else }}문의 · 데이터 제보{{ end }}</a>
       </div>
     </aside>
     {{- end -}}
