@@ -73,6 +73,54 @@
     </div>
     {{- end -}}
 
+    {{- $currentPermalink := .RelPermalink -}}
+    {{- $allPosts := (where .Site.RegularPages "Section" "posts").ByDate.Reverse -}}
+    {{- $related := slice -}}
+    {{- range $allPosts -}}
+      {{- if and (ne .RelPermalink $currentPermalink) (lt (len $related) 3) -}}
+        {{- $related = $related | append . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if gt (len $related) 0 -}}
+    <section class="related-reports" aria-labelledby="related-reports-heading">
+      <div class="related-head">
+        <div>
+          <div class="related-eyebrow">RELATED REPORTS · FURTHER READING</div>
+          <h3 id="related-reports-heading">함께 확인하면 좋은 최근 리포트</h3>
+        </div>
+        <a class="related-all-link" href="{{ "posts/" | relURL }}">전체 {{ len $allPosts }}건 보기 →</a>
+      </div>
+      <div class="related-grid">
+        {{- range $related -}}
+        {{- $rtRel := .ReadingTime -}}
+        {{- if lt $rtRel 1 }}{{ $rtRel = 1 }}{{ end -}}
+        <a class="related-card" href="{{ .RelPermalink }}">
+          <div class="related-meta">
+            <span class="badge {{ if $isTender }}badge-gold{{ else }}badge-emerald{{ end }}">
+              {{- with .GetTerms "categories" -}}
+                {{- range first 1 . -}}{{ .LinkTitle }}{{- end -}}
+              {{- else -}}
+                {{- $.Site.Params.trackCode | default "REPORT" -}}
+              {{- end -}}
+            </span>
+            {{- if not .Date.IsZero -}}
+            <time class="mono-meta" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
+            {{- end -}}
+            <span class="mono-meta">· {{ $rtRel }}분</span>
+          </div>
+          <div class="related-title">{{ .Title }}</div>
+          {{- with .Description -}}
+          <p class="related-desc">{{ . | truncate 88 }}</p>
+          {{- else -}}
+          <p class="related-desc">{{ .Summary | plainify | truncate 88 }}</p>
+          {{- end -}}
+          <span class="related-cta">리포트 전문 보기 →</span>
+        </a>
+        {{- end -}}
+      </div>
+    </section>
+    {{- end -}}
+
     {{- if $adsense -}}
     <aside class="ad-slot" aria-label="하단 광고 영역">
       <ins class="adsbygoogle"

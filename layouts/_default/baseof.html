@@ -739,6 +739,101 @@
       line-height: 1.4;
     }
 
+    /* Internal Related Reports (Dwell-Time & Session PV Loop) */
+    .related-reports {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .related-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px 16px;
+      margin-bottom: 14px;
+    }
+    .related-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 4px;
+    }
+    .related-head h3 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .related-all-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+    }
+    .related-all-link:hover {
+      color: var(--emerald);
+      text-decoration: underline;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .related-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 16px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--track-accent);
+      background: var(--bg);
+      text-decoration: none;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+    }
+    .related-card:hover {
+      transform: translateY(-2px);
+      background: #FFFFFF;
+      border-color: var(--navy);
+      box-shadow: var(--shadow-hover);
+    }
+    .related-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+    .related-title {
+      font-family: var(--font-serif);
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.44;
+    }
+    .related-card:hover .related-title {
+      color: var(--navy);
+    }
+    .related-desc {
+      margin: 0;
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .related-cta {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .related-card:hover .related-cta {
+      color: var(--track-accent);
+    }
+
     .cross-track-card {
       margin-top: 28px;
       background: var(--card);

@@ -3,6 +3,11 @@
 # 1) Create static/CNAME containing your custom domain (e.g. ipo.yourdomain.com)
 # 2) Update baseURL below to "https://ipo.yourdomain.com/"
 # 3) Configure DNS CNAME/A records pointing to daonjungpapa.github.io and enable Enforce HTTPS in GitHub Pages.
+#
+# AdSense & ads.txt Readiness Note:
+# - Once Google AdSense issues your Publisher ID (ca-pub-XXXXXXXXXXXXXXXX), set params.adsenseClient below
+#   and place `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0` in the root domain's `ads.txt`
+#   (repos/daonjungpapa.github.io/ads.txt for subpath hosting, or static/ads.txt after custom domain setup).
 baseURL = "https://daonjungpapa.github.io/ipo-radar-blog/"
 languageCode = "ko-kr"
 title = "IPO 퀀트 수급 레이더"
