@@ -21,7 +21,7 @@ enableRobotsTXT = true
 
 [params]
   adsenseClient = ""
-  ga4MeasurementId = ""
+  ga4MeasurementId = "G-2SCVZHNK8C"
   brandName = "퀀트 & 입찰 인텔리전스 랩"
   brandEn = "Quant & Tender Intelligence Lab"
   hubUrl = "https://daonjungpapa.github.io/"
