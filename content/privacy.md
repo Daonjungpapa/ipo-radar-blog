@@ -9,7 +9,7 @@ docBadge: "PRIVACY POLICY"
 description: "퀀트 & 입찰 인텔리전스 랩(IPO 퀀트 수급 레이더)의 개인정보 처리 기준, 쿠키·GA4·AdSense·제휴 링크, 국외 이전 5요소 및 보호책임자 안내입니다."
 ---
 
-**퀀트 & 입찰 인텔리전스 랩(Quant & Tender Intelligence Lab)**이 운영하는 **IPO 퀀트 수급 레이더**(`https://daonjungpapa.github.io/ipo-radar-blog/`, 이하 "본 사이트")는 「개인정보 보호법」 등 관련 법령을 준수하며, 이용자의 개인정보와 권익을 보호하기 위해 다음과 같이 개인정보처리방침을 수립·공개합니다.
+**퀀트 & 입찰 인텔리전스 랩(Quant & Tender Intelligence Lab)**이 운영하는 **IPO 퀀트 수급 레이더**(`https://ipo.qtilab.com/`, 이하 "본 사이트")는 「개인정보 보호법」 등 관련 법령을 준수하며, 이용자의 개인정보와 권익을 보호하기 위해 다음과 같이 개인정보처리방침을 수립·공개합니다.
 
 ---
 

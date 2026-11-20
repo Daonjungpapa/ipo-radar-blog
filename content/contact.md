@@ -19,7 +19,7 @@ description: "DART 공시 데이터 정정 제보, 정량 지표 피드백, 데�
 | :--- | :--- | :--- |
 | **대표 이메일 (정정·정책·제휴)** | `lastima33@gmail.com` | 영업일 기준 1~2일 이내 순차 회신 |
 | **공식 네이버 블로그 브리핑** | [퀀트 & 입찰 인텔리전스 랩 (Naver)](https://blog.naver.com/lastima33) | 종목별 요약 브리핑 및 공개 댓글 소통 |
-| **통합 리서치 허브 포털** | [daonjungpapa.github.io](https://daonjungpapa.github.io/) | Track A(공모주) · Track B(공공입찰) 통합 포털 |
+| **통합 리서치 허브 포털** | [daonjungpapa.github.io](https://qtilab.com/) | Track A(공모주) · Track B(공공입찰) 통합 포털 |
 
 > **알림 채널 안내:** 텔레그램 공개 브리핑 채널 및 주간 정량 데이터 요약본 연동 링크는 채널 연동 확정과 동시에 본 페이지와 각 리포트 하단에 순차 업데이트됩니다. 구독 알림 안내를 원하시는 경우 위 이메일로 문의해 주세요.
 
@@ -35,7 +35,7 @@ description: "DART 공시 데이터 정정 제보, 정량 지표 피드백, 데�
 2. **광고·데이터 제휴 및 아카이브 문의:**
    - 소속 기관/매체명, 협업 목적, 희망 회신 연락처
 3. **B2B 14일 무료 입찰 알림 파일럿 & 사내 폐쇄망 구축 상담:**
-   - 조달청 나라장터(G2B) 입찰 시방서 요약 및 규격 대비표(Compliance Matrix) 온프레미스 구축 상담은 [공공입찰 시방서 인텔리전스 문의 페이지](https://daonjungpapa.github.io/b2b-tender-blog/contact/)에서 확인 및 신청하실 수 있습니다.
+   - 조달청 나라장터(G2B) 입찰 시방서 요약 및 규격 대비표(Compliance Matrix) 온프레미스 구축 상담은 [공공입찰 시방서 인텔리전스 문의 페이지](https://tender.qtilab.com/contact/)에서 확인 및 신청하실 수 있습니다.
 
 ---
 

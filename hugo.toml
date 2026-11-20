@@ -8,7 +8,7 @@
 # - Once Google AdSense issues your Publisher ID (ca-pub-XXXXXXXXXXXXXXXX), set params.adsenseClient below
 #   and place `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0` in the root domain's `ads.txt`
 #   (repos/daonjungpapa.github.io/ads.txt for subpath hosting, or static/ads.txt after custom domain setup).
-baseURL = "https://daonjungpapa.github.io/ipo-radar-blog/"
+baseURL = "https://ipo.qtilab.com/"
 languageCode = "ko-kr"
 title = "IPO 퀀트 수급 레이더"
 enableRobotsTXT = true
@@ -24,9 +24,9 @@ enableRobotsTXT = true
   ga4MeasurementId = "G-2SCVZHNK8C"
   brandName = "퀀트 & 입찰 인텔리전스 랩"
   brandEn = "Quant & Tender Intelligence Lab"
-  hubUrl = "https://daonjungpapa.github.io/"
+  hubUrl = "https://qtilab.com/"
   siblingName = "공공입찰 시방서 인텔리전스"
-  siblingUrl = "https://daonjungpapa.github.io/b2b-tender-blog/"
+  siblingUrl = "https://tender.qtilab.com/"
   trackCode = "TRACK A · DART IPO"
   accentRole = "ipo"
   heroSummary = "금융감독원 전자공시(DART) 증권발행실적보고서·투자설명서를 기반으로 기관 수요예측 경쟁률, 의무보유확약 비율, 상장일 유통가능 물량 및 과거 유사 종목 시초가 백테스팅 지표를 정량 분석합니다."

@@ -2,7 +2,7 @@
 {{- $ga4 := strings.TrimSpace (.Site.Params.ga4MeasurementId | default "") -}}
 {{- $brand := .Site.Params.brandName | default "퀀트 & 입찰 인텔리전스 랩" -}}
 {{- $brandEn := .Site.Params.brandEn | default "Quant & Tender Intelligence Lab" -}}
-{{- $hubUrl := .Site.Params.hubUrl | default "https://daonjungpapa.github.io/" -}}
+{{- $hubUrl := .Site.Params.hubUrl | default "https://qtilab.com/" -}}
 {{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
 {{- $desc := "" -}}
 {{- with .Description -}}
