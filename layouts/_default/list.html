@@ -88,4 +88,21 @@
   </div>
 </section>
 {{- end -}}
+
+<aside class="cross-track-card" aria-label="리서치 네트워크 안내">
+  <div>
+    <div class="editorial-slot-label">{{ .Site.Params.brandName | default "퀀트 & 입찰 인텔리전스 랩" }} · BRIEFING DESK</div>
+    <strong style="color:var(--navy);font-family:var(--font-serif);font-size:1.05rem;">통합 연구 허브 및 교차 트랙 리포트</strong>
+    <p style="margin:4px 0 0;color:var(--muted);font-size:0.9rem;">
+      전체 아카이브 외 자매 리서치 트랙과 데이터 정정·제휴 안내 데스크를 바로 이용할 수 있습니다.
+    </p>
+  </div>
+  <div class="slot-actions">
+    <a class="btn btn-primary" href="{{ .Site.Params.hubUrl | default "https://qtilab.com/" }}">허브 포털 이동</a>
+    {{- with .Site.Params.siblingUrl -}}
+    <a class="btn btn-outline" href="{{ . }}">{{ $.Site.Params.siblingName }} ↗</a>
+    {{- end -}}
+    <a class="btn btn-outline" href="{{ "contact/" | relURL }}">문의 · 데이터 제보</a>
+  </div>
+</aside>
 {{ end }}

@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{- $adsense := strings.TrimSpace (.Site.Params.adsenseClient | default "") -}}
 {{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
 {{- $posts := (where .Site.RegularPages "Section" "posts").ByDate.Reverse -}}
 
@@ -96,9 +97,21 @@
   </div>
 </section>
 
+{{- if $adsense -}}
+<aside class="ad-slot ad-slot-home" aria-label="홈 하단 광고 영역">
+  <span class="ad-label">ADVERTISEMENT</span>
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="{{ $adsense }}"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</aside>
+{{- end -}}
+
 <aside class="cross-track-card" aria-label="리서치 네트워크 안내">
   <div>
-    <div class="editorial-slot-label">{{ .Site.Params.brandName | default "퀀트 & 입찰 인텔리전스 랩" }}</div>
+    <div class="editorial-slot-label">{{ .Site.Params.brandName | default "퀀트 & 입찰 인텔리전스 랩" }} · CROSS-TRACK HUB</div>
     <strong style="color:var(--navy);font-family:var(--font-serif);font-size:1.05rem;">통합 연구 허브 및 교차 트랙 리포트</strong>
     <p style="margin:4px 0 0;color:var(--muted);font-size:0.9rem;">
       공모주 수급 분석과 나라장터 시방서 인텔리전스 아카이브를 함께 탐색해 보세요.
@@ -109,6 +122,7 @@
     {{- with .Site.Params.siblingUrl -}}
     <a class="btn btn-outline" href="{{ . }}">{{ $.Site.Params.siblingName }} ↗</a>
     {{- end -}}
+    <a class="btn btn-outline" href="{{ "contact/" | relURL }}">문의 · 데이터 제보</a>
   </div>
 </aside>
 {{ end }}
