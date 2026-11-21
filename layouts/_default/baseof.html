@@ -1284,6 +1284,151 @@
       line-height: 1.5;
     }
 
+    /* Wave 5 Master Prompt v2.0: 5-Variable Weighted IPO Supply Intensity & Intraday Simulator */
+    .quant-sim-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--emerald);
+      border-radius: 14px;
+      padding: 28px 32px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 28px;
+    }
+    .post-quant-sim-panel {
+      margin: 30px 0 14px;
+      padding: 24px 26px;
+      border-top-color: var(--navy);
+    }
+    .sim-preset-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+    .sim-preset-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-right: 4px;
+      text-transform: uppercase;
+    }
+    .sim-preset-chip {
+      appearance: none;
+      border: 1px solid var(--border-strong);
+      background: #FFFFFF;
+      color: var(--text-body);
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .sim-preset-chip:hover,
+    .sim-preset-chip.is-active {
+      background: var(--navy);
+      color: #FFFFFF;
+      border-color: var(--navy);
+    }
+    .sim-controls-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .sim-ctrl-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 13px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .sim-ctrl-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+    }
+    .sim-ctrl-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .sim-weight-pill {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: var(--navy-soft);
+      color: var(--navy);
+      border: 1px solid #BFDBFE;
+    }
+    .sim-num-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .sim-num-input {
+      width: 100%;
+      padding: 5px 8px;
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: #FFFFFF;
+    }
+    .sim-unit {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--subtle);
+      white-space: nowrap;
+    }
+    .sim-range-input {
+      width: 100%;
+      accent-color: var(--navy);
+      cursor: pointer;
+      margin: 0;
+    }
+    .sim-score-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--emerald-soft);
+      color: #0B5E57;
+      border: 1px solid var(--emerald-border);
+    }
+    .sim-prefill-banner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 14px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      border-radius: 9px;
+      background: var(--emerald-soft);
+      border: 1px solid var(--emerald-border);
+      color: #0B5E57;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
     .site-footer {
       border-top: 1px solid var(--border);
       background: #FFFFFF;
@@ -1348,11 +1493,15 @@
       .hero-panel, .report-card { animation: none; }
     }
 
+    @media (max-width: 960px) {
+      .sim-controls-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
     @media (max-width: 760px) {
       .header-inner { padding: 14px 16px; }
       .shell { padding: 20px 16px 40px; }
       .hero-panel { padding: 24px 20px; }
-      .market-alpha-dashboard { padding: 20px 18px; }
+      .market-alpha-dashboard, .quant-sim-panel { padding: 20px 18px; }
       .alpha-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .pillar-grid { grid-template-columns: 1fr; }
       .report-card { padding: 20px 18px; }
@@ -1364,7 +1513,7 @@
       .table-scroll-hint {
         display: block;
       }
-      .alpha-kpi-grid { grid-template-columns: 1fr; }
+      .alpha-kpi-grid, .sim-controls-grid { grid-template-columns: 1fr; }
       #back-to-top {
         right: 16px;
         bottom: 18px;
@@ -1659,6 +1808,442 @@
             }
           }
         }
+      });
+
+      /* Wave 5 Master Prompt v2.0: 5-Variable Weighted IPO Supply Intensity & Intraday High Simulator */
+      var HISTORICAL_IPO_DB = [
+        {
+          code: '468670', name: '브릴스', market: 'KOSDAQ', url: '/posts/20260922-468670-브릴스/',
+          price: 15000, comp: 1187.74, lockup: 85.39, nominalEok: 585.4, netEok: 356.2,
+          tradeValEok: 3688.2, supplyIntensity: 1035.5,
+          openRet: 84.10, highRet: 94.00, lowRet: 76.00, closeRet: 78.60, wickPct: 7.94,
+          peakSlot: '09:15~10:00', marketTemp: 61.2,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 42.0, price: 84.10, pattern: '초고확약(85.4%) 유통 잠김으로 개장 직후 호가 공백 및 VI 발동' },
+            { slot: '09:15~10:00', stage: '② 미확약 1차 소화 · 당일 고점', vol: 20.4, price: 88.50, pattern: '미확약(14.6%) 조기 소화 후 당일 최고가(+94.00%) 도달' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 13.1, price: 83.20, pattern: '시초가(+84.1%) 및 VWAP 상단 강력한 지지 확인' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 6.5, price: 81.00, pattern: '거래대금 비중 6.5% 축소, +80% 상단 박스권 유지' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 분기', vol: 8.2, price: 80.20, pattern: '누적 수급강도 930% 돌파 후에도 매도 압력 제한적' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 데이트레이딩 청산', vol: 9.8, price: 78.60, pattern: '윗꼬리 밀림폭 -7.94% 방어하며 +78.60% 고점권 마감' }
+          ]
+        },
+        {
+          code: '475150', name: '산일전기', market: 'KOSPI', url: '',
+          price: 35000, comp: 1184.50, lockup: 42.70, nominalEok: 560.0, netEok: 397.3,
+          tradeValEok: 3692.6, supplyIntensity: 929.5,
+          openRet: 91.40, highRet: 121.43, lowRet: 88.00, closeRet: 118.50, wickPct: 1.32,
+          peakSlot: '14:30~15:30', marketTemp: 58.4,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 44.5, price: 91.40, pattern: '개장 15분 만에 거래대금 1,643억 유입, 시가 +91.40% 출발' },
+            { slot: '09:15~10:00', stage: '② 미확약 1차 소화 · VWAP 돌파', vol: 21.0, price: 98.20, pattern: '미확약 기관 차익물량 전량 흡수하며 VWAP 상향 돌파' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 12.5, price: 104.50, pattern: '공모가 대비 +100% 돌파 및 기관 순매수 지속' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 6.2, price: 103.80, pattern: '점심 구간 +103% 고점 박스권 견조한 지지' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 분기', vol: 7.3, price: 111.00, pattern: '연기금·운용사 패시브/액티브 편입 수요 유입으로 고점 경신' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 당일 최고가 마감', vol: 8.5, price: 118.50, pattern: '당일 최고가(+121.43%) 근접한 +118.50%(윗꼬리 -1.32%) 마감' }
+          ]
+        },
+        {
+          code: '476060', name: '전진건설로봇', market: 'KOSPI', url: '',
+          price: 16500, comp: 920.10, lockup: 35.80, nominalEok: 430.0, netEok: 324.1,
+          tradeValEok: 2201.7, supplyIntensity: 679.4,
+          openRet: 72.00, highRet: 82.73, lowRet: 63.03, closeRet: 65.40, wickPct: 9.49,
+          peakSlot: '09:15~10:00', marketTemp: 64.7,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 45.2, price: 72.00, pattern: '실질 유통금액 324.1억 경량 구조로 개장 직후 수급 집중' },
+            { slot: '09:15~10:00', stage: '② 미확약 1차 소화 · 당일 고점', vol: 21.8, price: 74.80, pattern: '09:15~10:00 구간 당일 최고가(+82.73%) 도달 후 차익실현 소화' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 12.0, price: 69.50, pattern: '오전 VWAP 지지선 테스트 및 손바뀜' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 6.0, price: 67.20, pattern: '점심 거래 소강 및 +67% 구간 횡보' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 분기', vol: 6.8, price: 66.80, pattern: '오후 기관 수급 균형 유지' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 데이트레이딩 청산', vol: 8.2, price: 65.40, pattern: '윗꼬리 밀림폭 -9.49% 수준의 +65.40% 종가 마감' }
+          ]
+        },
+        {
+          code: '462520', name: '에이치브이엠', market: 'KOSDAQ', url: '',
+          price: 18000, comp: 837.20, lockup: 31.40, nominalEok: 480.0, netEok: 378.2,
+          tradeValEok: 2188.0, supplyIntensity: 578.6,
+          openRet: 64.50, highRet: 72.50, lowRet: 45.00, closeRet: 48.20, wickPct: 14.09,
+          peakSlot: '09:00~09:15', marketTemp: 52.0,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · 당일 고점', vol: 46.5, price: 64.50, pattern: '개장 첫 15분 내 최고가(+72.50%) 도달 후 미확약 물량 출회' },
+            { slot: '09:15~10:00', stage: '② 미확약 1차 차익실현 · VWAP 공방', vol: 22.0, price: 61.20, pattern: '미확약(68.6%) 배정 물량 차익실현으로 VWAP 공방' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 11.8, price: 55.40, pattern: '오전 조정을 거치며 +55% 구간 1차 지지 확인' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 5.7, price: 52.00, pattern: '거래량 감소 및 호가 수렴' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 분기', vol: 6.2, price: 50.10, pattern: '오후 단기 매물 소화 과정' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 데이트레이딩 청산', vol: 7.8, price: 48.20, pattern: '윗꼬리 밀림폭 -14.09%, 종가 +48.20% 마감' }
+          ]
+        },
+        {
+          code: '250030', name: '진코스텍', market: 'KOSDAQ', url: '/posts/20261008-250030-진코스텍/',
+          price: 11000, comp: 1097.62, lockup: 72.70, nominalEok: 520.0, netEok: 405.0,
+          tradeValEok: 2135.6, supplyIntensity: 527.3,
+          openRet: 52.30, highRet: 59.82, lowRet: 38.18, closeRet: 41.20, wickPct: 11.65,
+          peakSlot: '09:15~10:00', marketTemp: 53.8,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 43.8, price: 52.30, pattern: '확약 72.7% 효과로 명목 유통비율(58.4%) 부담을 상쇄하며 강세 출발' },
+            { slot: '09:15~10:00', stage: '② 미확약 1차 소화 · 당일 고점', vol: 21.2, price: 54.00, pattern: '09:15~10:00 구간 당일 최고가(+59.82%) 형성' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 12.8, price: 47.80, pattern: '기존 주주 유통물량 일부 출회 소화' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 6.4, price: 45.20, pattern: '점심 구간 +45% 선 박스권 횡보' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 분기', vol: 7.1, price: 43.00, pattern: '오후 눌림목 지지 확인' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 데이트레이딩 청산', vol: 8.7, price: 41.20, pattern: '실질 수급강도 527.3% 기록하며 종가 +41.20% 마감' }
+          ]
+        },
+        {
+          code: '266690', name: '덕산넵코어스', market: 'KOSDAQ', url: '/posts/20260921-266690-덕산넵코어스/',
+          price: 14600, comp: 868.64, lockup: 57.26, nominalEok: 1106.4, netEok: 918.3,
+          tradeValEok: 4339.8, supplyIntensity: 472.6,
+          openRet: 48.60, highRet: 53.49, lowRet: 40.48, closeRet: 43.90, wickPct: 6.25,
+          peakSlot: '09:15~10:00', marketTemp: 56.2,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 44.2, price: 48.60, pattern: '개장 15분 거래대금 1,918억 유입, 확약 57.26% 잠김으로 VI 발동' },
+            { slot: '09:15~10:00', stage: '② 미확약 1차 소화 · 당일 고점', vol: 20.8, price: 51.20, pattern: '미확약 1차 물량 흡수하며 09:34 당일 최고가(22,410원, +53.49%) 형성' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 12.6, price: 46.80, pattern: '당일 VWAP(21,340원, +46.16%) 부근 1차 지지선 확인' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 6.3, price: 45.50, pattern: '거래비중 6.3% 축소 및 VWAP 보합권 수렴' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 수급 분기 · 눌림목', vol: 7.4, price: 44.80, pattern: '오후 저점(20,510원, +40.48%) 테스트 후 저가 매수 유입' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 데이트레이딩 청산', vol: 8.7, price: 43.90, pattern: '윗꼬리 밀림폭 -6.25% 방어, 종가 21,010원(+43.90%) 마감' }
+          ]
+        },
+        {
+          code: '451220', name: '이노스페이스', market: 'KOSDAQ', url: '',
+          price: 43300, comp: 598.90, lockup: 28.60, nominalEok: 790.0, netEok: 666.0,
+          tradeValEok: 2743.4, supplyIntensity: 411.9,
+          openRet: 38.20, highRet: 42.96, lowRet: 19.63, closeRet: 21.50, wickPct: 15.01,
+          peakSlot: '09:00~09:15', marketTemp: 49.5,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · 당일 고점', vol: 48.6, price: 38.20, pattern: '개장 15분에 거래대금 48.6% 집중, 고가(+42.96%) 터치 후 매물 출회' },
+            { slot: '09:15~10:00', stage: '② 미확약 1차 차익실현 · VWAP 공방', vol: 22.4, price: 33.50, pattern: '미확약(71.4%) 기관 차익실현 출회로 VWAP 하향 테스트' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 11.2, price: 28.40, pattern: '오전 매물 소화 및 +28% 선 지지 모색' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 5.4, price: 25.00, pattern: '거래량 축소 구간' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 분기', vol: 5.6, price: 23.20, pattern: '오후 완만한 조정' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 데이트레이딩 청산', vol: 6.8, price: 21.50, pattern: '윗꼬리 밀림폭 -15.01%, 종가 +21.50% 마감' }
+          ]
+        },
+        {
+          code: '480110', name: '더본코리아', market: 'KOSPI', url: '',
+          price: 34000, comp: 775.40, lockup: 19.20, nominalEok: 1050.0, netEok: 903.0,
+          tradeValEok: 3685.7, supplyIntensity: 408.1,
+          openRet: 21.30, highRet: 29.00, lowRet: 12.94, closeRet: 14.80, wickPct: 11.01,
+          peakSlot: '09:15~10:00', marketTemp: 39.2,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 51.8, price: 21.30, pattern: '개장 첫 15분 거래비중 51.8% 집중, 시가 +21.30% 출발' },
+            { slot: '09:15~10:00', stage: '② 미확약 1차 소화 · 당일 고점', vol: 22.7, price: 24.00, pattern: '대중적 인지도 매수세로 고가(+29.00%) 기록 후 미확약 매물 출회' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 10.5, price: 18.60, pattern: '시초가 하회 후 +18% 선 1차 지지' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 4.8, price: 16.90, pattern: '거래 소강 및 박스권 등락' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 분기', vol: 4.6, price: 15.80, pattern: '오후 잔여 차익매물 소화' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 데이트레이딩 청산', vol: 5.6, price: 14.80, pattern: '윗꼬리 밀림폭 -11.01%, 종가 +14.80% 마감' }
+          ]
+        },
+        {
+          code: '386380', name: '스카이랩스', market: 'KOSDAQ', url: '/posts/20260831-386380-스카이랩스/',
+          price: 13500, comp: 63.41, lockup: 10.93, nominalEok: 511.5, netEok: 489.2,
+          tradeValEok: 1378.1, supplyIntensity: 281.7,
+          openRet: 14.50, highRet: 18.00, lowRet: 1.11, closeRet: 3.20, wickPct: 12.54,
+          peakSlot: '09:00~09:15', marketTemp: 31.8,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 집중 · 당일 고점', vol: 52.4, price: 14.50, pattern: '개장 15분 내 당일 최고가(+18.00%) 터치 후 미확약(89.1%) 매물 출회' },
+            { slot: '09:15~10:00', stage: '② 미확약 차익실현 · VWAP 하회', vol: 23.1, price: 11.20, pattern: '09:15~10:00 구간 VWAP 하향 이탈로 단기 조정' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 10.1, price: 7.80, pattern: '공모가 상단 지지력 테스트' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 4.5, price: 5.90, pattern: '거래량 급감 구간' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 분기', vol: 4.4, price: 4.50, pattern: '오후 호가 공백 속 약보합' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 데이트레이딩 청산', vol: 5.5, price: 3.20, pattern: '공모가 소폭 상회(+3.20%) 마감' }
+          ]
+        },
+        {
+          code: '439270', name: '크리에이츠', market: 'KOSDAQ', url: '/posts/20261023-439270-크리에이츠/',
+          price: 19500, comp: 240.46, lockup: 0.50, nominalEok: 776.5, netEok: 774.2,
+          tradeValEok: 1514.5, supplyIntensity: 195.6,
+          openRet: -6.80, highRet: -3.33, lowRet: -15.90, closeRet: -14.10, wickPct: 11.14,
+          peakSlot: '09:00~09:15', marketTemp: 22.5,
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 매물 출회 · 고점 형성', vol: 53.0, price: -6.80, pattern: '확약 0.5% 및 대형 유통금액(774.2억) 부담으로 개장 직후 매물 집중' },
+            { slot: '09:15~10:00', stage: '② 미확약 1차 매도 · VWAP 하회', vol: 23.6, price: -9.40, pattern: '미확약 물량 연속 출회로 낙폭 확대' },
+            { slot: '10:00~11:30', stage: '③ 오전 저점 탐색 · 손바뀜', vol: 9.8, price: -11.20, pattern: '단기 투매 진정 및 지지선 모색' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 스프레드 수렴', vol: 4.2, price: -12.50, pattern: '거래대금 급감(4.2%)' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 수급 관망', vol: 4.3, price: -13.30, pattern: '추가 매수세 부재 속 횡보' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 데이트레이딩 청산', vol: 5.1, price: -14.10, pattern: '실질 수급강도 195.6%, 종가 -14.10% 마감' }
+          ]
+        }
+      ];
+
+      function computeSimMatch(inputs, excludeCode) {
+        var tNet = Math.max(15.0, parseFloat(inputs.netEok) || 450.0);
+        var tLk = Math.max(0.0, Math.min(100.0, parseFloat(inputs.lockup) || 0.0));
+        var tCr = Math.max(0.0, parseFloat(inputs.comp) || 0.0);
+        var tMt = parseFloat(inputs.marketTemp);
+        if (isNaN(tMt)) tMt = 48.0;
+        var tPr = Math.max(1000.0, parseFloat(inputs.price) || 15000.0);
+
+        var scored = HISTORICAL_IPO_DB.filter(function (c) {
+          return !excludeCode || c.code !== excludeCode;
+        }).map(function (c) {
+          var dNet = Math.min(1.0, Math.abs(Math.log10(tNet) - Math.log10(Math.max(15.0, c.netEok))) / 0.85);
+          var dLk = Math.min(1.0, Math.abs(tLk - c.lockup) / 85.0);
+          var dCr = Math.min(1.0, Math.abs(tCr - c.comp) / 1300.0);
+          var dMt = Math.min(1.0, Math.abs(tMt - c.marketTemp) / 80.0);
+          var dPr = Math.min(1.0, Math.abs(Math.log10(tPr) - Math.log10(Math.max(1000.0, c.price))) / 0.90);
+
+          var wDist = 0.35 * dNet + 0.30 * dLk + 0.15 * dCr + 0.12 * dMt + 0.08 * dPr;
+          var simPct = Math.max(12.0, (1.0 - wDist) * 100.0);
+          return { item: c, simPct: simPct, wDist: wDist };
+        });
+
+        scored.sort(function (a, b) {
+          return b.simPct - a.simPct;
+        });
+
+        var top3 = scored.slice(0, 3);
+        var wSum = top3.reduce(function (acc, x) { return acc + x.simPct; }, 0) || 1.0;
+
+        // Continuous sensitivity adjustment around Top-3 weighted average so slider tweaks respond smoothly
+        var avgNetTop = top3.reduce(function (acc, x) { return acc + x.item.netEok * x.simPct; }, 0) / wSum;
+        var avgLkTop = top3.reduce(function (acc, x) { return acc + x.item.lockup * x.simPct; }, 0) / wSum;
+        var avgCrTop = top3.reduce(function (acc, x) { return acc + x.item.comp * x.simPct; }, 0) / wSum;
+        var avgMtTop = top3.reduce(function (acc, x) { return acc + x.item.marketTemp * x.simPct; }, 0) / wSum;
+
+        var baseSup = top3.reduce(function (acc, x) { return acc + x.item.supplyIntensity * x.simPct; }, 0) / wSum;
+        var baseOpen = top3.reduce(function (acc, x) { return acc + x.item.openRet * x.simPct; }, 0) / wSum;
+        var baseHigh = top3.reduce(function (acc, x) { return acc + x.item.highRet * x.simPct; }, 0) / wSum;
+        var baseClose = top3.reduce(function (acc, x) { return acc + x.item.closeRet * x.simPct; }, 0) / wSum;
+        var baseWick = top3.reduce(function (acc, x) { return acc + x.item.wickPct * x.simPct; }, 0) / wSum;
+
+        var netRatioAdj = Math.log10(Math.max(15.0, avgNetTop) / tNet);
+        var lkDiff = tLk - avgLkTop;
+        var crDiff = (tCr - avgCrTop) / 100.0;
+        var mtDiff = tMt - avgMtTop;
+
+        var expSup = Math.max(110.0, Math.min(1350.0, baseSup * Math.pow(10, netRatioAdj * 0.42) + lkDiff * 2.1 + crDiff * 4.5));
+        var expOpen = Math.max(-25.0, Math.min(160.0, baseOpen + lkDiff * 0.38 + netRatioAdj * 24.0 + crDiff * 1.1 + mtDiff * 0.25));
+        var highSpread = Math.max(2.5, (baseHigh - baseOpen) + Math.max(0, lkDiff * 0.08) + Math.max(0, netRatioAdj * 6.0));
+        var expHigh = expOpen + highSpread;
+        var expWick = Math.max(1.2, Math.min(24.0, baseWick - lkDiff * 0.07 - netRatioAdj * 2.5));
+        var expClose = expHigh - ((100.0 + expHigh) * (expWick / 100.0));
+        var expTradeEok = tNet * (expSup / 100.0);
+
+        var peakSlot = '09:15~10:00';
+        if (tLk < 26.0 || expSup < 310.0) {
+          peakSlot = '09:00~09:15 (개장 15분 초단기 고점)';
+        } else if (tLk >= 42.0 && tNet <= 420.0 && expSup >= 850.0) {
+          peakSlot = '09:15~10:00 / 14:30~15:30 (종가 고점형)';
+        } else {
+          peakSlot = '09:15~10:00 (미확약 1차 소화 후 고점)';
+        }
+
+        var buckets = [];
+        var cumShare = 0.0;
+        for (var i = 0; i < 6; i++) {
+          var vShare = top3.reduce(function (acc, x) { return acc + x.item.buckets[i].vol * x.simPct; }, 0) / wSum;
+          var pRatio = 0.0;
+          if (i === 0) pRatio = expOpen;
+          else if (i === 1) pRatio = (tLk >= 26.0) ? expHigh : (expOpen * 0.85 + expClose * 0.15);
+          else if (i === 2) pRatio = expOpen * 0.55 + expClose * 0.45;
+          else if (i === 3) pRatio = expOpen * 0.35 + expClose * 0.65;
+          else if (i === 4) pRatio = expOpen * 0.20 + expClose * 0.80;
+          else pRatio = expClose;
+
+          cumShare += vShare;
+          var cumSup = expSup * (cumShare / 100.0);
+          buckets.push({
+            slot: top3[0].item.buckets[i].slot,
+            stage: top3[0].item.buckets[i].stage,
+            vol: vShare,
+            cumSup: cumSup,
+            price: pRatio,
+            pattern: top3[0].item.buckets[i].pattern
+          });
+        }
+
+        return {
+          top3: top3,
+          expSup: expSup,
+          expTradeEok: expTradeEok,
+          expOpen: expOpen,
+          expHigh: expHigh,
+          expClose: expClose,
+          expWick: expWick,
+          peakSlot: peakSlot,
+          buckets: buckets
+        };
+      }
+
+      document.querySelectorAll('.quant-sim-widget').forEach(function (widget) {
+        var priceNum = widget.querySelector('[data-sim-num="price"]');
+        var priceRange = widget.querySelector('[data-sim-range="price"]');
+        var compNum = widget.querySelector('[data-sim-num="comp"]');
+        var compRange = widget.querySelector('[data-sim-range="comp"]');
+        var lkNum = widget.querySelector('[data-sim-num="lockup"]');
+        var lkRange = widget.querySelector('[data-sim-range="lockup"]');
+        var netNum = widget.querySelector('[data-sim-num="netEok"]');
+        var netRange = widget.querySelector('[data-sim-range="netEok"]');
+        var mtNum = widget.querySelector('[data-sim-num="marketTemp"]');
+        var mtRange = widget.querySelector('[data-sim-range="marketTemp"]');
+
+        var kpiSupEl = widget.querySelector('[data-sim-kpi="supply"]');
+        var kpiTradeEl = widget.querySelector('[data-sim-kpi="tradeEok"]');
+        var kpiRangeEl = widget.querySelector('[data-sim-kpi="openHigh"]');
+        var kpiCloseEl = widget.querySelector('[data-sim-kpi="closeRet"]');
+        var kpiWickEl = widget.querySelector('[data-sim-kpi="wick"]');
+        var kpiPeakEl = widget.querySelector('[data-sim-kpi="peakSlot"]');
+        var kpiPeakNoteEl = widget.querySelector('[data-sim-kpi="peakNote"]');
+        var top3Tbody = widget.querySelector('[data-sim-top3-tbody]');
+        var intradayTbody = widget.querySelector('[data-sim-intraday-tbody]');
+        var prefillBanner = widget.querySelector('[data-sim-prefill-text]');
+        var excludeCode = widget.getAttribute('data-exclude-code') || '';
+
+        function setInputPair(numEl, rangeEl, val) {
+          if (numEl) numEl.value = val;
+          if (rangeEl) rangeEl.value = val;
+        }
+
+        function updateSimulation() {
+          var inputs = {
+            price: priceNum ? parseFloat(priceNum.value) : 14600,
+            comp: compNum ? parseFloat(compNum.value) : 868.6,
+            lockup: lkNum ? parseFloat(lkNum.value) : 57.3,
+            netEok: netNum ? parseFloat(netNum.value) : 918.3,
+            marketTemp: mtNum ? parseFloat(mtNum.value) : 56.2
+          };
+          var res = computeSimMatch(inputs, excludeCode);
+
+          if (kpiSupEl) kpiSupEl.textContent = res.expSup.toFixed(1) + '%';
+          if (kpiTradeEl) kpiTradeEl.innerHTML = '예상 당일 거래대금 약 <strong>' + Math.round(res.expTradeEok).toLocaleString() + '억 원</strong> (실질유통 대비 ' + (res.expSup / 100.0).toFixed(2) + '배)';
+          if (kpiRangeEl) {
+            var oSign = res.expOpen >= 0 ? '+' : '';
+            var hSign = res.expHigh >= 0 ? '+' : '';
+            kpiRangeEl.textContent = oSign + res.expOpen.toFixed(1) + '% → ' + hSign + res.expHigh.toFixed(1) + '%';
+          }
+          if (kpiCloseEl) {
+            var cSign = res.expClose >= 0 ? '+' : '';
+            kpiCloseEl.innerHTML = '시가 대비 고가 탄력 <strong>+' + (res.expHigh - res.expOpen).toFixed(1) + '%p</strong> · 예상 종가 <strong>' + cSign + res.expClose.toFixed(1) + '%</strong>';
+          }
+          if (kpiWickEl) kpiWickEl.textContent = '-' + res.expWick.toFixed(2) + '%';
+          if (kpiPeakEl) kpiPeakEl.textContent = res.peakSlot.split(' ')[0];
+          if (kpiPeakNoteEl) kpiPeakNoteEl.textContent = res.peakSlot;
+
+          if (top3Tbody) {
+            top3Tbody.innerHTML = res.top3.map(function (entry, idx) {
+              var c = entry.item;
+              var mktClass = c.market === 'KOSPI' ? 'mkt-kospi' : 'mkt-kosdaq';
+              var nameHtml = c.url ? ('<a href="' + c.url + '"><strong>' + c.name + '</strong></a>') : ('<strong>' + c.name + '</strong>');
+              var oStr = (c.openRet >= 0 ? '+' : '') + c.openRet.toFixed(2) + '%';
+              var hStr = (c.highRet >= 0 ? '+' : '') + c.highRet.toFixed(2) + '%';
+              var cStr = (c.closeRet >= 0 ? '+' : '') + c.closeRet.toFixed(2) + '%';
+              return (
+                '<tr>' +
+                  '<td><span class="sim-score-pill">#' + (idx + 1) + ' · ' + entry.simPct.toFixed(1) + '%</span></td>' +
+                  '<td>' + nameHtml + ' (<code>' + c.code + '</code>) <span class="mkt-pill ' + mktClass + '">' + c.market + '</span></td>' +
+                  '<td class="num"><strong>' + c.netEok.toFixed(1) + '억</strong> <span style="color:var(--subtle);font-size:0.76rem;">(명목 ' + c.nominalEok.toFixed(0) + '억)</span></td>' +
+                  '<td class="num">' + c.lockup.toFixed(2) + '% / ' + c.comp.toFixed(0) + ':1</td>' +
+                  '<td class="num"><strong style="color:var(--navy);">' + c.supplyIntensity.toFixed(1) + '%</strong> <span style="color:var(--subtle);font-size:0.76rem;">(' + Math.round(c.tradeValEok).toLocaleString() + '억)</span></td>' +
+                  '<td class="num">' + oStr + ' → <strong class="pos-val">' + hStr + '</strong> → ' + cStr + '</td>' +
+                  '<td class="num neg-val">-' + c.wickPct.toFixed(2) + '%</td>' +
+                  '<td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);">' + c.peakSlot + '</td>' +
+                '</tr>'
+              );
+            }).join('');
+          }
+
+          if (intradayTbody) {
+            intradayTbody.innerHTML = res.buckets.map(function (b) {
+              var barW = Math.min(100, Math.round((b.vol / 55.0) * 100));
+              var pSign = b.price >= 0 ? '+' : '';
+              var pClass = b.price >= 0 ? 'pos-val' : 'neg-val';
+              return (
+                '<tr>' +
+                  '<td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">' + b.slot + '</td>' +
+                  '<td style="font-weight:600;white-space:nowrap;">' + b.stage + '</td>' +
+                  '<td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:' + barW + '%;"></div></div><span class="vol-bar-num">' + b.vol.toFixed(1) + '%</span></div></td>' +
+                  '<td style="text-align:right;font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">' + b.cumSup.toFixed(1) + '%</td>' +
+                  '<td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="' + pClass + '">' + pSign + b.price.toFixed(2) + '%</td>' +
+                  '<td style="color:var(--text-body);font-size:0.82rem;">' + b.pattern + '</td>' +
+                '</tr>'
+              );
+            }).join('');
+          }
+        }
+
+        [
+          [priceNum, priceRange],
+          [compNum, compRange],
+          [lkNum, lkRange],
+          [netNum, netRange],
+          [mtNum, mtRange]
+        ].forEach(function (pair) {
+          var nEl = pair[0];
+          var rEl = pair[1];
+          if (nEl && rEl) {
+            nEl.addEventListener('input', function () {
+              rEl.value = nEl.value;
+              updateSimulation();
+            });
+            rEl.addEventListener('input', function () {
+              nEl.value = rEl.value;
+              updateSimulation();
+            });
+          }
+        });
+
+        widget.querySelectorAll('[data-sim-preset]').forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            widget.querySelectorAll('[data-sim-preset]').forEach(function (c) {
+              c.classList.toggle('is-active', c === chip);
+            });
+            setInputPair(priceNum, priceRange, chip.getAttribute('data-price'));
+            setInputPair(compNum, compRange, chip.getAttribute('data-comp'));
+            setInputPair(lkNum, lkRange, chip.getAttribute('data-lockup'));
+            setInputPair(netNum, netRange, chip.getAttribute('data-net'));
+            setInputPair(mtNum, mtRange, chip.getAttribute('data-temp'));
+            excludeCode = chip.getAttribute('data-exclude') || '';
+            updateSimulation();
+          });
+        });
+
+        // Auto-prefill from current single post page when data-auto-prefill-post="true"
+        if (widget.getAttribute('data-auto-prefill-post') === 'true') {
+          var titleText = (document.querySelector('.article-header h1') || {}).textContent || '';
+          var leadText = (document.querySelector('.article-lead') || {}).textContent || '';
+          var proseText = (document.querySelector('.prose') || {}).textContent || '';
+          var combined = titleText + ' ' + leadText + ' ' + proseText;
+
+          var codeMatch = titleText.match(/\(([0-9A-Za-z]{6})\)/);
+          var detectedCode = codeMatch ? codeMatch[1].toUpperCase() : '';
+          var corpName = (titleText.split('공모주')[0] || '본 리포트 종목').trim();
+
+          var known = HISTORICAL_IPO_DB.find(function (x) { return x.code === detectedCode; });
+          if (known) {
+            setInputPair(priceNum, priceRange, known.price);
+            setInputPair(compNum, compRange, known.comp);
+            setInputPair(lkNum, lkRange, known.lockup);
+            setInputPair(netNum, netRange, known.netEok);
+            setInputPair(mtNum, mtRange, known.marketTemp);
+            excludeCode = known.code;
+            if (prefillBanner) {
+              prefillBanner.innerHTML = '🎯 <strong>[' + known.name + ' (' + known.code + ')]</strong> 확정 공시 수치 자동 프리셋 완료 (공모가 ' + known.price.toLocaleString() + '원 · 경쟁률 ' + known.comp.toFixed(1) + ':1 · 확약 ' + known.lockup.toFixed(2) + '% · 실질유통 ' + known.netEok.toFixed(1) + '억 원)';
+            }
+          } else {
+            var pM = combined.match(/공모가[^\d]{0,18}([\d,]{4,9})\s*원/);
+            var cM = combined.match(/([\d,]+(?:\.\d+)?)\s*:\s*1/);
+            var lM = combined.match(/확약[^\d]{0,16}([\d.]+)\s*%/);
+            var fM = combined.match(/유통[^\d]{0,20}([\d,]+(?:\.\d+)?)\s*억/);
+
+            var pVal = pM ? parseInt(pM[1].replace(/,/g, ''), 10) : 16000;
+            var cVal = cM ? parseFloat(cM[1].replace(/,/g, '')) : 850.0;
+            var lVal = lM ? parseFloat(lM[1]) : 35.0;
+            var nomVal = fM ? parseFloat(fM[1].replace(/,/g, '')) : 500.0;
+            var deductRatio = Math.min(0.28, (lVal / 100.0) * 0.24);
+            var netVal = Math.max(25.0, Math.round(nomVal * (1.0 - deductRatio) * 10) / 10);
+
+            setInputPair(priceNum, priceRange, pVal);
+            setInputPair(compNum, compRange, cVal);
+            setInputPair(lkNum, lkRange, lVal);
+            setInputPair(netNum, netRange, netVal);
+            setInputPair(mtNum, mtRange, 48.0);
+            excludeCode = detectedCode;
+            if (prefillBanner) {
+              prefillBanner.innerHTML = '🎯 <strong>[' + corpName + (detectedCode ? ' (' + detectedCode + ')' : '') + ']</strong> 리포트 공시 수치 자동 프리셋 완료 (공모가 ' + pVal.toLocaleString() + '원 · 경쟁률 ' + cVal.toFixed(1) + ':1 · 확약 ' + lVal.toFixed(2) + '% · 추정 실질유통 ' + netVal.toFixed(1) + '억 원)';
+            }
+          }
+        }
+
+        updateSimulation();
       });
     })();
   </script>

@@ -41,6 +41,168 @@
   {{- end -}}
 </section>
 
+{{- if not $isTender -}}
+<section class="quant-sim-panel quant-sim-widget" id="home-ipo-quant-simulator" aria-labelledby="home-sim-heading" data-exclude-code="266690">
+  <div class="alpha-head">
+    <div>
+      <div class="eyebrow-badge" style="margin-bottom:6px;">MASTER PROMPT v2.0 · 5-VARIABLE WEIGHTED IPO DAY-1 SIMULATOR</div>
+      <h2 id="home-sim-heading">🧮 공모주 상장 당일 수급강도(거래대금/실질유통) &amp; 시가·고가·시간대별 매매 시뮬레이터</h2>
+      <p class="alpha-sub">
+        증권신고서 명목 유통물량에서 최종 배정 기관 확약물량을 차감한 <strong>실질 유통가능금액(Net Float, 가중치 35%)</strong>과 <strong>최종 배정 확약비율(30%) · 기관경쟁률(15%) · 시장 온도(12%) · 확정 공모가(8%)</strong> 5대 변수를 조합하여 과거 가장 유사한 상장 종목 Top-3와 예상 수급강도·시가/고가/종가·시간대별 고점 구간을 실시간 시뮬레이션합니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- 프리셋 종목 칩 -->
+  <div class="sim-preset-bar" role="toolbar" aria-label="대표 공모주 조건 프리셋 선택">
+    <span class="sim-preset-label">QUICK PRESET</span>
+    <button type="button" class="sim-preset-chip is-active" data-sim-preset="266690" data-price="14600" data-comp="868.6" data-lockup="57.26" data-net="918.3" data-temp="56.2" data-exclude="266690">덕산넵코어스 (266690 · Net 918억)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="468670" data-price="15000" data-comp="1187.7" data-lockup="85.39" data-net="356.2" data-temp="61.2" data-exclude="468670">브릴스 (468670 · Net 356억)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="475150" data-price="35000" data-comp="1184.5" data-lockup="42.70" data-net="397.3" data-temp="58.4" data-exclude="475150">산일전기 (475150 · Net 397억)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="420610" data-price="12000" data-comp="1234.3" data-lockup="73.10" data-net="191.0" data-temp="55.0" data-exclude="420610">인텔리빅스 (420610 · 초소형 Net 191억)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="359410" data-price="18000" data-comp="1000.1" data-lockup="37.17" data-net="435.0" data-temp="52.0" data-exclude="359410">영광 (359410 · Net 435억)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="480110" data-price="34000" data-comp="775.4" data-lockup="19.20" data-net="903.0" data-temp="39.2" data-exclude="480110">더본코리아 (480110 · Net 903억)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="386380" data-price="13500" data-comp="63.4" data-lockup="10.93" data-net="489.2" data-temp="31.8" data-exclude="386380">스카이랩스 (386380 · 저확약 Net 489억)</button>
+  </div>
+
+  <!-- 5대 입력 변수 컨트롤러 -->
+  <div class="sim-controls-grid" aria-label="5변수 가중치 시뮬레이터 입력 패널">
+    <div class="sim-ctrl-card">
+      <div class="sim-ctrl-top">
+        <span class="sim-ctrl-title">④ 실질 유통금액 (Net)</span>
+        <span class="sim-weight-pill">가중치 35%</span>
+      </div>
+      <div class="sim-num-row">
+        <input type="number" class="sim-num-input" data-sim-num="netEok" min="30" max="3000" step="10" value="918.3" aria-label="실질 유통가능금액 억 원" />
+        <span class="sim-unit">억 원</span>
+      </div>
+      <input type="range" class="sim-range-input" data-sim-range="netEok" min="50" max="2000" step="10" value="918.3" aria-label="실질 유통가능금액 슬라이더" />
+    </div>
+
+    <div class="sim-ctrl-card">
+      <div class="sim-ctrl-top">
+        <span class="sim-ctrl-title">③ 최종 배정 확약비율</span>
+        <span class="sim-weight-pill">가중치 30%</span>
+      </div>
+      <div class="sim-num-row">
+        <input type="number" class="sim-num-input" data-sim-num="lockup" min="0" max="100" step="0.5" value="57.26" aria-label="최종 배정 확약비율 퍼센트" />
+        <span class="sim-unit">%</span>
+      </div>
+      <input type="range" class="sim-range-input" data-sim-range="lockup" min="0" max="100" step="0.5" value="57.26" aria-label="최종 배정 확약비율 슬라이더" />
+    </div>
+
+    <div class="sim-ctrl-card">
+      <div class="sim-ctrl-top">
+        <span class="sim-ctrl-title">② 기관 수요예측 경쟁률</span>
+        <span class="sim-weight-pill">가중치 15%</span>
+      </div>
+      <div class="sim-num-row">
+        <input type="number" class="sim-num-input" data-sim-num="comp" min="10" max="2500" step="10" value="868.6" aria-label="기관 수요예측 경쟁률" />
+        <span class="sim-unit">: 1</span>
+      </div>
+      <input type="range" class="sim-range-input" data-sim-range="comp" min="20" max="1800" step="10" value="868.6" aria-label="기관 수요예측 경쟁률 슬라이더" />
+    </div>
+
+    <div class="sim-ctrl-card">
+      <div class="sim-ctrl-top">
+        <span class="sim-ctrl-title">⑤ 시장 온도 (직전3 시초)</span>
+        <span class="sim-weight-pill">가중치 12%</span>
+      </div>
+      <div class="sim-num-row">
+        <input type="number" class="sim-num-input" data-sim-num="marketTemp" min="-20" max="150" step="1" value="56.2" aria-label="직전 3종목 평균 시초가 수익률" />
+        <span class="sim-unit">%</span>
+      </div>
+      <input type="range" class="sim-range-input" data-sim-range="marketTemp" min="-10" max="120" step="1" value="56.2" aria-label="시장 온도 슬라이더" />
+    </div>
+
+    <div class="sim-ctrl-card">
+      <div class="sim-ctrl-top">
+        <span class="sim-ctrl-title">① 확정 공모가</span>
+        <span class="sim-weight-pill">가중치 8%</span>
+      </div>
+      <div class="sim-num-row">
+        <input type="number" class="sim-num-input" data-sim-num="price" min="1000" max="150000" step="500" value="14600" aria-label="확정 공모가 원" />
+        <span class="sim-unit">원</span>
+      </div>
+      <input type="range" class="sim-range-input" data-sim-range="price" min="3000" max="80000" step="500" value="14600" aria-label="확정 공모가 슬라이더" />
+    </div>
+  </div>
+
+  <!-- (b) 시뮬레이션 결과 KPI 4종 -->
+  <div class="alpha-kpi-grid" aria-label="5변수 가중치 시뮬레이션 핵심 예측 지표">
+    <div class="alpha-kpi-card">
+      <div class="alpha-kpi-label">EXPECTED SUPPLY INTENSITY (거래대금/Net)</div>
+      <div class="alpha-kpi-value pos-val" data-sim-kpi="supply">448.5%</div>
+      <div class="alpha-kpi-note" data-sim-kpi="tradeEok">예상 당일 거래대금 약 <strong>4,118억 원</strong> (실질유통 대비 4.49배)</div>
+    </div>
+    <div class="alpha-kpi-card kpi-navy">
+      <div class="alpha-kpi-label">OPENING → INTRADAY HIGH RANGE</div>
+      <div class="alpha-kpi-value pos-val" data-sim-kpi="openHigh">+37.0% → +43.7%</div>
+      <div class="alpha-kpi-note" data-sim-kpi="closeRet">시가 대비 고가 탄력 <strong>+6.7%p</strong> · 예상 종가 <strong>+25.7%</strong></div>
+    </div>
+    <div class="alpha-kpi-card">
+      <div class="alpha-kpi-label">UPPER WICK RISK (고가 대비 종가 밀림폭)</div>
+      <div class="alpha-kpi-value neg-val" data-sim-kpi="wick">-12.53%</div>
+      <div class="alpha-kpi-note">당일 최고가 도달 후 종가까지 평균 차익실현 반납률</div>
+    </div>
+    <div class="alpha-kpi-card kpi-gold">
+      <div class="alpha-kpi-label">DOMINANT PEAK TIME BUCKET (고점 시간대)</div>
+      <div class="alpha-kpi-value" style="color:var(--navy);font-size:1.12rem;" data-sim-kpi="peakSlot">09:15~10:00</div>
+      <div class="alpha-kpi-note" data-sim-kpi="peakNote">09:15~10:00 (미확약 1차 소화 후 고점)</div>
+    </div>
+  </div>
+
+  <!-- (a) 과거 유사 종목 Top-3 매칭 테이블 -->
+  <div class="alpha-block-head">
+    <h3 class="alpha-block-title">1. 5변수 가중치 매칭 과거 유사 상장 종목 Top-3 (Log-NetFloat 35% · 확약 30% · 경쟁률 15% · 시장온도 12% · 공모가 8%)</h3>
+  </div>
+  <div class="alpha-table-wrap">
+    <div class="table-scroll-hint" aria-hidden="true">↔ 표를 좌우로 스크롤하여 유사 종목 Top-3의 실질 수급강도 및 시가·고가·종가 전체 수치를 확인하세요</div>
+    <table class="alpha-table">
+      <thead>
+        <tr>
+          <th>매칭 순위 · 유사도</th>
+          <th>유사 상장 종목 (코드 · 시장)</th>
+          <th class="num">실질 유통금액 (Net Float)</th>
+          <th class="num">확약비율 / 경쟁률</th>
+          <th class="num">실질 수급강도 (거래대금)</th>
+          <th class="num">시가 → 당일 고가 → 종가 수익률</th>
+          <th class="num">윗꼬리 밀림폭</th>
+          <th>당일 고점 시간대</th>
+        </tr>
+      </thead>
+      <tbody data-sim-top3-tbody></tbody>
+    </table>
+  </div>
+
+  <!-- (c) 상장 당일 6개 시간대별 거래대금 집중도 · 누적 수급강도 · 가격 흐름 시각 바 -->
+  <div class="intraday-analyzer">
+    <div class="alpha-block-head" style="margin-top:0;">
+      <h3 class="alpha-block-title">2. 시뮬레이션 조건 기반 상장 당일 6개 시간대별(09:00~15:30) 거래대금 집중도 · 누적 수급강도 · 가격 흐름</h3>
+    </div>
+    <div class="alpha-table-wrap" style="margin-bottom:0;">
+      <table class="intraday-slot-table">
+        <thead>
+          <tr>
+            <th>시간대 구간</th>
+            <th>당일 수급 국면 (6단계)</th>
+            <th>시간대 거래대금 집중도 (%) · 시각 바</th>
+            <th style="text-align:right;">누적 실질 수급강도</th>
+            <th style="text-align:right;">공모가 대비 예상 가격 흐름</th>
+            <th>수급 주체별 핵심 매매 패턴 및 고점 형성 임계치</th>
+          </tr>
+        </thead>
+        <tbody data-sim-intraday-tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="alpha-legal-foot">
+    ※ 본 시뮬레이터는 OpenDART 공시(증권신고서·증권발행실적보고서) 및 KRX 과거 상장 종목의 사후 데이터를 5변수 가중치로 매칭한 <strong>통계적 참고 도구(유사투자자문업 비영위)</strong>이며, 특정 종목에 대한 매수·매도 권유나 미래 수익률 보장이 아닙니다.
+  </p>
+</section>
+{{- end -}}
+
 {{- if or .Site.Taxonomies.categories .Site.Taxonomies.tags -}}
 <nav class="taxonomy-strip" aria-label="카테고리 및 핵심 태그">
   <span class="strip-label">CATEGORIES &amp; TAGS</span>
