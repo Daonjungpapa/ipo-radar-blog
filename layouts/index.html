@@ -45,104 +45,193 @@
 <section class="quant-sim-panel quant-sim-widget" id="home-ipo-quant-simulator" aria-labelledby="home-sim-heading" data-exclude-code="266690">
   <div class="alpha-head">
     <div>
-      <div class="eyebrow-badge" style="margin-bottom:6px;">MASTER PROMPT v2.0 · 5-VARIABLE WEIGHTED IPO DAY-1 SIMULATOR</div>
-      <h2 id="home-sim-heading">🧮 공모주 상장 당일 수급강도(거래대금/실질유통) &amp; 시가·고가·시간대별 매매 시뮬레이터</h2>
+      <div class="eyebrow-badge" style="margin-bottom:6px;">MASTER PROMPT v3.0 · 7-VARIABLE RELATIVE FLOAT &amp; USER-WEIGHTED IPO DAY-1 SIMULATOR</div>
+      <h2 id="home-sim-heading">🧮 공모주 7변수 상대 유통비율(Net Float %) · 당일 상대 수급강도(거래량/실질유통) &amp; 사용자 가중치 배치 시뮬레이터</h2>
       <p class="alpha-sub">
-        증권신고서 명목 유통물량에서 최종 배정 기관 확약물량을 차감한 <strong>실질 유통가능금액(Net Float, 가중치 35%)</strong>과 <strong>최종 배정 확약비율(30%) · 기관경쟁률(15%) · 시장 온도(12%) · 확정 공모가(8%)</strong> 5대 변수를 조합하여 과거 가장 유사한 상장 종목 Top-3와 예상 수급강도·시가/고가/종가·시간대별 고점 구간을 실시간 시뮬레이션합니다.
+        절대 공모가·절대 금액 왜곡을 배제한 <strong>동일 조건 상대값(A1: 사전 실질 유통비율 % · 당일 상대 수급강도 % · 체결단가 VWAP 프리미엄 %)</strong>과 <strong>상장 전 5영업일(D-5~D-1) KOSPI·KOSDAQ 지수 흐름 가중 시장온도(A2)</strong>를 포함한 <strong>7대 핵심 매칭 변수(V1~V7)</strong> 기반 시뮬레이터입니다. 아래 <strong>[⚖️ 사용자 매칭 변수 가중치 배치 패널]</strong>에서 7개 변수의 가중치를 직접 조합(자동 100% 정규화)하거나 4종 원클릭 전략 프리셋을 선택해 과거 유사 종목 Top-3와 시간대별 고점 구간을 실시간 검증하세요.
       </p>
     </div>
   </div>
 
   <!-- 프리셋 종목 칩 -->
-  <div class="sim-preset-bar" role="toolbar" aria-label="대표 공모주 조건 프리셋 선택">
+  <div class="sim-preset-bar" role="toolbar" aria-label="대표 공모주 7변수 조건 프리셋 선택">
     <span class="sim-preset-label">QUICK PRESET</span>
-    <button type="button" class="sim-preset-chip is-active" data-sim-preset="266690" data-price="14600" data-comp="868.6" data-lockup="57.26" data-net="918.3" data-temp="56.2" data-exclude="266690">덕산넵코어스 (266690 · Net 918억)</button>
-    <button type="button" class="sim-preset-chip" data-sim-preset="468670" data-price="15000" data-comp="1187.7" data-lockup="85.39" data-net="356.2" data-temp="61.2" data-exclude="468670">브릴스 (468670 · Net 356억)</button>
-    <button type="button" class="sim-preset-chip" data-sim-preset="475150" data-price="35000" data-comp="1184.5" data-lockup="42.70" data-net="397.3" data-temp="58.4" data-exclude="475150">산일전기 (475150 · Net 397억)</button>
-    <button type="button" class="sim-preset-chip" data-sim-preset="420610" data-price="12000" data-comp="1234.3" data-lockup="73.10" data-net="191.0" data-temp="55.0" data-exclude="420610">인텔리빅스 (420610 · 초소형 Net 191억)</button>
-    <button type="button" class="sim-preset-chip" data-sim-preset="359410" data-price="18000" data-comp="1000.1" data-lockup="37.17" data-net="435.0" data-temp="52.0" data-exclude="359410">영광 (359410 · Net 435억)</button>
-    <button type="button" class="sim-preset-chip" data-sim-preset="480110" data-price="34000" data-comp="775.4" data-lockup="19.20" data-net="903.0" data-temp="39.2" data-exclude="480110">더본코리아 (480110 · Net 903억)</button>
-    <button type="button" class="sim-preset-chip" data-sim-preset="386380" data-price="13500" data-comp="63.4" data-lockup="10.93" data-net="489.2" data-temp="31.8" data-exclude="386380">스카이랩스 (386380 · 저확약 Net 489억)</button>
+    <button type="button" class="sim-preset-chip is-active" data-sim-preset="266690" data-v1="33.32" data-v2="57.26" data-v3="23.75" data-v4="18.40" data-v5="912.4" data-v6="868.6" data-v7="0.47" data-exclude="266690">덕산넵코어스 (266690 · 실질유통 33.32%)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="468670" data-v1="20.42" data-v2="85.39" data-v3="42.10" data-v4="9.80" data-v5="1310.0" data-v6="1187.7" data-v7="1.15" data-exclude="468670">브릴스 (468670 · 실질유통 20.42% · 확약 85.4%)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="475150" data-v1="19.16" data-v2="42.70" data-v3="24.50" data-v4="7.20" data-v5="423.1" data-v6="1184.5" data-v7="0.88" data-exclude="475150">산일전기 (475150 · 실질유통 19.16%)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="420610" data-v1="13.85" data-v2="73.10" data-v3="39.40" data-v4="6.20" data-v5="1620.0" data-v6="1234.3" data-v7="0.92" data-exclude="420610">인텔리빅스 (420610 · 품절주 13.85%)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="359410" data-v1="26.40" data-v2="37.17" data-v3="19.20" data-v4="13.50" data-v5="1050.0" data-v6="1000.1" data-v7="0.48" data-exclude="359410">영광 (359410 · 실질유통 26.40%)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="480110" data-v1="18.39" data-v2="19.20" data-v3="8.40" data-v4="11.20" data-v5="772.8" data-v6="775.4" data-v7="-0.59" data-exclude="480110">더본코리아 (480110 · 실질유통 18.39%)</button>
+    <button type="button" class="sim-preset-chip" data-sim-preset="386380" data-v1="43.82" data-v2="10.93" data-v3="3.20" data-v4="34.80" data-v5="18.4" data-v6="63.4" data-v7="-1.20" data-exclude="386380">스카이랩스 (386380 · 구주오버행 34.8%)</button>
   </div>
 
-  <!-- 5대 입력 변수 컨트롤러 -->
-  <div class="sim-controls-grid" aria-label="5변수 가중치 시뮬레이터 입력 패널">
+  <!-- A4: 사용자 매칭 변수 가중치 배치 패널 (7개 슬라이더 + 자동 100% 정규화 + 4종 전략 프리셋) -->
+  <div class="weight-alloc-panel" aria-label="사용자 매칭 변수 가중치 배치 패널">
+    <div class="weight-alloc-head">
+      <h3 class="weight-alloc-title">⚖️ 사용자 매칭 변수 가중치 배치 패널 (슬라이더 조작 시 합계 100.0% 실시간 자동 정규화)</h3>
+      <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--navy);font-weight:700;">NORMALIZED WEIGHT SUM = 100.0%</span>
+    </div>
+    <div class="weight-preset-row" role="toolbar" aria-label="4종 원클릭 가중치 전략 프리셋">
+      <button type="button" class="weight-preset-btn is-active" data-weight-preset="balanced">⚖️ 표준 균형형 (24/20/12/14/12/10/8)</button>
+      <button type="button" class="weight-preset-btn" data-weight-preset="scarcity_overhang">🔥 품절주·구주 오버행 방어형 (V1:34 · V4:26)</button>
+      <button type="button" class="weight-preset-btn" data-weight-preset="inst_longterm">🏦 기관 장기확약 신뢰형 (V2:30 · V3:28)</button>
+      <button type="button" class="weight-preset-btn" data-weight-preset="momentum_5d">📈 5일 지수·일반청약 모멘텀형 (V7:28 · V5:26)</button>
+    </div>
+    <div class="weight-sliders-grid">
+      <div class="weight-slider-card">
+        <div class="weight-slider-top">
+          <span class="weight-var-name">V1 실질유통%</span>
+          <span class="norm-weight-badge" data-norm-w="v1">24.0%</span>
+        </div>
+        <input type="range" class="sim-range-input" data-weight-slider="v1" min="0" max="100" step="1" value="24" aria-label="V1 실질 유통비율 가중치 슬라이더" />
+      </div>
+      <div class="weight-slider-card">
+        <div class="weight-slider-top">
+          <span class="weight-var-name">V2 최종확약%</span>
+          <span class="norm-weight-badge" data-norm-w="v2">20.0%</span>
+        </div>
+        <input type="range" class="sim-range-input" data-weight-slider="v2" min="0" max="100" step="1" value="20" aria-label="V2 최종 배정 확약비율 가중치 슬라이더" />
+      </div>
+      <div class="weight-slider-card">
+        <div class="weight-slider-top">
+          <span class="weight-var-name">V3 장기확약%</span>
+          <span class="norm-weight-badge" data-norm-w="v3">12.0%</span>
+        </div>
+        <input type="range" class="sim-range-input" data-weight-slider="v3" min="0" max="100" step="1" value="12" aria-label="V3 장기 확약 품질 가중치 슬라이더" />
+      </div>
+      <div class="weight-slider-card">
+        <div class="weight-slider-top">
+          <span class="weight-var-name">V4 구주오버행%</span>
+          <span class="norm-weight-badge" data-norm-w="v4">14.0%</span>
+        </div>
+        <input type="range" class="sim-range-input" data-weight-slider="v4" min="0" max="100" step="1" value="14" aria-label="V4 구주 오버행 비중 가중치 슬라이더" />
+      </div>
+      <div class="weight-slider-card">
+        <div class="weight-slider-top">
+          <span class="weight-var-name">V5 일반청약</span>
+          <span class="norm-weight-badge" data-norm-w="v5">12.0%</span>
+        </div>
+        <input type="range" class="sim-range-input" data-weight-slider="v5" min="0" max="100" step="1" value="12" aria-label="V5 일반청약 경쟁률 가중치 슬라이더" />
+      </div>
+      <div class="weight-slider-card">
+        <div class="weight-slider-top">
+          <span class="weight-var-name">V6 기관경쟁률</span>
+          <span class="norm-weight-badge" data-norm-w="v6">10.0%</span>
+        </div>
+        <input type="range" class="sim-range-input" data-weight-slider="v6" min="0" max="100" step="1" value="10" aria-label="V6 기관 수요예측 경쟁률 가중치 슬라이더" />
+      </div>
+      <div class="weight-slider-card">
+        <div class="weight-slider-top">
+          <span class="weight-var-name">V7 5일지수온도</span>
+          <span class="norm-weight-badge" data-norm-w="v7">8.0%</span>
+        </div>
+        <input type="range" class="sim-range-input" data-weight-slider="v7" min="0" max="100" step="1" value="8" aria-label="V7 상장 전 5일 지수 시장온도 가중치 슬라이더" />
+      </div>
+    </div>
+  </div>
+
+  <!-- A3: 7대 핵심 매칭 변수 입력 컨트롤러 -->
+  <div class="sim-controls-grid" aria-label="7대 핵심 매칭 변수 수치 입력 패널">
     <div class="sim-ctrl-card">
       <div class="sim-ctrl-top">
-        <span class="sim-ctrl-title">④ 실질 유통금액 (Net)</span>
-        <span class="sim-weight-pill">가중치 35%</span>
+        <span class="sim-ctrl-title">V1 실질 유통비율 (Net Float)</span>
+        <span class="sim-weight-pill" data-norm-w="v1">24.0%</span>
       </div>
       <div class="sim-num-row">
-        <input type="number" class="sim-num-input" data-sim-num="netEok" min="30" max="3000" step="10" value="918.3" aria-label="실질 유통가능금액 억 원" />
-        <span class="sim-unit">억 원</span>
+        <input type="number" class="sim-num-input" data-sim-num="netFloatPct" min="3" max="90" step="0.2" value="33.32" aria-label="V1 실질 유통비율 퍼센트" />
+        <span class="sim-unit">% (상장주수 대비)</span>
       </div>
-      <input type="range" class="sim-range-input" data-sim-range="netEok" min="50" max="2000" step="10" value="918.3" aria-label="실질 유통가능금액 슬라이더" />
+      <input type="range" class="sim-range-input" data-sim-range="netFloatPct" min="5" max="75" step="0.2" value="33.32" aria-label="V1 실질 유통비율 슬라이더" />
     </div>
 
     <div class="sim-ctrl-card">
       <div class="sim-ctrl-top">
-        <span class="sim-ctrl-title">③ 최종 배정 확약비율</span>
-        <span class="sim-weight-pill">가중치 30%</span>
+        <span class="sim-ctrl-title">V2 최종 배정 확약비율</span>
+        <span class="sim-weight-pill" data-norm-w="v2">20.0%</span>
       </div>
       <div class="sim-num-row">
-        <input type="number" class="sim-num-input" data-sim-num="lockup" min="0" max="100" step="0.5" value="57.26" aria-label="최종 배정 확약비율 퍼센트" />
+        <input type="number" class="sim-num-input" data-sim-num="lockup" min="0" max="100" step="0.5" value="57.26" aria-label="V2 최종 배정 확약비율 퍼센트" />
         <span class="sim-unit">%</span>
       </div>
-      <input type="range" class="sim-range-input" data-sim-range="lockup" min="0" max="100" step="0.5" value="57.26" aria-label="최종 배정 확약비율 슬라이더" />
+      <input type="range" class="sim-range-input" data-sim-range="lockup" min="0" max="95" step="0.5" value="57.26" aria-label="V2 최종 배정 확약비율 슬라이더" />
     </div>
 
     <div class="sim-ctrl-card">
       <div class="sim-ctrl-top">
-        <span class="sim-ctrl-title">② 기관 수요예측 경쟁률</span>
-        <span class="sim-weight-pill">가중치 15%</span>
+        <span class="sim-ctrl-title">V3 장기 확약 품질 (3+6개월)</span>
+        <span class="sim-weight-pill" data-norm-w="v3">12.0%</span>
       </div>
       <div class="sim-num-row">
-        <input type="number" class="sim-num-input" data-sim-num="comp" min="10" max="2500" step="10" value="868.6" aria-label="기관 수요예측 경쟁률" />
+        <input type="number" class="sim-num-input" data-sim-num="ltLockup" min="0" max="80" step="0.5" value="23.75" aria-label="V3 장기 확약 품질 비율 퍼센트" />
+        <span class="sim-unit">% (기관배정 대비)</span>
+      </div>
+      <input type="range" class="sim-range-input" data-sim-range="ltLockup" min="0" max="65" step="0.5" value="23.75" aria-label="V3 장기 확약 품질 슬라이더" />
+    </div>
+
+    <div class="sim-ctrl-card">
+      <div class="sim-ctrl-top">
+        <span class="sim-ctrl-title">V4 실질유통 내 구주 오버행</span>
+        <span class="sim-weight-pill" data-norm-w="v4">14.0%</span>
+      </div>
+      <div class="sim-num-row">
+        <input type="number" class="sim-num-input" data-sim-num="vcOverhang" min="0" max="80" step="0.5" value="18.40" aria-label="V4 구주 오버행 비중 퍼센트" />
+        <span class="sim-unit">% (VC/기존주주)</span>
+      </div>
+      <input type="range" class="sim-range-input" data-sim-range="vcOverhang" min="0" max="60" step="0.5" value="18.40" aria-label="V4 구주 오버행 슬라이더" />
+    </div>
+
+    <div class="sim-ctrl-card">
+      <div class="sim-ctrl-top">
+        <span class="sim-ctrl-title">V5 일반청약 경쟁률</span>
+        <span class="sim-weight-pill" data-norm-w="v5">12.0%</span>
+      </div>
+      <div class="sim-num-row">
+        <input type="number" class="sim-num-input" data-sim-num="retailComp" min="1" max="3000" step="10" value="912.4" aria-label="V5 일반청약 경쟁률" />
         <span class="sim-unit">: 1</span>
       </div>
-      <input type="range" class="sim-range-input" data-sim-range="comp" min="20" max="1800" step="10" value="868.6" aria-label="기관 수요예측 경쟁률 슬라이더" />
+      <input type="range" class="sim-range-input" data-sim-range="retailComp" min="10" max="2200" step="10" value="912.4" aria-label="V5 일반청약 경쟁률 슬라이더" />
     </div>
 
     <div class="sim-ctrl-card">
       <div class="sim-ctrl-top">
-        <span class="sim-ctrl-title">⑤ 시장 온도 (직전3 시초)</span>
-        <span class="sim-weight-pill">가중치 12%</span>
+        <span class="sim-ctrl-title">V6 기관 수요예측 경쟁률</span>
+        <span class="sim-weight-pill" data-norm-w="v6">10.0%</span>
       </div>
       <div class="sim-num-row">
-        <input type="number" class="sim-num-input" data-sim-num="marketTemp" min="-20" max="150" step="1" value="56.2" aria-label="직전 3종목 평균 시초가 수익률" />
-        <span class="sim-unit">%</span>
+        <input type="number" class="sim-num-input" data-sim-num="instComp" min="10" max="2500" step="10" value="868.6" aria-label="V6 기관 수요예측 경쟁률" />
+        <span class="sim-unit">: 1</span>
       </div>
-      <input type="range" class="sim-range-input" data-sim-range="marketTemp" min="-10" max="120" step="1" value="56.2" aria-label="시장 온도 슬라이더" />
+      <input type="range" class="sim-range-input" data-sim-range="instComp" min="20" max="1800" step="10" value="868.6" aria-label="V6 기관 수요예측 경쟁률 슬라이더" />
     </div>
 
     <div class="sim-ctrl-card">
       <div class="sim-ctrl-top">
-        <span class="sim-ctrl-title">① 확정 공모가</span>
-        <span class="sim-weight-pill">가중치 8%</span>
+        <span class="sim-ctrl-title">V7 상장 전 5일 지수 시장온도</span>
+        <span class="sim-weight-pill" data-norm-w="v7">8.0%</span>
       </div>
       <div class="sim-num-row">
-        <input type="number" class="sim-num-input" data-sim-num="price" min="1000" max="150000" step="500" value="14600" aria-label="확정 공모가 원" />
-        <span class="sim-unit">원</span>
+        <input type="number" class="sim-num-input" data-sim-num="pre5dTemp" min="-8" max="8" step="0.05" value="0.47" aria-label="V7 상장 전 5일 KOSPI KOSDAQ 지수 가중 등락률" />
+        <span class="sim-unit">% (D-5~D-1 지수)</span>
       </div>
-      <input type="range" class="sim-range-input" data-sim-range="price" min="3000" max="80000" step="500" value="14600" aria-label="확정 공모가 슬라이더" />
+      <input type="range" class="sim-range-input" data-sim-range="pre5dTemp" min="-5" max="5" step="0.05" value="0.47" aria-label="V7 상장 전 5일 지수 시장온도 슬라이더" />
     </div>
   </div>
 
   <!-- (b) 시뮬레이션 결과 KPI 4종 -->
-  <div class="alpha-kpi-grid" aria-label="5변수 가중치 시뮬레이션 핵심 예측 지표">
+  <div class="alpha-kpi-grid" aria-label="7변수 가중치 시뮬레이션 핵심 예측 지표">
     <div class="alpha-kpi-card">
-      <div class="alpha-kpi-label">EXPECTED SUPPLY INTENSITY (거래대금/Net)</div>
-      <div class="alpha-kpi-value pos-val" data-sim-kpi="supply">448.5%</div>
-      <div class="alpha-kpi-note" data-sim-kpi="tradeEok">예상 당일 거래대금 약 <strong>4,118억 원</strong> (실질유통 대비 4.49배)</div>
+      <div class="alpha-kpi-label">EXPECTED RELATIVE TURNOVER (거래량/실질유통주수)</div>
+      <div class="alpha-kpi-value pos-val" data-sim-kpi="relTurnover">348.5%</div>
+      <div class="alpha-kpi-note" data-sim-kpi="vwapNote">VWAP 프리미엄 <strong>+31.2%</strong> · 명목 수급강도 <strong>457.2%</strong></div>
     </div>
     <div class="alpha-kpi-card kpi-navy">
       <div class="alpha-kpi-label">OPENING → INTRADAY HIGH RANGE</div>
-      <div class="alpha-kpi-value pos-val" data-sim-kpi="openHigh">+37.0% → +43.7%</div>
-      <div class="alpha-kpi-note" data-sim-kpi="closeRet">시가 대비 고가 탄력 <strong>+6.7%p</strong> · 예상 종가 <strong>+25.7%</strong></div>
+      <div class="alpha-kpi-value pos-val" data-sim-kpi="openHigh">+34.8% → +41.9%</div>
+      <div class="alpha-kpi-note" data-sim-kpi="closeRet">시가 대비 고가 탄력 <strong>+7.1%p</strong> · 예상 종가 <strong>+24.2%</strong></div>
     </div>
     <div class="alpha-kpi-card">
       <div class="alpha-kpi-label">UPPER WICK RISK (고가 대비 종가 밀림폭)</div>
-      <div class="alpha-kpi-value neg-val" data-sim-kpi="wick">-12.53%</div>
+      <div class="alpha-kpi-value neg-val" data-sim-kpi="wick">-12.45%</div>
       <div class="alpha-kpi-note">당일 최고가 도달 후 종가까지 평균 차익실현 반납률</div>
     </div>
     <div class="alpha-kpi-card kpi-gold">
@@ -154,18 +243,18 @@
 
   <!-- (a) 과거 유사 종목 Top-3 매칭 테이블 -->
   <div class="alpha-block-head">
-    <h3 class="alpha-block-title">1. 5변수 가중치 매칭 과거 유사 상장 종목 Top-3 (Log-NetFloat 35% · 확약 30% · 경쟁률 15% · 시장온도 12% · 공모가 8%)</h3>
+    <h3 class="alpha-block-title">1. 7대 상대값 변수 · 사용자 가중치 매칭 과거 유사 상장 종목 Top-3</h3>
   </div>
   <div class="alpha-table-wrap">
-    <div class="table-scroll-hint" aria-hidden="true">↔ 표를 좌우로 스크롤하여 유사 종목 Top-3의 실질 수급강도 및 시가·고가·종가 전체 수치를 확인하세요</div>
+    <div class="table-scroll-hint" aria-hidden="true">↔ 표를 좌우로 스크롤하여 유사 종목 Top-3의 실질 유통비율, 당일 상대 수급강도(거래량/실질유통), VWAP 프리미엄 및 시가·고가·종가 전체 수치를 확인하세요</div>
     <table class="alpha-table">
       <thead>
         <tr>
           <th>매칭 순위 · 유사도</th>
           <th>유사 상장 종목 (코드 · 시장)</th>
-          <th class="num">실질 유통금액 (Net Float)</th>
-          <th class="num">확약비율 / 경쟁률</th>
-          <th class="num">실질 수급강도 (거래대금)</th>
+          <th class="num">V1 실질유통비율 (V4 구주%)</th>
+          <th class="num">V2 확약비율 (V3 장기%)</th>
+          <th class="num">당일 상대 수급강도 (VWAP · 명목)</th>
           <th class="num">시가 → 당일 고가 → 종가 수익률</th>
           <th class="num">윗꼬리 밀림폭</th>
           <th>당일 고점 시간대</th>
@@ -175,10 +264,10 @@
     </table>
   </div>
 
-  <!-- (c) 상장 당일 6개 시간대별 거래대금 집중도 · 누적 수급강도 · 가격 흐름 시각 바 -->
+  <!-- (c) 상장 당일 6개 시간대별 거래량 집중도 · 누적 상대 수급강도 · 가격 흐름 시각 바 -->
   <div class="intraday-analyzer">
     <div class="alpha-block-head" style="margin-top:0;">
-      <h3 class="alpha-block-title">2. 시뮬레이션 조건 기반 상장 당일 6개 시간대별(09:00~15:30) 거래대금 집중도 · 누적 수급강도 · 가격 흐름</h3>
+      <h3 class="alpha-block-title">2. 시뮬레이션 조건 기반 상장 당일 6개 시간대별(09:00~15:30) 거래량 집중도 · 누적 상대 수급강도 · 가격 흐름</h3>
     </div>
     <div class="alpha-table-wrap" style="margin-bottom:0;">
       <table class="intraday-slot-table">
@@ -186,8 +275,8 @@
           <tr>
             <th>시간대 구간</th>
             <th>당일 수급 국면 (6단계)</th>
-            <th>시간대 거래대금 집중도 (%) · 시각 바</th>
-            <th style="text-align:right;">누적 실질 수급강도</th>
+            <th>시간대 거래량 집중도 (%) · 시각 바</th>
+            <th style="text-align:right;">누적 상대 수급강도 (명목)</th>
             <th style="text-align:right;">공모가 대비 예상 가격 흐름</th>
             <th>수급 주체별 핵심 매매 패턴 및 고점 형성 임계치</th>
           </tr>
@@ -198,7 +287,7 @@
   </div>
 
   <p class="alpha-legal-foot">
-    ※ 본 시뮬레이터는 OpenDART 공시(증권신고서·증권발행실적보고서) 및 KRX 과거 상장 종목의 사후 데이터를 5변수 가중치로 매칭한 <strong>통계적 참고 도구(유사투자자문업 비영위)</strong>이며, 특정 종목에 대한 매수·매도 권유나 미래 수익률 보장이 아닙니다.
+    ※ 본 시뮬레이터는 OpenDART 공시(증권신고서·증권발행실적보고서) 및 KRX 과거 상장 종목의 사후 데이터를 7대 상대값 변수와 사용자 정규화 가중치로 매칭한 <strong>통계적 참고 도구(유사투자자문업 비영위)</strong>이며, 특정 종목에 대한 매수·매도 권유나 미래 수익률 보장이 아닙니다.
   </p>
 </section>
 {{- end -}}
