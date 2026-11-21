@@ -1006,6 +1006,284 @@
       box-shadow: var(--shadow-card);
     }
 
+    /* Wave 4: KOSPI/KOSDAQ Market Alpha & Intraday Volume/Price Dashboard */
+    .market-alpha-dashboard {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--navy);
+      border-radius: 14px;
+      padding: 28px 32px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 28px;
+    }
+    .single-alpha-dashboard {
+      margin: 30px 0 12px;
+      padding: 24px 26px;
+    }
+    .alpha-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px 18px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .alpha-head h2,
+    .alpha-head h3 {
+      margin: 4px 0 6px;
+      font-family: var(--font-serif);
+      font-size: 1.32rem;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.34;
+    }
+    .alpha-sub {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .alpha-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .alpha-kpi-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--track-accent);
+      border-radius: 10px;
+      padding: 13px 15px;
+    }
+    .alpha-kpi-card.kpi-gold {
+      border-left-color: var(--gold);
+    }
+    .alpha-kpi-card.kpi-navy {
+      border-left-color: var(--navy);
+    }
+    .alpha-kpi-label {
+      font-family: var(--font-mono);
+      font-size: 0.71rem;
+      font-weight: 700;
+      color: var(--subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .alpha-kpi-value {
+      margin-top: 4px;
+      font-family: var(--font-mono);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+    .alpha-kpi-note {
+      margin-top: 3px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .pos-val { color: #0F766E; font-weight: 700; }
+    .neg-val { color: #BE123C; font-weight: 700; }
+
+    .alpha-block-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px 14px;
+      margin: 18px 0 10px;
+    }
+    .alpha-block-title {
+      font-family: var(--font-serif);
+      font-size: 1.06rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 0;
+    }
+    .alpha-filter-tabs,
+    .intraday-profile-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .alpha-filter-btn,
+    .intraday-tab-btn {
+      appearance: none;
+      border: 1px solid var(--border-strong);
+      background: #FFFFFF;
+      color: var(--navy);
+      font-family: var(--font-sans);
+      font-size: 0.79rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .alpha-filter-btn:hover,
+    .intraday-tab-btn:hover {
+      border-color: var(--navy);
+      background: var(--navy-soft);
+    }
+    .alpha-filter-btn.is-active,
+    .intraday-tab-btn.is-active {
+      background: var(--navy);
+      color: #FFFFFF;
+      border-color: var(--navy);
+    }
+
+    .alpha-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #FFFFFF;
+      margin-bottom: 22px;
+    }
+    .alpha-table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .alpha-table th,
+    .alpha-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid #EEF2F6;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .alpha-table th:first-child,
+    .alpha-table td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: #FFFFFF;
+      box-shadow: 1px 0 0 var(--border);
+    }
+    .alpha-table th {
+      background: var(--navy);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    .alpha-table th:first-child {
+      background: var(--navy);
+      z-index: 3;
+    }
+    .alpha-table tbody tr:nth-child(even) td,
+    .alpha-table tbody tr:nth-child(even) td:first-child {
+      background: #F8FAFC;
+    }
+    .alpha-table tbody tr:hover td,
+    .alpha-table tbody tr:hover td:first-child {
+      background: #EFF6FF;
+    }
+    .alpha-table td.num,
+    .alpha-table th.num {
+      text-align: right;
+      font-family: var(--font-mono);
+    }
+    .mkt-pill {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.69rem;
+      font-weight: 700;
+    }
+    .mkt-kospi {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #BFDBFE;
+    }
+    .mkt-kosdaq {
+      background: #ECFDF5;
+      color: #0F766E;
+      border: 1px solid #99F6E4;
+    }
+
+    .intraday-analyzer {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .intraday-summary-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 16px;
+      padding: 10px 14px;
+      margin: 10px 0 14px;
+      border-radius: 8px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      font-size: 0.84rem;
+    }
+    .intraday-slot-table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background: #FFFFFF;
+    }
+    .intraday-slot-table th,
+    .intraday-slot-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: middle;
+    }
+    .intraday-slot-table th {
+      background: var(--surface-alt);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.79rem;
+    }
+    .vol-bar-cell {
+      min-width: 170px;
+    }
+    .vol-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .vol-bar-track {
+      flex: 1;
+      height: 8px;
+      border-radius: 999px;
+      background: #E2E8F0;
+      overflow: hidden;
+    }
+    .vol-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--navy), var(--track-accent));
+      transition: width 0.25s ease;
+    }
+    .vol-bar-num {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      min-width: 44px;
+      text-align: right;
+    }
+    .alpha-legal-foot {
+      margin: 12px 0 0;
+      font-size: 0.78rem;
+      color: var(--subtle);
+      line-height: 1.5;
+    }
+
     .site-footer {
       border-top: 1px solid var(--border);
       background: #FFFFFF;
@@ -1074,6 +1352,8 @@
       .header-inner { padding: 14px 16px; }
       .shell { padding: 20px 16px 40px; }
       .hero-panel { padding: 24px 20px; }
+      .market-alpha-dashboard { padding: 20px 18px; }
+      .alpha-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .pillar-grid { grid-template-columns: 1fr; }
       .report-card { padding: 20px 18px; }
       .article-card { padding: 24px 18px; }
@@ -1084,6 +1364,7 @@
       .table-scroll-hint {
         display: block;
       }
+      .alpha-kpi-grid { grid-template-columns: 1fr; }
       #back-to-top {
         right: 16px;
         bottom: 18px;
@@ -1204,6 +1485,181 @@
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       }
+
+      /* Wave 4: Interactive KOSPI/KOSDAQ Alpha Table Filter & Intraday 09:00-15:30 Volume/Price Analyzer */
+      var INTRADAY_PROFILES = {
+        high_50_plus: {
+          title: '고확약 우수형 (의무보유확약 50% 이상 평균 · 브릴스·진코스텍·덕산넵코어스)',
+          open15: '43.3%',
+          turnover: '296.7%',
+          openAlpha: '+61.93%p',
+          closeRet: '+54.57%',
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 43.3, turn: 128.5, price: '+61.67%', isPos: true, pattern: '개장 동시호가 체결 및 정적·동적 VI 발동, 의무보유확약 잠김 효과로 유통 호가 공백 발생' },
+            { slot: '09:15~10:00', stage: '② 미확약 기관 1차 차익실현 · VWAP 공방', vol: 20.8, turn: 190.2, price: '+64.57%', isPos: true, pattern: '미확약 기관 배정물량 1차 출회에도 당일 VWAP(거래량가중평균가) 상단 지지 유지' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 12.8, turn: 228.2, price: '+59.27%', isPos: true, pattern: '초반 급등분 일부 소화 후 오전 1차 지지선 구축 및 기관·외국인 손바뀜' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 호가 스프레드 수렴', vol: 6.4, turn: 247.2, price: '+57.23%', isPos: true, pattern: '거래량 급감 및 오전 VWAP 부근 좁은 박스권 등락' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 이탈 분기', vol: 7.6, turn: 269.7, price: '+56.00%', isPos: true, pattern: '운용사·연기금 패시브/액티브 편입 유입 여부에 따른 오후 추세 확정' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 당일 데이트레이딩 청산', vol: 9.1, turn: 296.7, price: '+54.57%', isPos: true, pattern: '당일 단기 데이트레이딩 물량 청산 후에도 공모가 대비 높은 프리미엄 종가 마감' }
+          ]
+        },
+        mid_25_50: {
+          title: '중확약 표준형 (의무보유확약 25%~50% 평균 · 산일전기·전진건설로봇·에이치브이엠·이노스페이스)',
+          open15: '46.2%',
+          turnover: '291.2%',
+          openAlpha: '+66.98%p',
+          closeRet: '+63.40%',
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 46.2, turn: 134.5, price: '+66.53%', isPos: true, pattern: '개장 첫 15분간 일간 거래량의 46.2% 집중, 시초가 갭상승 및 VI 발동' },
+            { slot: '09:15~10:00', stage: '② 미확약 기관 1차 차익실현 · VWAP 공방', vol: 21.8, turn: 198.0, price: '+66.93%', isPos: true, pattern: '미확약 기관 매물 소화 과정, VWAP 지지 시 오전 고점 재돌파 시도' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 11.9, turn: 232.7, price: '+64.45%', isPos: true, pattern: '유통물량 2회전(200%) 돌파 후 단기 지지선 확인 및 거래량 완만화' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 호가 스프레드 수렴', vol: 5.8, turn: 249.6, price: '+62.00%', isPos: true, pattern: '점심 시간대 거래 비중 5.8%로 축소, 오전 종가 부근 횡보' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 이탈 분기', vol: 6.5, turn: 268.5, price: '+62.78%', isPos: true, pattern: 'KOSPI·KOSDAQ 우량 업종(전력·로봇·방산) 중심으로 오후 기관 재매수 유입' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 당일 데이트레이딩 청산', vol: 7.8, turn: 291.2, price: '+63.40%', isPos: true, pattern: '종가 동시호가 수급 유입 및 시초가 수준 강보합 유지 마감' }
+          ]
+        },
+        low_under_20: {
+          title: '저확약 변동성형 (의무보유확약 20% 미만 평균 · 더본코리아·스카이랩스·크리에이츠)',
+          open15: '52.4%',
+          turnover: '253.7%',
+          openAlpha: '+9.93%p',
+          closeRet: '+1.30%',
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 52.4, turn: 133.0, price: '+9.67%', isPos: true, pattern: '개장 첫 15분에 당일 거래량의 절반 이상(52.4%) 집중, 미확약 물량 즉시 출회' },
+            { slot: '09:15~10:00', stage: '② 미확약 기관 1차 차익실현 · VWAP 공방', vol: 23.1, turn: 191.6, price: '+8.60%', isPos: true, pattern: '09:15~10:00 구간 누적 거래비중 75.5% 도달, VWAP 하향 이탈 시 낙폭 확대 주의' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 10.1, turn: 217.2, price: '+5.07%', isPos: true, pattern: '초반 급등분 반납 후 공모가 부근 지지력 테스트' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 호가 스프레드 수렴', vol: 4.5, turn: 228.6, price: '+3.43%', isPos: true, pattern: '매수 호가 공백 확대 및 거래량 급감(4.5%)' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 이탈 분기', vol: 4.4, turn: 239.8, price: '+2.33%', isPos: true, pattern: '추가 매수세 부재 시 계단식 완만한 조정 흐름' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 당일 데이트레이딩 청산', vol: 5.5, turn: 253.7, price: '+1.30%', isPos: true, pattern: '장 막판 당일 데이트레이딩·미수 청산 물량 출회로 시초가 대비 낮은 종가 형성' }
+          ]
+        },
+        '475150': {
+          title: '산일전기 (475150 · KOSPI · 확약 42.70% · 유통 21.80% · 지수 대비 Alpha +91.92%p)',
+          open15: '44.5%',
+          turnover: '312.4%',
+          openAlpha: '+91.92%p',
+          closeRet: '+118.50%',
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 44.5, turn: 139.0, price: '+91.40%', isPos: true, pattern: 'KOSPI 상장 첫 15분간 139.0% 회전하며 시초가 +91.4% 출발' },
+            { slot: '09:15~10:00', stage: '② 미확약 기관 1차 차익실현 · VWAP 공방', vol: 21.0, turn: 204.6, price: '+98.20%', isPos: true, pattern: '미확약 물량 전량 흡수하며 VWAP 상향 돌파(+98.2%)' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 12.5, turn: 243.7, price: '+104.50%', isPos: true, pattern: '공모가 대비 +100% 돌파 후 기관 순매수 지속' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 호가 스프레드 수렴', vol: 6.2, turn: 263.0, price: '+103.80%', isPos: true, pattern: '+103% 구간 견조한 고점 박스권 유지' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 이탈 분기', vol: 7.3, turn: 285.8, price: '+111.00%', isPos: true, pattern: '오후 기관·외국인 추가 매수 유입으로 당일 고점 경신' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 당일 데이트레이딩 청산', vol: 8.5, turn: 312.4, price: '+118.50%', isPos: true, pattern: '당일 KOSPI(-0.52%) 대비 종가 Alpha +119.02%p로 고점 마감' }
+          ]
+        },
+        '468670': {
+          title: '브릴스 (468670 · KOSDAQ · 확약 85.39% · 유통 26.42% · 지수 대비 Alpha +84.34%p)',
+          open15: '42.0%',
+          turnover: '346.2%',
+          openAlpha: '+84.34%p',
+          closeRet: '+78.60%',
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 42.0, turn: 145.4, price: '+84.10%', isPos: true, pattern: '85.39% 초고확약에 따른 유통물량 품귀로 개장 직후 +84.1% 형성' },
+            { slot: '09:15~10:00', stage: '② 미확약 기관 1차 차익실현 · VWAP 공방', vol: 20.4, turn: 216.0, price: '+88.50%', isPos: true, pattern: '출회 가능한 미확약 물량(14.6%) 조기 소진으로 오전 고점 +88.5% 기록' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 13.1, turn: 261.4, price: '+83.20%', isPos: true, pattern: '시초가(+84.1%) 부근 강력한 하방 경직성 확인' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 호가 스프레드 수렴', vol: 6.5, turn: 283.9, price: '+81.00%', isPos: true, pattern: '점심 구간 거래량 축소 속 +80% 상단 지지' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 이탈 분기', vol: 8.2, turn: 312.3, price: '+80.20%', isPos: true, pattern: '누적 회전율 300% 돌파 후에도 매물 압력 제한적' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 당일 데이트레이딩 청산', vol: 9.8, turn: 346.2, price: '+78.60%', isPos: true, pattern: '당일 KOSDAQ(-0.24%) 대비 종가 Alpha +78.84%p 마감' }
+          ]
+        },
+        '480110': {
+          title: '더본코리아 (480110 · KOSPI · 확약 19.20% · 유통 31.00% · 지수 대비 Alpha +21.48%p)',
+          open15: '51.8%',
+          turnover: '294.0%',
+          openAlpha: '+21.48%p',
+          closeRet: '+14.80%',
+          buckets: [
+            { slot: '09:00~09:15', stage: '① 개장 수급 폭발 · VI 구간', vol: 51.8, turn: 152.3, price: '+21.30%', isPos: true, pattern: '개장 첫 15분간 거래량 51.8% 집중, 시초가 +21.3% 형성 후 변동성 확대' },
+            { slot: '09:15~10:00', stage: '② 미확약 기관 1차 차익실현 · VWAP 공방', vol: 22.7, turn: 219.0, price: '+24.00%', isPos: true, pattern: '개인 매수세 유입으로 오전 고점(+24.0%) 터치 후 미확약 기관 매물 출회' },
+            { slot: '10:00~11:30', stage: '③ 오전 지지선 확인 · 손바뀜', vol: 10.5, turn: 249.9, price: '+18.60%', isPos: true, pattern: '시초가 하회 후 +18% 구간 1차 지지선 형성' },
+            { slot: '11:30~13:30', stage: '④ 점심 거래 소강 · 호가 스프레드 수렴', vol: 4.8, turn: 264.0, price: '+16.90%', isPos: true, pattern: '거래량 급감 및 +16~17% 구간 박스권 등락' },
+            { slot: '13:30~14:30', stage: '⑤ 오후 기관 재유입 / 이탈 분기', vol: 4.6, turn: 277.5, price: '+15.80%', isPos: true, pattern: '오후 미확약 잔여 물량 소화 및 완만한 조정' },
+            { slot: '14:30~15:30', stage: '⑥ 종가 동시호가 · 당일 데이트레이딩 청산', vol: 5.6, turn: 294.0, price: '+14.80%', isPos: true, pattern: '당일 KOSPI(-0.18%) 대비 종가 Alpha +14.98%p 마감' }
+          ]
+        }
+      };
+
+      document.querySelectorAll('[data-alpha-filter-group]').forEach(function (group) {
+        var targetTableId = group.getAttribute('data-alpha-filter-group');
+        var table = document.getElementById(targetTableId);
+        if (!table) return;
+        group.querySelectorAll('[data-alpha-filter]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var filter = btn.getAttribute('data-alpha-filter');
+            group.querySelectorAll('[data-alpha-filter]').forEach(function (b) {
+              b.classList.toggle('is-active', b === btn);
+            });
+            table.querySelectorAll('tbody tr').forEach(function (row) {
+              var mkt = row.getAttribute('data-market') || '';
+              var isHigh = row.getAttribute('data-lockup-high') === 'true';
+              var show = true;
+              if (filter === 'KOSPI') show = (mkt === 'KOSPI');
+              else if (filter === 'KOSDAQ') show = (mkt === 'KOSDAQ');
+              else if (filter === 'HIGH30') show = isHigh;
+              row.style.display = show ? '' : 'none';
+            });
+          });
+        });
+      });
+
+      document.querySelectorAll('.intraday-analyzer').forEach(function (analyzer) {
+        var titleEl = analyzer.querySelector('[data-intraday-title]');
+        var open15El = analyzer.querySelector('[data-intraday-open15]');
+        var turnEl = analyzer.querySelector('[data-intraday-turnover]');
+        var alphaEl = analyzer.querySelector('[data-intraday-alpha]');
+        var closeEl = analyzer.querySelector('[data-intraday-close]');
+        var tbody = analyzer.querySelector('[data-intraday-tbody]');
+
+        function renderProfile(key) {
+          var prof = INTRADAY_PROFILES[key] || INTRADAY_PROFILES.mid_25_50;
+          if (titleEl) titleEl.textContent = prof.title;
+          if (open15El) open15El.textContent = prof.open15;
+          if (turnEl) turnEl.textContent = prof.turnover;
+          if (alphaEl) alphaEl.textContent = prof.openAlpha;
+          if (closeEl) closeEl.textContent = prof.closeRet;
+          if (tbody) {
+            tbody.innerHTML = prof.buckets.map(function (b) {
+              var barWidth = Math.min(100, Math.round((b.vol / 55.0) * 100));
+              var priceClass = b.isPos ? 'pos-val' : 'neg-val';
+              return (
+                '<tr>' +
+                  '<td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">' + b.slot + '</td>' +
+                  '<td style="font-weight:600;white-space:nowrap;">' + b.stage + '</td>' +
+                  '<td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:' + barWidth + '%;"></div></div><span class="vol-bar-num">' + b.vol.toFixed(1) + '%</span></div></td>' +
+                  '<td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">' + b.turn.toFixed(1) + '%</td>' +
+                  '<td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="' + priceClass + '">' + b.price + '</td>' +
+                  '<td style="color:var(--text-body);font-size:0.82rem;">' + b.pattern + '</td>' +
+                '</tr>'
+              );
+            }).join('');
+          }
+        }
+
+        analyzer.querySelectorAll('[data-intraday-profile]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var key = btn.getAttribute('data-intraday-profile');
+            analyzer.querySelectorAll('[data-intraday-profile]').forEach(function (b) {
+              b.classList.toggle('is-active', b === btn);
+            });
+            renderProfile(key);
+          });
+        });
+
+        if (analyzer.getAttribute('data-auto-match-lockup') === 'true') {
+          var parentSection = analyzer.closest('[data-post-desc]');
+          var descText = parentSection ? (parentSection.getAttribute('data-post-desc') || '') : '';
+          var m = descText.match(/확약\s*([\d.]+)%/);
+          if (m) {
+            var lkVal = parseFloat(m[1]);
+            var targetKey = lkVal >= 50.0 ? 'high_50_plus' : (lkVal >= 20.0 ? 'mid_25_50' : 'low_under_20');
+            var targetBtn = analyzer.querySelector('[data-intraday-profile="' + targetKey + '"]');
+            if (targetBtn) {
+              targetBtn.click();
+            }
+          }
+        }
+      });
     })();
   </script>
 </body>

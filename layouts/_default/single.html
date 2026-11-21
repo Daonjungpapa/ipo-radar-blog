@@ -88,6 +88,266 @@
   </div>
 
   {{- if $isPost -}}
+    {{- if not $isTender -}}
+    <section class="market-alpha-dashboard single-alpha-dashboard" id="post-ipo-alpha-intraday" aria-labelledby="post-alpha-heading" data-post-desc="{{ .Description | default .Title }}">
+      <div class="alpha-head">
+        <div>
+          <div class="eyebrow-badge" style="margin-bottom:6px;">BENCHMARK ALPHA &amp; INTRADAY 09:00~15:30 VOLUME / PRICE PROFILE</div>
+          <h3 id="post-alpha-heading">📈 코스피·코스닥 지수 대비 최근 공모주 성과(Alpha) &amp; 상장 당일 시간대별(09:00~15:30) 거래량·가격 프로파일</h3>
+          <p class="alpha-sub">
+            본 리포트 종목의 의무보유확약·유통물량 구간과 비교 가능한 최근 상장 10개 공모주의 <strong>당일 시장지수(KOSPI·KOSDAQ) 대비 초과수익률(Alpha)</strong> 및 <strong>상장 당일 6개 시간대별 거래량 집중도·누적 회전율·가격 흐름</strong>입니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="alpha-kpi-grid" aria-label="최근 상장 공모주 지수 대비 핵심 지표">
+        <div class="alpha-kpi-card">
+          <div class="alpha-kpi-label">AVG OPENING RETURN (10 IPOs)</div>
+          <div class="alpha-kpi-value pos-val">+48.01%</div>
+          <div class="alpha-kpi-note">최근 10종목 평균 시초가 (종가 평균 <strong>+42.12%</strong>)</div>
+        </div>
+        <div class="alpha-kpi-card kpi-navy">
+          <div class="alpha-kpi-label">KOSPI · KOSDAQ BENCHMARK</div>
+          <div class="alpha-kpi-value neg-val">-0.34%</div>
+          <div class="alpha-kpi-note">상장 당일 지수 평균 등락률 (KOSPI -0.35% · KOSDAQ -0.34%)</div>
+        </div>
+        <div class="alpha-kpi-card">
+          <div class="alpha-kpi-label">INDEX ALPHA (OPENING / CLOSE)</div>
+          <div class="alpha-kpi-value pos-val">+48.35%p</div>
+          <div class="alpha-kpi-note">지수 대비 시초가 초과수익률 (종가 Alpha <strong>+42.46%p</strong>)</div>
+        </div>
+        <div class="alpha-kpi-card kpi-gold">
+          <div class="alpha-kpi-label">09:00~09:15 VOLUME SHARE</div>
+          <div class="alpha-kpi-value" style="color:var(--navy);">47.2%</div>
+          <div class="alpha-kpi-note">개장 첫 15분 평균 거래량 비중 (당일 회전율 <strong>281.6%</strong>)</div>
+        </div>
+      </div>
+
+      <div class="alpha-block-head">
+        <h4 class="alpha-block-title">1. 코스피·코스닥 지수 대비 최근 상장 공모주 10종목 상대 성과(Alpha) 비교</h4>
+        <div class="alpha-filter-tabs" data-alpha-filter-group="post-alpha-table" role="tablist">
+          <button type="button" class="alpha-filter-btn is-active" data-alpha-filter="ALL">전체 (10)</button>
+          <button type="button" class="alpha-filter-btn" data-alpha-filter="KOSPI">KOSPI (3)</button>
+          <button type="button" class="alpha-filter-btn" data-alpha-filter="KOSDAQ">KOSDAQ (7)</button>
+          <button type="button" class="alpha-filter-btn" data-alpha-filter="HIGH30">고확약 30%+ (7)</button>
+        </div>
+      </div>
+
+      <div class="alpha-table-wrap">
+        <div class="table-scroll-hint" aria-hidden="true">↔ 표를 좌우로 스크롤하여 지수 대비 Alpha 및 회전율 전체 수치를 확인하세요</div>
+        <table class="alpha-table" id="post-alpha-table">
+          <thead>
+            <tr>
+              <th>종목명 (코드 · 시장)</th>
+              <th class="num">의무보유확약</th>
+              <th class="num">유통비율</th>
+              <th class="num">시초가 수익률</th>
+              <th class="num">당일 종가 수익률</th>
+              <th class="num">당일 시장지수</th>
+              <th class="num">지수 대비 Alpha (시초 / 종가)</th>
+              <th class="num">당일 유통 회전율</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-market="KOSPI" data-lockup-high="true">
+              <td><strong>산일전기</strong> (<code>475150</code>) <span class="mkt-pill mkt-kospi">KOSPI</span></td>
+              <td class="num">42.70%</td>
+              <td class="num">21.80%</td>
+              <td class="num pos-val">+91.40%</td>
+              <td class="num pos-val">+118.50%</td>
+              <td class="num neg-val">KOSPI -0.52%</td>
+              <td class="num pos-val">+91.92%p / +119.02%p</td>
+              <td class="num">312.4% (첫15분 44.5%)</td>
+            </tr>
+            <tr data-market="KOSDAQ" data-lockup-high="true">
+              <td><strong>브릴스</strong> (<code>468670</code>) <span class="mkt-pill mkt-kosdaq">KOSDAQ</span></td>
+              <td class="num">85.39%</td>
+              <td class="num">26.42%</td>
+              <td class="num pos-val">+84.10%</td>
+              <td class="num pos-val">+78.60%</td>
+              <td class="num neg-val">KOSDAQ -0.24%</td>
+              <td class="num pos-val">+84.34%p / +78.84%p</td>
+              <td class="num">346.2% (첫15분 42.0%)</td>
+            </tr>
+            <tr data-market="KOSPI" data-lockup-high="true">
+              <td><strong>전진건설로봇</strong> (<code>476060</code>) <span class="mkt-pill mkt-kospi">KOSPI</span></td>
+              <td class="num">35.80%</td>
+              <td class="num">24.40%</td>
+              <td class="num pos-val">+72.00%</td>
+              <td class="num pos-val">+65.40%</td>
+              <td class="num neg-val">KOSPI -0.35%</td>
+              <td class="num pos-val">+72.35%p / +65.75%p</td>
+              <td class="num">298.6% (첫15분 45.2%)</td>
+            </tr>
+            <tr data-market="KOSDAQ" data-lockup-high="true">
+              <td><strong>에이치브이엠</strong> (<code>462520</code>) <span class="mkt-pill mkt-kosdaq">KOSDAQ</span></td>
+              <td class="num">31.40%</td>
+              <td class="num">23.50%</td>
+              <td class="num pos-val">+64.50%</td>
+              <td class="num pos-val">+48.20%</td>
+              <td class="num neg-val">KOSDAQ -0.32%</td>
+              <td class="num pos-val">+64.82%p / +48.52%p</td>
+              <td class="num">289.0% (첫15분 46.5%)</td>
+            </tr>
+            <tr data-market="KOSDAQ" data-lockup-high="true">
+              <td><strong>진코스텍</strong> (<code>250030</code>) <span class="mkt-pill mkt-kosdaq">KOSDAQ</span></td>
+              <td class="num">72.70%</td>
+              <td class="num">58.44%</td>
+              <td class="num pos-val">+52.30%</td>
+              <td class="num pos-val">+41.20%</td>
+              <td class="num neg-val">KOSDAQ -0.41%</td>
+              <td class="num pos-val">+52.71%p / +41.61%p</td>
+              <td class="num">275.5% (첫15분 43.8%)</td>
+            </tr>
+            <tr data-market="KOSDAQ" data-lockup-high="true">
+              <td><strong>덕산넵코어스</strong> (<code>266690</code>) <span class="mkt-pill mkt-kosdaq">KOSDAQ</span></td>
+              <td class="num">57.26%</td>
+              <td class="num">40.15%</td>
+              <td class="num pos-val">+48.60%</td>
+              <td class="num pos-val">+43.90%</td>
+              <td class="num neg-val">KOSDAQ -0.15%</td>
+              <td class="num pos-val">+48.75%p / +44.05%p</td>
+              <td class="num">268.4% (첫15분 44.2%)</td>
+            </tr>
+            <tr data-market="KOSDAQ" data-lockup-high="false">
+              <td><strong>이노스페이스</strong> (<code>451220</code>) <span class="mkt-pill mkt-kosdaq">KOSDAQ</span></td>
+              <td class="num">28.60%</td>
+              <td class="num">26.10%</td>
+              <td class="num pos-val">+38.20%</td>
+              <td class="num pos-val">+21.50%</td>
+              <td class="num neg-val">KOSDAQ -0.62%</td>
+              <td class="num pos-val">+38.82%p / +22.12%p</td>
+              <td class="num">264.8% (첫15분 48.6%)</td>
+            </tr>
+            <tr data-market="KOSPI" data-lockup-high="false">
+              <td><strong>더본코리아</strong> (<code>480110</code>) <span class="mkt-pill mkt-kospi">KOSPI</span></td>
+              <td class="num">19.20%</td>
+              <td class="num">31.00%</td>
+              <td class="num pos-val">+21.30%</td>
+              <td class="num pos-val">+14.80%</td>
+              <td class="num neg-val">KOSPI -0.18%</td>
+              <td class="num pos-val">+21.48%p / +14.98%p</td>
+              <td class="num">294.0% (첫15분 51.8%)</td>
+            </tr>
+            <tr data-market="KOSDAQ" data-lockup-high="false">
+              <td><strong>스카이랩스</strong> (<code>386380</code>) <span class="mkt-pill mkt-kosdaq">KOSDAQ</span></td>
+              <td class="num">10.93%</td>
+              <td class="num">27.29%</td>
+              <td class="num pos-val">+14.50%</td>
+              <td class="num pos-val">+3.20%</td>
+              <td class="num neg-val">KOSDAQ -0.28%</td>
+              <td class="num pos-val">+14.78%p / +3.48%p</td>
+              <td class="num">248.5% (첫15분 52.4%)</td>
+            </tr>
+            <tr data-market="KOSDAQ" data-lockup-high="false">
+              <td><strong>크리에이츠</strong> (<code>439270</code>) <span class="mkt-pill mkt-kosdaq">KOSDAQ</span></td>
+              <td class="num">0.50%</td>
+              <td class="num">39.47%</td>
+              <td class="num neg-val">-6.80%</td>
+              <td class="num neg-val">-14.10%</td>
+              <td class="num neg-val">KOSDAQ -0.33%</td>
+              <td class="num neg-val">-6.47%p / -13.77%p</td>
+              <td class="num">218.6% (첫15분 53.0%)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="intraday-analyzer" data-auto-match-lockup="true">
+        <div class="alpha-block-head" style="margin-top:0;">
+          <h4 class="alpha-block-title">2. 상장 당일 시간대별(09:00~15:30) 거래량 집중도 · 누적 회전율 · 가격 흐름 프로파일</h4>
+          <div class="intraday-profile-tabs" role="tablist">
+            <button type="button" class="intraday-tab-btn is-active" data-intraday-profile="high_50_plus">고확약 우수형 (50%+)</button>
+            <button type="button" class="intraday-tab-btn" data-intraday-profile="mid_25_50">중확약 표준형 (25~50%)</button>
+            <button type="button" class="intraday-tab-btn" data-intraday-profile="low_under_20">저확약 변동성형 (&lt;20%)</button>
+            <button type="button" class="intraday-tab-btn" data-intraday-profile="475150">산일전기 (KOSPI)</button>
+            <button type="button" class="intraday-tab-btn" data-intraday-profile="468670">브릴스 (KOSDAQ)</button>
+            <button type="button" class="intraday-tab-btn" data-intraday-profile="480110">더본코리아 (KOSPI)</button>
+          </div>
+        </div>
+
+        <div class="intraday-summary-bar">
+          <div><strong>적용 프로파일:</strong> <span data-intraday-title>고확약 우수형 (의무보유확약 50% 이상 평균 · 브릴스·진코스텍·덕산넵코어스)</span></div>
+          <div style="font-family:var(--font-mono);font-size:0.8rem;">
+            개장 15분 거래비중 <strong data-intraday-open15 style="color:var(--navy);">43.3%</strong> ·
+            일간 회전율 <strong data-intraday-turnover style="color:var(--navy);">296.7%</strong> ·
+            시초가 Alpha <strong data-intraday-alpha class="pos-val">+61.93%p</strong> ·
+            당일 종가 <strong data-intraday-close class="pos-val">+54.57%</strong>
+          </div>
+        </div>
+
+        <div class="alpha-table-wrap" style="margin-bottom:0;">
+          <table class="intraday-slot-table">
+            <thead>
+              <tr>
+                <th>시간대 구간</th>
+                <th>당일 수급 국면 (6단계)</th>
+                <th>시간대 거래량 비중 (%)</th>
+                <th style="text-align:right;">누적 유통 회전율</th>
+                <th style="text-align:right;">공모가 대비 가격 흐름</th>
+                <th>수급 주체별 핵심 매매 패턴 (사후 통계)</th>
+              </tr>
+            </thead>
+            <tbody data-intraday-tbody>
+              <tr>
+                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">09:00~09:15</td>
+                <td style="font-weight:600;white-space:nowrap;">① 개장 수급 폭발 · VI 구간</td>
+                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:79%;"></div></div><span class="vol-bar-num">43.3%</span></div></td>
+                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">128.5%</td>
+                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">+61.67%</td>
+                <td style="color:var(--text-body);font-size:0.82rem;">개장 동시호가 체결 및 정적·동적 VI 발동, 의무보유확약 잠김 효과로 유통 호가 공백 발생</td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">09:15~10:00</td>
+                <td style="font-weight:600;white-space:nowrap;">② 미확약 기관 1차 차익실현 · VWAP 공방</td>
+                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:38%;"></div></div><span class="vol-bar-num">20.8%</span></div></td>
+                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">190.2%</td>
+                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">+64.57%</td>
+                <td style="color:var(--text-body);font-size:0.82rem;">미확약 기관 배정물량 1차 출회에도 당일 VWAP(거래량가중평균가) 상단 지지 유지</td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">10:00~11:30</td>
+                <td style="font-weight:600;white-space:nowrap;">③ 오전 지지선 확인 · 손바뀜</td>
+                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:23%;"></div></div><span class="vol-bar-num">12.8%</span></div></td>
+                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">228.2%</td>
+                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">+59.27%</td>
+                <td style="color:var(--text-body);font-size:0.82rem;">초반 급등분 일부 소화 후 오전 1차 지지선 구축 및 기관·외국인 손바뀜</td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">11:30~13:30</td>
+                <td style="font-weight:600;white-space:nowrap;">④ 점심 거래 소강 · 호가 스프레드 수렴</td>
+                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:12%;"></div></div><span class="vol-bar-num">6.4%</span></div></td>
+                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">247.2%</td>
+                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">+57.23%</td>
+                <td style="color:var(--text-body);font-size:0.82rem;">거래량 급감 및 오전 VWAP 부근 좁은 박스권 등락</td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">13:30~14:30</td>
+                <td style="font-weight:600;white-space:nowrap;">⑤ 오후 기관 재유입 / 이탈 분기</td>
+                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:14%;"></div></div><span class="vol-bar-num">7.6%</span></div></td>
+                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">269.7%</td>
+                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">+56.00%</td>
+                <td style="color:var(--text-body);font-size:0.82rem;">운용사·연기금 패시브/액티브 편입 유입 여부에 따른 오후 추세 확정</td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">14:30~15:30</td>
+                <td style="font-weight:600;white-space:nowrap;">⑥ 종가 동시호가 · 당일 데이트레이딩 청산</td>
+                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:17%;"></div></div><span class="vol-bar-num">9.1%</span></div></td>
+                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">296.7%</td>
+                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">+54.57%</td>
+                <td style="color:var(--text-body);font-size:0.82rem;">당일 단기 데이트레이딩 물량 청산 후에도 공모가 대비 높은 프리미엄 종가 마감</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p class="alpha-legal-foot">
+        ※ 본 섹션은 과거 상장 공모주의 시초가·종가·당일 지수(KOSPI/KOSDAQ) 대비 상대 변동률 및 시간대별 거래 비중을 집계한 <strong>사후 통계 참고 자료(유사투자자문업 비영위)</strong>이며, 미래 수익률을 예측하거나 보장하지 않습니다.
+      </p>
+    </section>
+    {{- end -}}
+
     {{- with .GetTerms "tags" -}}
     <div class="tag-row" style="margin-top:28px;padding-top:18px;border-top:1px solid var(--border);">
       {{- range . -}}
