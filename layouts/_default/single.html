@@ -10,9 +10,9 @@
 {{- if $isPost -}}
   {{- $items := slice -}}
   {{- if $isTender -}}
-    {{- with hugo.Data.tender_summary -}}{{- $items = .items -}}{{- end -}}
+    {{- with .Site.Data.tender_summary -}}{{- $items = .items -}}{{- end -}}
   {{- else -}}
-    {{- with hugo.Data.ipo_summary -}}{{- $items = .items -}}{{- end -}}
+    {{- with .Site.Data.ipo_summary -}}{{- $items = .items -}}{{- end -}}
   {{- end -}}
   {{- range $items -}}
     {{- if eq .slug $.Slug -}}

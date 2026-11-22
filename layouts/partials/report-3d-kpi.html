@@ -1,5 +1,5 @@
 {{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
-{{- $summary := hugo.Data.ipo_summary -}}
+{{- $summary := .Site.Data.ipo_summary -}}
 {{- if and (not $isTender) $summary $summary.top_peers -}}
 <section class="qti-card" style="margin:24px 0;" aria-labelledby="kpi-3d-heading">
   <div class="qti-sec-head" style="margin-bottom:8px;">

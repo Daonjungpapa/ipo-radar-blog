@@ -1,7 +1,7 @@
 {{ define "above_main" }}
 {{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
 {{- if $isTender -}}
-  {{- $td := hugo.Data.tender_summary -}}
+  {{- $td := .Site.Data.tender_summary -}}
   <div class="qti-ticker" role="region" aria-label="실시간 공공입찰 요약 티커">
     <div class="qti-in">
       <span>누적 시방서 요약 <b>{{ $td.count | default 0 }}건</b></span>
@@ -20,7 +20,7 @@
 
 {{- if $isTender -}}
   {{- /* ═══ TRACK B · B1 필터+티커 리스트형 ═══ */ -}}
-  {{- $td := hugo.Data.tender_summary -}}
+  {{- $td := .Site.Data.tender_summary -}}
   <section class="qti-sec" data-filter-root>
     <div class="qti-in">
       <div class="qti-eyebrow is-tender">TRACK B · G2B TENDER INTELLIGENCE</div>
@@ -130,7 +130,7 @@
 
 {{- else -}}
   {{- /* ═══ TRACK A · T1 캘린더 우선형 + 7변수 시뮬레이터 ═══ */ -}}
-  {{- $ipo := hugo.Data.ipo_summary -}}
+  {{- $ipo := .Site.Data.ipo_summary -}}
   <section class="qti-sec" data-filter-root>
     <div class="qti-in">
       <div class="qti-eyebrow">TRACK A · DART IPO QUANT RADAR</div>
