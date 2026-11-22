@@ -1,0 +1,18 @@
+{{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
+<nav class="qti-subnav{{ if $isTender }} is-tender{{ end }}" aria-label="트랙 세부 메뉴">
+  <div class="qti-in">
+    {{- if $isTender -}}
+      <a href="{{ .Site.Home.RelPermalink }}"{{ if .IsHome }} class="is-active"{{ end }}>오늘의 공고</a>
+      <a href="{{ "posts/" | relURL }}"{{ if eq .Section "posts" }} class="is-active"{{ end }}>시방서 리포트</a>
+      <a href="{{ .Site.Home.RelPermalink }}#region-stats">지역·예산 통계</a>
+      <a href="{{ "about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="is-active"{{ end }}>방법론 v2.1</a>
+      <a href="{{ "contact/" | relURL }}"{{ if eq .RelPermalink "/contact/" }} class="is-active"{{ end }}>문의·제보</a>
+    {{- else -}}
+      <a href="{{ .Site.Home.RelPermalink }}"{{ if .IsHome }} class="is-active"{{ end }}>청약 캘린더</a>
+      <a href="{{ "posts/" | relURL }}"{{ if eq .Section "posts" }} class="is-active"{{ end }}>리포트</a>
+      <a href="{{ .Site.Home.RelPermalink }}#home-ipo-quant-simulator">7변수 시뮬레이터</a>
+      <a href="{{ "about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="is-active"{{ end }}>방법론 v2.1</a>
+      <a href="{{ "contact/" | relURL }}"{{ if eq .RelPermalink "/contact/" }} class="is-active"{{ end }}>문의·제보</a>
+    {{- end -}}
+  </div>
+</nav>

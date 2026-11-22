@@ -1,0 +1,35 @@
+{{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
+{{- $hub := .Site.Params.hubUrl | default "https://qtilab.com/" -}}
+{{- $ipoUrl := cond $isTender (.Site.Params.siblingUrl | default "https://ipo.qtilab.com/") (.Site.Home.RelPermalink) -}}
+{{- $tdUrl := cond $isTender (.Site.Home.RelPermalink) (.Site.Params.siblingUrl | default "https://tender.qtilab.com/") -}}
+<header class="qti-gnb">
+  <div class="qti-in">
+    <a class="qti-logo" href="{{ $hub }}" aria-label="QTI Lab 허브 홈">
+      <span class="qti-logo-mark" aria-hidden="true"></span>
+      <span>QTI Lab</span>
+    </a>
+    <nav class="qti-nav" aria-label="주요 메뉴">
+      <a href="{{ $ipoUrl }}"{{ if not $isTender }} class="is-active" aria-current="page"{{ end }}>IPO 레이더</a>
+      <a href="{{ $tdUrl }}" class="is-tender{{ if $isTender }} is-active{{ end }}"{{ if $isTender }} aria-current="page"{{ end }}>입찰 인텔리전스</a>
+      <a href="{{ "posts/" | relURL }}">전체 리포트</a>
+      <a href="{{ $hub }}b2b/#excel">엑셀 구독</a>
+      <a href="{{ $hub }}b2b/">B2B</a>
+    </nav>
+    <span class="qti-gnb-sp"></span>
+    <form class="qti-gnb-search" action="{{ "posts/" | relURL }}" method="get" role="search" aria-label="리포트 검색">
+      <span aria-hidden="true">🔍</span>
+      <input type="search" name="q" placeholder="종목·발주처 검색" aria-label="종목 또는 발주처 검색" />
+    </form>
+    <button type="button" class="qti-icon-btn" data-theme-toggle aria-pressed="false" aria-label="다크 모드 전환" title="다크 모드로 전환">◐</button>
+    <button type="button" class="qti-icon-btn qti-menu-btn" data-menu-toggle aria-expanded="false" aria-controls="qti-mobile-drawer" aria-label="모바일 메뉴 열기">☰</button>
+  </div>
+</header>
+<nav class="qti-drawer" id="qti-mobile-drawer" aria-label="모바일 메뉴" hidden>
+  <a href="{{ $hub }}">허브 포털 (qtilab.com)</a>
+  <a href="{{ $ipoUrl }}"{{ if not $isTender }} class="is-active"{{ end }}>IPO 퀀트 수급 레이더</a>
+  <a href="{{ $tdUrl }}"{{ if $isTender }} class="is-active"{{ end }}>공공입찰 시방서 인텔리전스</a>
+  <a href="{{ "posts/" | relURL }}">전체 리포트 아카이브</a>
+  <a href="{{ $hub }}b2b/#excel">마스터 엑셀 구독</a>
+  <a href="{{ $hub }}b2b/">B2B 폐쇄망 구축 문의</a>
+  <a href="{{ "about/" | relURL }}">랩 소개 · 방법론</a>
+</nav>

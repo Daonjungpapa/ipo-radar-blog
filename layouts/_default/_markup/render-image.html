@@ -1,1 +1,16 @@
-<img src="{{ .Destination | relURL }}" alt="{{ .Text }}" loading="lazy" />
+{{- $dest := .Destination -}}
+{{- $alt := .Text | default "데이터 인포그래픽" -}}
+{{- $src := $dest -}}
+{{- if hasPrefix $dest "/images/" -}}
+  {{- $svgPath := replaceRE `\.png$` ".svg" $dest -}}
+  {{- $fsPath := printf "static%s" $svgPath -}}
+  {{- if fileExists $fsPath -}}
+    {{- $src = strings.TrimPrefix "/" $svgPath | relURL -}}
+  {{- else -}}
+    {{- $src = strings.TrimPrefix "/" $dest | relURL -}}
+  {{- end -}}
+{{- end -}}
+<figure style="margin:18px 0;">
+  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async" />
+  {{- with $alt -}}<figcaption class="xs muted" style="text-align:center;margin-top:6px;">{{ . }}</figcaption>{{- end -}}
+</figure>

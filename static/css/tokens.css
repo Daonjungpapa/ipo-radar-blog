@@ -1,0 +1,142 @@
+/* QTI Lab Design System — Tokens v1.0
+ * Fonts: Wanted Sans (Display) · SUIT (Body) · Roboto Mono (Numbers/Tabular) — SIL OFL / Apache 2.0
+ * Palette: P2 Deep Teal Ledger (Light Primary + Dark Mode) · KRX Up=Red / Down=Blue · CVD-safe IPO charts
+ */
+:root,
+[data-theme="light"] {
+  --font-display: "Wanted Sans Variable", "Wanted Sans", "SUIT", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "SUIT", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --font-num: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Legacy aliases so existing simulator/markdown snippets keep working seamlessly */
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-num);
+
+  /* Brand & Track Palette — Light */
+  --ink: #062A2E;
+  --primary: #0B7A75;
+  --primary-hover: #08615D;
+  --primary-ink: #FFFFFF;
+  --primary-soft: #E6F4F2;
+  --accent: #E0A100;
+  --accent-hover: #C68D00;
+  --accent-soft: #FDF4D8;
+  --accent-ink: #7A4F00;
+
+  --ipo: #0B7A75;
+  --ipo-soft: #E6F4F2;
+  --tender: #6D4AFF;
+  --tender-soft: #EFEBFF;
+
+  /* Neutrals */
+  --bg: #F7F8F6;
+  --surface: #FFFFFF;
+  --surface-alt: #EFF2F0;
+  --text: #0E1A1C;
+  --text-body: #1E2E30;
+  --muted: #50605F;
+  --subtle: #6E7F7D;
+  --border: #E1E6E4;
+  --border-strong: #C5CFCC;
+
+  /* Legacy color aliases for preserved simulator/alpha widgets */
+  --navy: var(--ink);
+  --navy-deep: #041D20;
+  --navy-soft: var(--primary-soft);
+  --card: var(--surface);
+  --emerald: var(--primary);
+  --emerald-soft: var(--primary-soft);
+  --emerald-border: #A7DBD6;
+  --gold: var(--accent);
+  --gold-soft: var(--accent-soft);
+  --gold-border: #F2D785;
+
+  /* Semantic & KRX Market */
+  --up: #E5303B;
+  --up-soft: #FDECEC;
+  --down: #2463EB;
+  --down-soft: #EBF2FE;
+  --flat: #6B7280;
+  --success: #0F8A5F;
+  --warning: #C87D00;
+  --danger: #D92D20;
+  --danger-soft: #FEF3F2;
+
+  /* Surfaces */
+  --banner-bg: #062A2E;
+  --banner-text: #F7F8F6;
+  --banner-border: transparent;
+  --ad-bg: #F1F3F2;
+  --ad-border: #CFD7D5;
+  --focus-ring: 0 0 0 3px rgba(11, 122, 117, 0.28);
+  --shadow-sm: 0 1px 2px rgba(6, 42, 46, 0.05);
+  --shadow-md: 0 12px 30px -16px rgba(6, 42, 46, 0.16);
+
+  /* Layout & Radius */
+  --container-max: 1200px;
+  --prose-max: 760px;
+  --sidebar-w: 300px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-pill: 999px;
+}
+
+[data-theme="dark"] {
+  --ink: #E9F5F3;
+  --primary: #2BB3A6;
+  --primary-hover: #3DC9BC;
+  --primary-ink: #062A2E;
+  --primary-soft: #0F2E2E;
+  --accent: #F2B92A;
+  --accent-hover: #FFCA47;
+  --accent-soft: #2E2611;
+  --accent-ink: #F2B92A;
+
+  --ipo: #2BB3A6;
+  --ipo-soft: #0F2E2E;
+  --tender: #9C86FF;
+  --tender-soft: #221C3D;
+
+  --bg: #0A1416;
+  --surface: #102023;
+  --surface-alt: #162A2E;
+  --text: #E3ECEB;
+  --text-body: #CBE0DD;
+  --muted: #8FA5A3;
+  --subtle: #6A8280;
+  --border: #1E3336;
+  --border-strong: #2E4B50;
+
+  --navy: var(--ink);
+  --navy-deep: #061012;
+  --navy-soft: var(--primary-soft);
+  --card: var(--surface);
+  --emerald: var(--primary);
+  --emerald-soft: var(--primary-soft);
+  --emerald-border: #1E5450;
+  --gold: var(--accent);
+  --gold-soft: var(--accent-soft);
+  --gold-border: #594618;
+
+  --up: #FF5A5F;
+  --up-soft: #35161A;
+  --down: #4C8DFF;
+  --down-soft: #132340;
+  --flat: #94A3B8;
+  --success: #34D399;
+  --warning: #FBBF24;
+  --danger: #F87171;
+  --danger-soft: #35161A;
+
+  --banner-bg: #132C30;
+  --banner-text: #E9F5F3;
+  --banner-border: #254A4F;
+  --ad-bg: #122427;
+  --ad-border: #284246;
+  --focus-ring: 0 0 0 3px rgba(43, 179, 166, 0.36);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 14px 34px -12px rgba(0, 0, 0, 0.52);
+}

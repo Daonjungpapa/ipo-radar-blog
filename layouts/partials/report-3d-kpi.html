@@ -1,0 +1,55 @@
+{{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
+{{- $summary := hugo.Data.ipo_summary -}}
+{{- if and (not $isTender) $summary $summary.top_peers -}}
+<section class="qti-card" style="margin:24px 0;" aria-labelledby="kpi-3d-heading">
+  <div class="qti-sec-head" style="margin-bottom:8px;">
+    <div>
+      <span class="qti-badge qti-b-ipo mono">INTERACTIVE 3D · CVD-SAFE</span>
+      <h3 id="kpi-3d-heading" style="margin-top:6px;">동종 공모주 기관 경쟁률 3D 비교 (막대 ↔ 표 클릭 연동)</h3>
+    </div>
+    <div class="qti-chips">
+      <button type="button" class="qti-chip is-active" data-kpi3d-mode="3d" data-target="qti-report-kpi-3d" aria-pressed="true">인터랙티브 3D</button>
+      <button type="button" class="qti-chip" data-kpi3d-mode="2d" data-target="qti-report-kpi-3d" aria-pressed="false">정적 SVG · 2D 표</button>
+    </div>
+  </div>
+  <p class="xs muted" style="margin:0 0 12px;">3D 막대를 클릭하면 아래 2D 표의 해당 종목이 강조됩니다. 드래그 또는 키보드 ←/→로 회전할 수 있으며 저사양 기기에서는 정적 SVG로 표시됩니다.</p>
+
+  <div class="qti-3d-stage is-light" id="qti-report-kpi-3d" data-qti-3d="report-kpi" data-peers-id="qti-kpi-peers-json" data-table-id="qti-kpi-peers-table" data-live-id="qti-kpi-live" tabindex="0" role="region" aria-label="동종 공모주 기관 경쟁률 3D 비교 차트">
+    <div class="qti-3d-tip"></div>
+    <div class="qti-3d-fallback">
+      <img src="{{ "images/charts/ipo_comp_top5.svg" | relURL }}" alt="기관 수요예측 경쟁률 상위 5 아이소메트릭 차트" style="max-height:310px;border:0;padding:0;margin:0;background:transparent;" loading="lazy" />
+    </div>
+    <div class="qti-3d-hud">
+      <span>LAZY 3D · 막대 클릭 시 표 하이라이트 · ←/→ 회전</span>
+      <span>IPO CVD-SAFE PALETTE</span>
+    </div>
+  </div>
+  <div class="sr-only" id="qti-kpi-live" aria-live="polite"></div>
+
+  <div class="qti-table-wrap" style="margin-top:14px;">
+    <table class="qti-table is-resp" id="qti-kpi-peers-table" data-sortable>
+      <thead>
+        <tr>
+          <th data-sort="str">종목명 (클릭 시 3D 연동)</th>
+          <th class="r" data-sort="num">기관 경쟁률 ↕</th>
+          <th class="r mh" data-sort="num">의무보유확약 ↕</th>
+          <th class="r mh" data-sort="num">상장일 유통 ↕</th>
+          <th class="mh">상세</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{- range $idx, $p := $summary.top_peers -}}
+        <tr{{ if eq $idx 0 }} class="is-hl"{{ end }}>
+          <td class="nowrap"><strong>{{ $p.corp }}</strong>{{ with $p.code }} <span class="xs muted num">{{ . }}</span>{{ end }}</td>
+          <td class="r num" data-val="{{ $p.comp_num }}"><strong>{{ if gt $p.comp_num 0 }}{{ lang.FormatNumber 1 $p.comp_num }}:1{{ else }}예측 전{{ end }}</strong></td>
+          <td class="r num mh" data-val="{{ $p.lock_num }}">{{ printf "%.1f%%" $p.lock_num }}</td>
+          <td class="r num mh" data-val="{{ $p.flt_num }}">{{ printf "%.1f%%" $p.flt_num }}</td>
+          <td class="mh">{{ if $p.rel }}<a href="{{ $p.rel }}" class="xs" style="font-weight:700;">리포트 →</a>{{ else }}<span class="xs muted">참고 표본</span>{{ end }}</td>
+        </tr>
+        {{- end -}}
+      </tbody>
+    </table>
+  </div>
+  <script type="application/json" id="qti-kpi-peers-json">{{ $summary.top_peers | jsonify | safeJS }}</script>
+</section>
+{{- end -}}

@@ -5,621 +5,151 @@
 {{- $readTime := .ReadingTime -}}
 {{- if lt $readTime 1 }}{{ $readTime = 1 }}{{ end -}}
 
-<article class="article-card">
-  <nav class="breadcrumb" aria-label="현재 위치">
-    <a href="{{ .Site.Home.RelPermalink }}">홈</a>
-    <span>/</span>
-    {{- if $isPost -}}
-    <a href="{{ "posts/" | relURL }}">전체 리포트</a>
-    <span>/</span>
-    {{- end -}}
-    <span>{{ .Title }}</span>
-  </nav>
-
-  <header class="article-header">
-    <div class="card-meta-row">
-      {{- if $isPost -}}
-        {{- with .GetTerms "categories" -}}
-          {{- range . -}}
-          <a class="badge {{ if $isTender }}badge-gold{{ else }}badge-emerald{{ end }}" href="{{ .RelPermalink }}" style="text-decoration:none;">{{ .LinkTitle }}</a>
-          {{- end -}}
-        {{- else -}}
-          <span class="badge {{ if $isTender }}badge-gold{{ else }}badge-emerald{{ end }}">{{ .Site.Params.trackCode | default "INTELLIGENCE" }}</span>
-        {{- end -}}
-        <span class="badge badge-navy mono-meta">읽기 약 {{ $readTime }}분</span>
-        {{- if not .Date.IsZero -}}
-        <time class="mono-meta" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">발행 {{ .Date.Format "2006-01-02 15:04" }}</time>
-        {{- end -}}
-      {{- else -}}
-        <span class="badge badge-navy">{{ .Params.docBadge | default "LAB GOVERNANCE" }}</span>
-        <span class="badge {{ if $isTender }}badge-gold{{ else }}badge-emerald{{ end }} mono-meta">읽기 약 {{ $readTime }}분</span>
-        {{- if not .Lastmod.IsZero -}}
-        <time class="mono-meta" datetime="{{ .Lastmod.Format "2006-01-02" }}">최종 개정 {{ .Lastmod.Format "2006-01-02" }}</time>
-        {{- end -}}
-      {{- end -}}
-    </div>
-
-    <h1>{{ .Title }}</h1>
-
-    {{- with .Description -}}
-    <p class="article-lead">{{ . }}</p>
-    {{- end -}}
-  </header>
-
-  {{- if $isPost -}}
-  <nav class="quick-toc" id="quick-toc" aria-label="리포트 핵심 목차 바로가기" hidden>
-    <span class="quick-toc-title">📑 리포트 핵심 목차 바로가기</span>
-    <div class="quick-toc-pills" id="quick-toc-pills"></div>
-  </nav>
-  {{- end -}}
-
-  {{- if and $isPost $adsense -}}
-  <aside class="ad-slot ad-slot-top" aria-label="광고 영역">
-    <span class="ad-label">ADVERTISEMENT</span>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="{{ $adsense }}"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </aside>
-  {{- end -}}
-
-  <div class="prose">
-    {{- $imgPrefix := "images/" | relURL -}}
-    {{- $rendered := .Content | replaceRE "(?s)<table([^>]*)>(.*?)</table>" "<div class=\"table-wrap\"><div class=\"table-scroll-hint\" aria-hidden=\"true\">↔ 표를 좌우로 스크롤하여 전체 수치를 확인하세요</div><table$1>$2</table></div>" -}}
-    {{- $rendered = $rendered | replaceRE `(<img[^>]*\ssrc=["'])/images/` (printf "${1}%s" $imgPrefix) -}}
-    {{- if and $isPost $adsense -}}
-      {{- $h2Parts := split $rendered "<h2" -}}
-      {{- if ge (len $h2Parts) 3 -}}
-        {{- $midAd := printf `<aside class="ad-slot ad-slot-mid" aria-label="본문 중간 광고 영역"><span class="ad-label">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="%s"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></aside>` $adsense -}}
-        {{- $rebuilt := index $h2Parts 0 -}}
-        {{- range $idx, $part := after 1 $h2Parts -}}
-          {{- if eq $idx 1 -}}
-            {{- $rebuilt = printf "%s%s<h2%s" $rebuilt $midAd $part -}}
-          {{- else -}}
-            {{- $rebuilt = printf "%s<h2%s" $rebuilt $part -}}
-          {{- end -}}
-        {{- end -}}
-        {{- $rendered = $rebuilt -}}
-      {{- end -}}
-    {{- end -}}
-    {{ $rendered | safeHTML }}
-  </div>
-
-  {{- if $isPost -}}
-    {{- if and (not $isTender) (in .Title "266690") -}}
-    <section class="market-alpha-dashboard single-alpha-dashboard" id="post-ipo-alpha-intraday" aria-labelledby="post-alpha-heading">
-      <div class="alpha-head">
-        <div>
-          <div class="eyebrow-badge" style="margin-bottom:6px;">PILOT CASE STUDY · 266690 덕산넵코어스 · KOSPI/KOSDAQ ALPHA &amp; INTRADAY FLOW</div>
-          <h3 id="post-alpha-heading">📈 [266690 덕산넵코어스] 코스피·코스닥 지수 대비 상장 성과(Alpha) &amp; 당일 시간대별(09:00~15:30) 거래량·가격 시각 분석</h3>
-          <p class="alpha-sub">
-            확정 공모가(<strong>14,600원</strong>, 의무보유확약 <strong>57.26%</strong>, 유통물량 <strong>40.15% / 757.8만 주</strong>) 기준 상장 당일 소속 시장(KOSDAQ) 및 비교 시장(KOSPI) 지수 대비 초과수익률(Alpha)과 6개 시간대별 거래량 비중·누적 회전율·VWAP(21,340원) 지지 흐름입니다.
-          </p>
-        </div>
-      </div>
-
-      <div class="alpha-kpi-grid" aria-label="266690 덕산넵코어스 지수 대비 핵심 성과 지표">
-        <div class="alpha-kpi-card">
-          <div class="alpha-kpi-label">OPENING / CLOSING RETURN</div>
-          <div class="alpha-kpi-value pos-val">+48.60%</div>
-          <div class="alpha-kpi-note">시초가 21,695원 (당일 종가 <strong>21,010원 / +43.90%</strong>)</div>
-        </div>
-        <div class="alpha-kpi-card kpi-navy">
-          <div class="alpha-kpi-label">KOSDAQ / KOSPI BENCHMARK</div>
-          <div class="alpha-kpi-value neg-val">-0.15%</div>
-          <div class="alpha-kpi-note">당일 KOSDAQ -0.15% (862.82pt) · KOSPI +0.15%</div>
-        </div>
-        <div class="alpha-kpi-card">
-          <div class="alpha-kpi-label">MARKET ALPHA (vs KOSDAQ)</div>
-          <div class="alpha-kpi-value pos-val">+48.75%p</div>
-          <div class="alpha-kpi-note">시초가 Alpha +48.75%p (종가 Alpha <strong>+44.05%p</strong>)</div>
-        </div>
-        <div class="alpha-kpi-card kpi-gold">
-          <div class="alpha-kpi-label">09:00~09:15 VOL &amp; TURNOVER</div>
-          <div class="alpha-kpi-value" style="color:var(--navy);">44.2%</div>
-          <div class="alpha-kpi-note">개장 15분 거래량 집중도 (당일 누적 회전율 <strong>268.4%</strong>)</div>
-        </div>
-      </div>
-
-      <div class="alpha-block-head">
-        <h4 class="alpha-block-title">1. 코스피(KOSPI) · 코스닥(KOSDAQ) 지수 대비 덕산넵코어스(266690) 결과 비교</h4>
-      </div>
-
-      <div class="alpha-table-wrap">
-        <div class="table-scroll-hint" aria-hidden="true">↔ 표를 좌우로 스크롤하여 지수 대비 Alpha 전체 수치를 확인하세요</div>
-        <table class="alpha-table" id="post-alpha-table">
-          <thead>
-            <tr>
-              <th>구분 지표</th>
-              <th class="num">가격 / 지수</th>
-              <th class="num">공모가(14,600원) 대비 등락률</th>
-              <th class="num">KOSDAQ(-0.15%) 대비 Alpha</th>
-              <th class="num">KOSPI(+0.15%) 대비 Alpha</th>
-              <th>수급 및 시장 비교 판정</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>시초가 (09:00 개장)</strong> <span class="mkt-pill mkt-kosdaq">KOSDAQ</span></td>
-              <td class="num"><strong>21,695원</strong></td>
-              <td class="num pos-val">+48.60%</td>
-              <td class="num pos-val">+48.75%p</td>
-              <td class="num pos-val">+48.45%p</td>
-              <td>개장 동시호가 체결 직후 정적·동적 VI 발동</td>
-            </tr>
-            <tr>
-              <td><strong>당일 고가 (09:34)</strong></td>
-              <td class="num"><strong>22,410원</strong></td>
-              <td class="num pos-val">+53.49%</td>
-              <td class="num pos-val">+53.64%p</td>
-              <td class="num pos-val">+53.34%p</td>
-              <td>미확약 1차 물량 소화 후 오전 최고점 형성</td>
-            </tr>
-            <tr>
-              <td><strong>당일 VWAP (가중평균가)</strong></td>
-              <td class="num"><strong>21,340원</strong></td>
-              <td class="num pos-val">+46.16%</td>
-              <td class="num pos-val">+46.31%p</td>
-              <td class="num pos-val">+46.01%p</td>
-              <td>당일 총 거래량 2,033.9만 주 체결 중심선</td>
-            </tr>
-            <tr>
-              <td><strong>당일 종가 (15:30 마감)</strong></td>
-              <td class="num"><strong>21,010원</strong></td>
-              <td class="num pos-val">+43.90%</td>
-              <td class="num pos-val">+44.05%p</td>
-              <td class="num pos-val">+43.75%p</td>
-              <td>확약 57.26% 하방 경직성으로 +40%대 안착 마감</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="intraday-analyzer">
-        <div class="alpha-block-head" style="margin-top:0;">
-          <h4 class="alpha-block-title">2. 상장 당일 시간대별(09:00~15:30) 거래량 비중 시각 바 · 누적 회전율 · 가격 흐름</h4>
-        </div>
-
-        <div class="intraday-summary-bar">
-          <div><strong>분석 대상:</strong> 덕산넵코어스 (<code>266690</code> · KOSDAQ · 유통가능 7,577,904주 / 40.15%)</div>
-          <div style="font-family:var(--font-mono);font-size:0.8rem;">
-            당일 총 거래량 <strong style="color:var(--navy);">20,339,094주</strong> ·
-            누적 회전율 <strong style="color:var(--navy);">268.4%</strong> ·
-            당일 VWAP <strong class="pos-val">21,340원 (+46.16%)</strong>
-          </div>
-        </div>
-
-        <div class="alpha-table-wrap" style="margin-bottom:0;">
-          <table class="intraday-slot-table">
-            <thead>
-              <tr>
-                <th>시간대 구간</th>
-                <th>당일 수급 국면 (6단계)</th>
-                <th>시간대 거래량 비중 (%) · 시각 바</th>
-                <th style="text-align:right;">누적 유통 회전율</th>
-                <th style="text-align:right;">평균가 (공모가 대비)</th>
-                <th>VWAP(21,340원) 지지 및 수급 패턴</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">09:00~09:15</td>
-                <td style="font-weight:600;white-space:nowrap;">① 개장 수급 폭발 · VI 구간</td>
-                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:88%;"></div></div><span class="vol-bar-num">44.2%</span></div></td>
-                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">118.6%</td>
-                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">21,695원 (+48.60%)</td>
-                <td style="color:var(--text-body);font-size:0.82rem;"><strong>VWAP +1.66% 상회</strong> · 개장 15분 만에 유통물량 1.19회전(899.0만 주) 체결</td>
-              </tr>
-              <tr>
-                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">09:15~10:00</td>
-                <td style="font-weight:600;white-space:nowrap;">② 미확약 1차 소화 · 고점 형성</td>
-                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:42%;"></div></div><span class="vol-bar-num">20.8%</span></div></td>
-                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">174.5%</td>
-                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">22,075원 (+51.20%)</td>
-                <td style="color:var(--text-body);font-size:0.82rem;"><strong>VWAP +3.44% 상회</strong> · 미확약(42.7%) 1차 매물 흡수하며 당일 고가(22,410원, +53.49%) 기록</td>
-              </tr>
-              <tr>
-                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">10:00~11:30</td>
-                <td style="font-weight:600;white-space:nowrap;">③ 오전 지지선 확인 · 손바뀜</td>
-                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:25%;"></div></div><span class="vol-bar-num">12.6%</span></div></td>
-                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">208.3%</td>
-                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">21,433원 (+46.80%)</td>
-                <td style="color:var(--text-body);font-size:0.82rem;"><strong>VWAP +0.44% 지지</strong> · 유통물량 2회전(208.3%) 돌파 후 당일 VWAP 부근 1차 지지 확인</td>
-              </tr>
-              <tr>
-                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">11:30~13:30</td>
-                <td style="font-weight:600;white-space:nowrap;">④ 점심 거래 소강 · 스프레드 수렴</td>
-                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:13%;"></div></div><span class="vol-bar-num">6.3%</span></div></td>
-                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">225.2%</td>
-                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">21,243원 (+45.50%)</td>
-                <td style="color:var(--text-body);font-size:0.82rem;"><strong>VWAP -0.45% 보합</strong> · 거래 비중 6.3%(128.1만 주)로 축소, 21,150~21,350원 박스권</td>
-              </tr>
-              <tr>
-                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">13:30~14:30</td>
-                <td style="font-weight:600;white-space:nowrap;">⑤ 오후 기관 수급 분기 · 눌림목</td>
-                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:15%;"></div></div><span class="vol-bar-num">7.4%</span></div></td>
-                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">245.1%</td>
-                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">21,141원 (+44.80%)</td>
-                <td style="color:var(--text-body);font-size:0.82rem;"><strong>VWAP -0.93% 방어</strong> · 당일 저점(20,510원, +40.48%) 테스트 후 저가 매수 유입</td>
-              </tr>
-              <tr>
-                <td style="font-family:var(--font-mono);font-weight:700;color:var(--navy);white-space:nowrap;">14:30~15:30</td>
-                <td style="font-weight:600;white-space:nowrap;">⑥ 종가 동시호가 · 당일 청산</td>
-                <td class="vol-bar-cell"><div class="vol-bar-wrap"><div class="vol-bar-track"><div class="vol-bar-fill" style="width:18%;"></div></div><span class="vol-bar-num">8.7%</span></div></td>
-                <td style="text-align:right;font-family:var(--font-mono);font-weight:600;white-space:nowrap;">268.4%</td>
-                <td style="text-align:right;font-family:var(--font-mono);white-space:nowrap;" class="pos-val">21,010원 (+43.90%)</td>
-                <td style="color:var(--text-body);font-size:0.82rem;"><strong>종가 Alpha +44.05%p</strong> · 데이트레이딩 청산 소화 후 공모가 대비 +43.90% 마감</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <p class="alpha-legal-foot">
-        ※ 본 섹션은 덕산넵코어스(266690)의 상장 당일 시초가·종가·당일 지수(KOSPI/KOSDAQ) 대비 상대 변동률 및 시간대별 거래 비중을 집계한 <strong>사후 통계 참고 자료(유사투자자문업 비영위)</strong>이며, 특정 종목에 대한 투자 권유나 미래 수익률 보장이 아닙니다.
-      </p>
-    </section>
-    {{- end -}}
-
-    {{- if not $isTender -}}
-    <section class="quant-sim-panel post-quant-sim-panel quant-sim-widget" id="post-ipo-quant-simulator" aria-labelledby="post-sim-heading" data-auto-prefill-post="true">
-      <div class="alpha-head">
-        <div>
-          <div class="eyebrow-badge" style="margin-bottom:6px;">MASTER PROMPT v3.0 · PRE-FILLED 7-VARIABLE RELATIVE FLOAT &amp; USER-WEIGHTED SIMULATOR</div>
-          <h3 id="post-sim-heading">🧮 본 종목 7대 상대값 변수 자동 프리셋 — 상장 당일 상대 수급강도(거래량/실질유통) &amp; 사용자 가중치 배치 시뮬레이터</h3>
-          <p class="alpha-sub">
-            본 리포트의 7대 핵심 상대값 변수(V1 실질 유통비율 % · V2 최종 배정 확약비율 % · V3 장기 확약 품질 % · V4 구주 오버행 비중 % · V5 일반청약 경쟁률 · V6 기관 수요예측 경쟁률 · V7 상장 전 5영업일 KOSPI·KOSDAQ 지수 시장온도 %)가 자동 프리셋되었습니다. 아래 <strong>[⚖️ 사용자 매칭 변수 가중치 배치 패널]</strong>에서 7개 변수의 가중치를 조절(실시간 합계 100% 자동 정규화)하거나 4종 원클릭 전략 프리셋을 선택해 과거 유사 종목 Top-3와 시간대별 고점 구간을 실험해 보세요.
-          </p>
-        </div>
-      </div>
-
-      <div class="sim-prefill-banner">
-        <span data-sim-prefill-text>🎯 본 리포트 7대 상대값 변수 자동 프리셋 적용됨</span>
-        <span style="font-family:var(--font-mono);font-size:0.75rem;">기본 가중치: V1 24% · V2 20% · V3 12% · V4 14% · V5 12% · V6 10% · V7 8%</span>
-      </div>
-
-      <!-- A4: 사용자 매칭 변수 가중치 배치 패널 (7개 슬라이더 + 자동 100% 정규화 + 4종 전략 프리셋) -->
-      <div class="weight-alloc-panel" aria-label="본 종목 사용자 매칭 변수 가중치 배치 패널">
-        <div class="weight-alloc-head">
-          <h4 class="weight-alloc-title">⚖️ 사용자 매칭 변수 가중치 배치 패널 (슬라이더 조작 시 합계 100.0% 실시간 자동 정규화)</h4>
-          <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--navy);font-weight:700;">NORMALIZED WEIGHT SUM = 100.0%</span>
-        </div>
-        <div class="weight-preset-row" role="toolbar" aria-label="4종 원클릭 가중치 전략 프리셋">
-          <button type="button" class="weight-preset-btn is-active" data-weight-preset="balanced">⚖️ 표준 균형형 (24/20/12/14/12/10/8)</button>
-          <button type="button" class="weight-preset-btn" data-weight-preset="scarcity_overhang">🔥 품절주·구주 오버행 방어형 (V1:34 · V4:26)</button>
-          <button type="button" class="weight-preset-btn" data-weight-preset="inst_longterm">🏦 기관 장기확약 신뢰형 (V2:30 · V3:28)</button>
-          <button type="button" class="weight-preset-btn" data-weight-preset="momentum_5d">📈 5일 지수·일반청약 모멘텀형 (V7:28 · V5:26)</button>
-        </div>
-        <div class="weight-sliders-grid">
-          <div class="weight-slider-card">
-            <div class="weight-slider-top">
-              <span class="weight-var-name">V1 실질유통%</span>
-              <span class="norm-weight-badge" data-norm-w="v1">24.0%</span>
-            </div>
-            <input type="range" class="sim-range-input" data-weight-slider="v1" min="0" max="100" step="1" value="24" aria-label="V1 실질 유통비율 가중치 슬라이더" />
-          </div>
-          <div class="weight-slider-card">
-            <div class="weight-slider-top">
-              <span class="weight-var-name">V2 최종확약%</span>
-              <span class="norm-weight-badge" data-norm-w="v2">20.0%</span>
-            </div>
-            <input type="range" class="sim-range-input" data-weight-slider="v2" min="0" max="100" step="1" value="20" aria-label="V2 최종 배정 확약비율 가중치 슬라이더" />
-          </div>
-          <div class="weight-slider-card">
-            <div class="weight-slider-top">
-              <span class="weight-var-name">V3 장기확약%</span>
-              <span class="norm-weight-badge" data-norm-w="v3">12.0%</span>
-            </div>
-            <input type="range" class="sim-range-input" data-weight-slider="v3" min="0" max="100" step="1" value="12" aria-label="V3 장기 확약 품질 가중치 슬라이더" />
-          </div>
-          <div class="weight-slider-card">
-            <div class="weight-slider-top">
-              <span class="weight-var-name">V4 구주오버행%</span>
-              <span class="norm-weight-badge" data-norm-w="v4">14.0%</span>
-            </div>
-            <input type="range" class="sim-range-input" data-weight-slider="v4" min="0" max="100" step="1" value="14" aria-label="V4 구주 오버행 비중 가중치 슬라이더" />
-          </div>
-          <div class="weight-slider-card">
-            <div class="weight-slider-top">
-              <span class="weight-var-name">V5 일반청약</span>
-              <span class="norm-weight-badge" data-norm-w="v5">12.0%</span>
-            </div>
-            <input type="range" class="sim-range-input" data-weight-slider="v5" min="0" max="100" step="1" value="12" aria-label="V5 일반청약 경쟁률 가중치 슬라이더" />
-          </div>
-          <div class="weight-slider-card">
-            <div class="weight-slider-top">
-              <span class="weight-var-name">V6 기관경쟁률</span>
-              <span class="norm-weight-badge" data-norm-w="v6">10.0%</span>
-            </div>
-            <input type="range" class="sim-range-input" data-weight-slider="v6" min="0" max="100" step="1" value="10" aria-label="V6 기관 수요예측 경쟁률 가중치 슬라이더" />
-          </div>
-          <div class="weight-slider-card">
-            <div class="weight-slider-top">
-              <span class="weight-var-name">V7 5일지수온도</span>
-              <span class="norm-weight-badge" data-norm-w="v7">8.0%</span>
-            </div>
-            <input type="range" class="sim-range-input" data-weight-slider="v7" min="0" max="100" step="1" value="8" aria-label="V7 상장 전 5일 지수 시장온도 가중치 슬라이더" />
-          </div>
-        </div>
-      </div>
-
-      <!-- A3: 7대 핵심 매칭 변수 수치 컨트롤러 -->
-      <div class="sim-controls-grid" aria-label="본 종목 7변수 시나리오 조절 패널">
-        <div class="sim-ctrl-card">
-          <div class="sim-ctrl-top">
-            <span class="sim-ctrl-title">V1 실질 유통비율 (Net Float)</span>
-            <span class="sim-weight-pill" data-norm-w="v1">24.0%</span>
-          </div>
-          <div class="sim-num-row">
-            <input type="number" class="sim-num-input" data-sim-num="netFloatPct" min="3" max="90" step="0.2" value="33.32" aria-label="V1 실질 유통비율 퍼센트" />
-            <span class="sim-unit">%</span>
-          </div>
-          <input type="range" class="sim-range-input" data-sim-range="netFloatPct" min="5" max="75" step="0.2" value="33.32" aria-label="V1 실질 유통비율 슬라이더" />
-        </div>
-
-        <div class="sim-ctrl-card">
-          <div class="sim-ctrl-top">
-            <span class="sim-ctrl-title">V2 최종 배정 확약비율</span>
-            <span class="sim-weight-pill" data-norm-w="v2">20.0%</span>
-          </div>
-          <div class="sim-num-row">
-            <input type="number" class="sim-num-input" data-sim-num="lockup" min="0" max="100" step="0.5" value="57.26" aria-label="V2 최종 배정 확약비율 퍼센트" />
-            <span class="sim-unit">%</span>
-          </div>
-          <input type="range" class="sim-range-input" data-sim-range="lockup" min="0" max="95" step="0.5" value="57.26" aria-label="V2 최종 배정 확약비율 슬라이더" />
-        </div>
-
-        <div class="sim-ctrl-card">
-          <div class="sim-ctrl-top">
-            <span class="sim-ctrl-title">V3 장기 확약 품질 (3+6개월)</span>
-            <span class="sim-weight-pill" data-norm-w="v3">12.0%</span>
-          </div>
-          <div class="sim-num-row">
-            <input type="number" class="sim-num-input" data-sim-num="ltLockup" min="0" max="80" step="0.5" value="23.75" aria-label="V3 장기 확약 품질 비율 퍼센트" />
-            <span class="sim-unit">%</span>
-          </div>
-          <input type="range" class="sim-range-input" data-sim-range="ltLockup" min="0" max="65" step="0.5" value="23.75" aria-label="V3 장기 확약 품질 슬라이더" />
-        </div>
-
-        <div class="sim-ctrl-card">
-          <div class="sim-ctrl-top">
-            <span class="sim-ctrl-title">V4 실질유통 내 구주 오버행</span>
-            <span class="sim-weight-pill" data-norm-w="v4">14.0%</span>
-          </div>
-          <div class="sim-num-row">
-            <input type="number" class="sim-num-input" data-sim-num="vcOverhang" min="0" max="80" step="0.5" value="18.40" aria-label="V4 구주 오버행 비중 퍼센트" />
-            <span class="sim-unit">%</span>
-          </div>
-          <input type="range" class="sim-range-input" data-sim-range="vcOverhang" min="0" max="60" step="0.5" value="18.40" aria-label="V4 구주 오버행 슬라이더" />
-        </div>
-
-        <div class="sim-ctrl-card">
-          <div class="sim-ctrl-top">
-            <span class="sim-ctrl-title">V5 일반청약 경쟁률</span>
-            <span class="sim-weight-pill" data-norm-w="v5">12.0%</span>
-          </div>
-          <div class="sim-num-row">
-            <input type="number" class="sim-num-input" data-sim-num="retailComp" min="1" max="3000" step="10" value="912.4" aria-label="V5 일반청약 경쟁률" />
-            <span class="sim-unit">: 1</span>
-          </div>
-          <input type="range" class="sim-range-input" data-sim-range="retailComp" min="10" max="2200" step="10" value="912.4" aria-label="V5 일반청약 경쟁률 슬라이더" />
-        </div>
-
-        <div class="sim-ctrl-card">
-          <div class="sim-ctrl-top">
-            <span class="sim-ctrl-title">V6 기관 수요예측 경쟁률</span>
-            <span class="sim-weight-pill" data-norm-w="v6">10.0%</span>
-          </div>
-          <div class="sim-num-row">
-            <input type="number" class="sim-num-input" data-sim-num="instComp" min="10" max="2500" step="10" value="868.6" aria-label="V6 기관 수요예측 경쟁률" />
-            <span class="sim-unit">: 1</span>
-          </div>
-          <input type="range" class="sim-range-input" data-sim-range="instComp" min="20" max="1800" step="10" value="868.6" aria-label="V6 기관 수요예측 경쟁률 슬라이더" />
-        </div>
-
-        <div class="sim-ctrl-card">
-          <div class="sim-ctrl-top">
-            <span class="sim-ctrl-title">V7 상장 전 5일 지수 시장온도</span>
-            <span class="sim-weight-pill" data-norm-w="v7">8.0%</span>
-          </div>
-          <div class="sim-num-row">
-            <input type="number" class="sim-num-input" data-sim-num="pre5dTemp" min="-8" max="8" step="0.05" value="0.47" aria-label="V7 상장 전 5일 지수 가중 등락률" />
-            <span class="sim-unit">%</span>
-          </div>
-          <input type="range" class="sim-range-input" data-sim-range="pre5dTemp" min="-5" max="5" step="0.05" value="0.47" aria-label="V7 상장 전 5일 지수 시장온도 슬라이더" />
-        </div>
-      </div>
-
-      <div class="alpha-kpi-grid" aria-label="본 종목 7변수 시뮬레이션 예측 결과">
-        <div class="alpha-kpi-card">
-          <div class="alpha-kpi-label">EXPECTED RELATIVE TURNOVER (거래량/실질유통주수)</div>
-          <div class="alpha-kpi-value pos-val" data-sim-kpi="relTurnover">348.5%</div>
-          <div class="alpha-kpi-note" data-sim-kpi="vwapNote">VWAP 프리미엄 · 명목 수급강도</div>
-        </div>
-        <div class="alpha-kpi-card kpi-navy">
-          <div class="alpha-kpi-label">OPENING → INTRADAY HIGH</div>
-          <div class="alpha-kpi-value pos-val" data-sim-kpi="openHigh">+34.8% → +41.9%</div>
-          <div class="alpha-kpi-note" data-sim-kpi="closeRet">시가 대비 고가 탄력</div>
-        </div>
-        <div class="alpha-kpi-card">
-          <div class="alpha-kpi-label">UPPER WICK RISK (밀림폭)</div>
-          <div class="alpha-kpi-value neg-val" data-sim-kpi="wick">-12.45%</div>
-          <div class="alpha-kpi-note">당일 최고가 대비 종가 반납 폭</div>
-        </div>
-        <div class="alpha-kpi-card kpi-gold">
-          <div class="alpha-kpi-label">PEAK TIME BUCKET (고점 시간대)</div>
-          <div class="alpha-kpi-value" style="color:var(--navy);font-size:1.12rem;" data-sim-kpi="peakSlot">09:15~10:00</div>
-          <div class="alpha-kpi-note" data-sim-kpi="peakNote">미확약 1차 소화 후 고점</div>
-        </div>
-      </div>
-
-      <div class="alpha-block-head">
-        <h4 class="alpha-block-title">1. 현재 7변수 및 사용자 가중치 조건과 가장 유사한 과거 상장 종목 Top-3</h4>
-      </div>
-      <div class="alpha-table-wrap">
-        <table class="alpha-table">
-          <thead>
-            <tr>
-              <th>순위 · 유사도</th>
-              <th>유사 상장 종목 (시장)</th>
-              <th class="num">V1 실질유통비율 (V4 구주%)</th>
-              <th class="num">V2 확약비율 (V3 장기%)</th>
-              <th class="num">당일 상대 수급강도 (VWAP · 명목)</th>
-              <th class="num">시가 → 당일 고가 → 종가</th>
-              <th class="num">윗꼬리 밀림폭</th>
-              <th>당일 고점 시간대</th>
-            </tr>
-          </thead>
-          <tbody data-sim-top3-tbody></tbody>
-        </table>
-      </div>
-
-      <div class="intraday-analyzer">
-        <div class="alpha-block-head" style="margin-top:0;">
-          <h4 class="alpha-block-title">2. 상장 당일 6개 시간대별(09:00~15:30) 거래량 집중도 · 누적 상대 수급강도 · 가격 흐름</h4>
-        </div>
-        <div class="alpha-table-wrap" style="margin-bottom:0;">
-          <table class="intraday-slot-table">
-            <thead>
-              <tr>
-                <th>시간대 구간</th>
-                <th>당일 수급 국면 (6단계)</th>
-                <th>시간대 거래량 집중도 (%)</th>
-                <th style="text-align:right;">누적 상대 수급강도 (명목)</th>
-                <th style="text-align:right;">공모가 대비 가격 흐름</th>
-                <th>수급 주체별 핵심 매매 패턴</th>
-              </tr>
-            </thead>
-            <tbody data-sim-intraday-tbody></tbody>
-          </table>
-        </div>
-      </div>
-
-      <p class="alpha-legal-foot">
-        ※ 본 시뮬레이터는 OpenDART 공시 및 KRX 과거 상장 종목의 사후 데이터를 7대 상대값 변수와 사용자 정규화 가중치로 매칭한 <strong>통계적 참고 도구(유사투자자문업 비영위)</strong>이며, 투자 권유나 미래 수익률 보장이 아닙니다.
-      </p>
-    </section>
-    {{- end -}}
-
-    {{- with .GetTerms "tags" -}}
-    <div class="tag-row" style="margin-top:28px;padding-top:18px;border-top:1px solid var(--border);">
-      {{- range . -}}
-      <a class="tag-pill" href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
-      {{- end -}}
-    </div>
-    {{- end -}}
-
-    {{- $currentPermalink := .RelPermalink -}}
-    {{- $allPosts := (where .Site.RegularPages "Section" "posts").ByDate.Reverse -}}
-    {{- $related := slice -}}
-    {{- range $allPosts -}}
-      {{- if and (ne .RelPermalink $currentPermalink) (lt (len $related) 3) -}}
-        {{- $related = $related | append . -}}
-      {{- end -}}
-    {{- end -}}
-    {{- if gt (len $related) 0 -}}
-    <section class="related-reports" aria-labelledby="related-reports-heading">
-      <div class="related-head">
-        <div>
-          <div class="related-eyebrow">RELATED REPORTS · FURTHER READING</div>
-          <h3 id="related-reports-heading">함께 확인하면 좋은 최근 리포트</h3>
-        </div>
-        <a class="related-all-link" href="{{ "posts/" | relURL }}">전체 {{ len $allPosts }}건 보기 →</a>
-      </div>
-      <div class="related-grid">
-        {{- range $related -}}
-        {{- $rtRel := .ReadingTime -}}
-        {{- if lt $rtRel 1 }}{{ $rtRel = 1 }}{{ end -}}
-        <a class="related-card" href="{{ .RelPermalink }}">
-          <div class="related-meta">
-            <span class="badge {{ if $isTender }}badge-gold{{ else }}badge-emerald{{ end }}">
-              {{- with .GetTerms "categories" -}}
-                {{- range first 1 . -}}{{ .LinkTitle }}{{- end -}}
-              {{- else -}}
-                {{- $.Site.Params.trackCode | default "REPORT" -}}
-              {{- end -}}
-            </span>
-            {{- if not .Date.IsZero -}}
-            <time class="mono-meta" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
-            {{- end -}}
-            <span class="mono-meta">· {{ $rtRel }}분</span>
-          </div>
-          <div class="related-title">{{ .Title }}</div>
-          {{- with .Description -}}
-          <p class="related-desc">{{ . | truncate 88 }}</p>
-          {{- else -}}
-          <p class="related-desc">{{ .Summary | plainify | truncate 88 }}</p>
-          {{- end -}}
-          <span class="related-cta">리포트 전문 보기 →</span>
-        </a>
-        {{- end -}}
-      </div>
-    </section>
-    {{- end -}}
-
-    {{- if $adsense -}}
-    <aside class="ad-slot ad-slot-bottom" aria-label="하단 광고 영역">
-      <span class="ad-label">ADVERTISEMENT</span>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="{{ $adsense }}"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </aside>
-    {{- end -}}
-
-    <aside class="editorial-slot" aria-label="리서치 허브 안내">
-      <div class="editorial-slot-label">{{ .Site.Params.brandName | default "퀀트 & 입찰 인텔리전스 랩" }} · BRIEFING DESK</div>
-      {{- if $isTender -}}
-      <h4>맞춤형 입찰 알림 파일럿 및 사내 폐쇄망 구축 상담</h4>
-      <p>본 아카이브는 조달청 나라장터(G2B)·공공데이터포털 원문 공고를 기반으로 자동 요약됩니다. 14일 무료 입찰 알림 파일럿 신청, 데이터 정정 제보 및 사내 폐쇄망 시방서 비교 도구 상담은 공식 문의 페이지를 이용해 주세요.</p>
-      {{- else -}}
-      <h4>더 많은 퀀트 수급·공공입찰 리포트를 한곳에서 확인하세요</h4>
-      <p>본 아카이브는 DART 전자공시와 나라장터(G2B) 원문 공고를 교차 검증하여 매일 업데이트됩니다. 공시 데이터 정정 제보 및 아카이브 문의는 공식 문의 페이지를 이용해 주세요.</p>
-      {{- end -}}
-      <div class="slot-actions">
-        <a class="btn btn-primary" href="{{ "posts/" | relURL }}">전체 리포트 목록</a>
-        {{- with .Site.Params.siblingUrl -}}
-        <a class="btn btn-outline" href="{{ . }}">{{ $.Site.Params.siblingName }} ↗</a>
-        {{- end -}}
-        <a class="btn btn-outline" href="{{ "contact/" | relURL }}">{{ if $isTender }}14일 무료 파일럿 · B2B 문의{{ else }}문의 · 데이터 제보{{ end }}</a>
-      </div>
-    </aside>
-
-    {{- if or .PrevInSection .NextInSection -}}
-    <nav class="post-nav" aria-label="이전 및 다음 리포트">
-      <div>
-        {{- with .NextInSection -}}
-        <a class="post-nav-item" href="{{ .RelPermalink }}">
-          <span class="post-nav-dir">← 최신 리포트</span>
-          <span class="post-nav-title">{{ .Title }}</span>
-        </a>
-        {{- end -}}
-      </div>
-      <div>
-        {{- with .PrevInSection -}}
-        <a class="post-nav-item" href="{{ .RelPermalink }}">
-          <span class="post-nav-dir">이전 리포트 →</span>
-          <span class="post-nav-title">{{ .Title }}</span>
-        </a>
-        {{- end -}}
-      </div>
-    </nav>
-    {{- end -}}
+{{- /* Look up structured KPI metadata for current post from data JSON */ -}}
+{{- $meta := false -}}
+{{- if $isPost -}}
+  {{- $items := slice -}}
+  {{- if $isTender -}}
+    {{- with hugo.Data.tender_summary -}}{{- $items = .items -}}{{- end -}}
   {{- else -}}
-    <aside class="editorial-slot" aria-label="포털 바로가기">
-      <div class="editorial-slot-label">PORTAL NAVIGATION</div>
-      <h4>{{ .Site.Params.brandName | default "퀀트 & 입찰 인텔리전스 랩" }}</h4>
-      <p>실시간 공모주 수급 분석 및 나라장터 입찰 시방서 요약 리포트를 바로 열람할 수 있습니다.</p>
-      <div class="slot-actions">
-        <a class="btn btn-primary" href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }} 홈</a>
-        <a class="btn btn-outline" href="{{ "posts/" | relURL }}">전체 리포트</a>
-        <a class="btn btn-outline" href="{{ .Site.Params.hubUrl | default "https://qtilab.com/" }}">허브 포털 ↗</a>
-      </div>
-    </aside>
+    {{- with hugo.Data.ipo_summary -}}{{- $items = .items -}}{{- end -}}
   {{- end -}}
-</article>
+  {{- range $items -}}
+    {{- if eq .slug $.Slug -}}
+      {{- $meta = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<section class="qti-sec" style="padding-top:24px;">
+  <div class="qti-in">
+    <div class="qti-main-rail">
+      <article>
+        <nav class="qti-breadcrumb" aria-label="현재 위치">
+          <a href="{{ .Site.Home.RelPermalink }}">홈</a>
+          <span>›</span>
+          {{- if $isPost -}}<a href="{{ "posts/" | relURL }}">전체 리포트</a><span>›</span>{{- end -}}
+          <span>{{ .Title | truncate 42 }}</span>
+        </nav>
+
+        <header style="margin-bottom:20px;">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px;">
+            <span class="qti-badge {{ if $isTender }}qti-b-tender{{ else }}qti-b-ipo{{ end }} mono">
+              {{ .Site.Params.trackCode | default "QTI LAB" }}
+            </span>
+            <span class="qti-badge qti-b-done mono">읽기 약 {{ $readTime }}분</span>
+          </div>
+          <h1 style="font-size:clamp(24px,3vw,33px);margin-bottom:12px;">{{ .Title }}</h1>
+          <div class="qti-trust-bar">
+            {{- if not .Date.IsZero -}}
+            <span>기준일 <b class="num">{{ .Date.Format "2006-01-02 15:04" }}</b></span>
+            {{- end -}}
+            <span>출처 <b>{{ if $isTender }}조달청 나라장터(G2B){{ else }}금융감독원 전자공시(DART){{ end }}</b></span>
+            <span>방법론 <b>v2.1</b></span>
+            {{- if and $meta $meta.source_url -}}
+            <span><a href="{{ $meta.source_url }}" target="_blank" rel="noopener noreferrer" style="font-weight:700;">원문 공시 보기 ↗</a></span>
+            {{- end -}}
+          </div>
+        </header>
+
+        {{- /* 4-KPI Row on Posts (Empty state graceful fallback) */ -}}
+        {{- if and $isPost $meta -}}
+          {{- if $isTender -}}
+          <div class="qti-kpi-grid" style="margin-bottom:20px;">
+            <div class="qti-kpi"><div class="qti-kpi-lbl">추정가격(배정예산)</div><div class="qti-kpi-val">{{ $meta.budget_label }}</div><div class="qti-kpi-sub">VAT 포함 기준</div></div>
+            <div class="qti-kpi"><div class="qti-kpi-lbl">발주처 과거 하한율</div><div class="qti-kpi-val">{{ if gt $meta.floor_rate 0 }}{{ printf "%.3f%%" $meta.floor_rate }}{{ else }}원문확인{{ end }}</div><div class="qti-kpi-sub">참고 이력 평균</div></div>
+            <div class="qti-kpi"><div class="qti-kpi-lbl">발주 지역</div><div class="qti-kpi-val" style="color:var(--tender);">{{ $meta.region }}</div><div class="qti-kpi-sub">{{ $meta.org | truncate 14 }}</div></div>
+            <div class="qti-kpi"><div class="qti-kpi-lbl">공고번호</div><div class="qti-kpi-val" style="font-size:15px;">{{ $meta.bid_no | default "-" }}</div><div class="qti-kpi-sub">나라장터 기준</div></div>
+          </div>
+          {{- else -}}
+          <div class="qti-kpi-grid" style="margin-bottom:20px;">
+            <div class="qti-kpi"><div class="qti-kpi-lbl">기관 경쟁률</div><div class="qti-kpi-val">{{ if gt $meta.comp_num 0 }}{{ lang.FormatNumber 1 $meta.comp_num }}:1{{ else }}수요예측 전{{ end }}</div><div class="qti-kpi-sub">DART 공시 기준</div></div>
+            <div class="qti-kpi"><div class="qti-kpi-lbl">의무보유확약</div><div class="qti-kpi-val">{{ if gt $meta.lock_num 0 }}{{ printf "%.1f%%" $meta.lock_num }}{{ else }}—{{ end }}</div><div class="qti-kpi-sub">30% 기준선 비교</div></div>
+            <div class="qti-kpi"><div class="qti-kpi-lbl">상장일 유통물량</div><div class="qti-kpi-val">{{ if gt $meta.flt_num 0 }}{{ printf "%.1f%%" $meta.flt_num }}{{ else }}—{{ end }}</div><div class="qti-kpi-sub">상장 직후 유통 비중</div></div>
+            <div class="qti-kpi"><div class="qti-kpi-lbl">대표 주관사</div><div class="qti-kpi-val" style="font-size:16px;">{{ $meta.underwriter | default "-" }}</div><div class="qti-kpi-sub">공모가 {{ $meta.band | truncate 16 }}</div></div>
+          </div>
+          {{- end -}}
+        {{- end -}}
+
+        {{- /* Prose with AdSense strictly AFTER first <h2> summary (NEVER under title!) */ -}}
+        <div class="qti-prose">
+          {{- $imgPrefix := "images/" | relURL -}}
+          {{- $rendered := .Content | replaceRE "(?s)<table([^>]*)>(.*?)</table>" "<div class=\"table-wrap\"><div class=\"table-scroll-hint\" aria-hidden=\"true\">↔ 좌우로 스크롤해 전체 수치를 확인하세요</div><table$1>$2</table></div>" -}}
+          {{- $rendered = $rendered | replaceRE `(<img[^>]*\ssrc=["'])/images/` (printf "${1}%s" $imgPrefix) -}}
+          {{- if and $isPost $adsense -}}
+            {{- $h2Parts := split $rendered "<h2" -}}
+            {{- if ge (len $h2Parts) 3 -}}
+              {{- $ad1 := printf `<aside class="qti-ad qti-ad-in-article" aria-label="본문 광고 1"><span class="qti-ad-label">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block;text-align:center;width:100%%;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="%s"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></aside>` $adsense -}}
+              {{- $ad2 := printf `<aside class="qti-ad qti-ad-in-article" aria-label="본문 광고 2"><span class="qti-ad-label">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block;text-align:center;width:100%%;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="%s"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></aside>` $adsense -}}
+              {{- $rebuilt := index $h2Parts 0 -}}
+              {{- range $idx, $part := after 1 $h2Parts -}}
+                {{- if eq $idx 1 -}}
+                  {{- $rebuilt = printf "%s%s<h2%s" $rebuilt $ad1 $part -}}
+                {{- else if eq $idx 3 -}}
+                  {{- $rebuilt = printf "%s%s<h2%s" $rebuilt $ad2 $part -}}
+                {{- else -}}
+                  {{- $rebuilt = printf "%s<h2%s" $rebuilt $part -}}
+                {{- end -}}
+              {{- end -}}
+              {{- $rendered = $rebuilt -}}
+            {{- end -}}
+          {{- end -}}
+          {{ $rendered | safeHTML }}
+        </div>
+
+        {{- if $isPost -}}
+          {{- if not $isTender -}}
+            {{ partial "report-3d-kpi.html" . }}
+            {{- if in .Title "266690" -}}
+              {{ partial "ipo-alpha-266690.html" . }}
+            {{- end -}}
+            {{ partial "ipo-simulator-post.html" . }}
+          {{- end -}}
+
+          {{ partial "subscribe-cta.html" . }}
+
+          {{- $related := where (where .Site.RegularPages "Section" "posts") "Permalink" "ne" .Permalink -}}
+          {{- if gt (len $related) 0 -}}
+          <section style="margin-top:26px;" aria-labelledby="related-heading">
+            <div class="qti-sec-head">
+              <h3 id="related-heading">관련 리포트</h3>
+              <a href="{{ "posts/" | relURL }}">전체 리포트 →</a>
+            </div>
+            <div class="qti-grid qti-g3">
+              {{- range first 3 $related.ByDate.Reverse -}}
+              <a class="qti-report-card" href="{{ .RelPermalink }}">
+                <span class="qti-badge {{ if $isTender }}qti-b-tender{{ else }}qti-b-ipo{{ end }} mono" style="width:fit-content;">{{ .Date.Format "2006-01-02" }}</span>
+                <strong style="color:var(--ink);font-size:14.5px;line-height:1.4;">{{ .Title | truncate 48 }}</strong>
+                <span class="xs muted">리포트 보기 →</span>
+              </a>
+              {{- end -}}
+            </div>
+          </section>
+          {{- end -}}
+
+          {{ partial "disclaimer.html" . }}
+        {{- end -}}
+      </article>
+
+      {{- /* Sticky Right Rail: TOC + Quick Print/Source Actions + 300x600 AdSense */ -}}
+      <aside class="qti-sticky-rail">
+        {{- if $isPost -}}
+        <div class="qti-toc-card">
+          <div class="qti-toc-title">목차 · CONTENTS</div>
+          <nav class="qti-toc-list" id="qti-toc-list" aria-label="리포트 목차"></nav>
+          <div class="qti-rail-actions">
+            <button type="button" class="qti-btn qti-btn-ghost" style="width:100%;font-size:13px;padding:8px 12px;" onclick="window.print()">🖨 PDF 리포트 인쇄</button>
+            {{- if and $meta $meta.source_url -}}
+            <a class="qti-btn qti-btn-primary" style="width:100%;font-size:13px;padding:8px 12px;" href="{{ $meta.source_url }}" target="_blank" rel="noopener noreferrer">{{ if $isTender }}나라장터 원문 ↗{{ else }}DART 공시 원문 ↗{{ end }}</a>
+            {{- end -}}
+          </div>
+        </div>
+        {{- end -}}
+        <div class="qti-rail-ad-only">
+          {{ partial "ad-slot.html" (dict "page" . "slot" "sidebar") }}
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
 {{ end }}
