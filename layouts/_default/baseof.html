@@ -1,5 +1,7 @@
 {{- $adsense := strings.TrimSpace (.Site.Params.adsenseClient | default "") -}}
 {{- $ga4 := strings.TrimSpace (.Site.Params.ga4MeasurementId | default "") -}}
+{{- $naverVer := strings.TrimSpace (.Site.Params.naverSiteVerification | default "") -}}
+{{- $bingVer := strings.TrimSpace (.Site.Params.bingSiteVerification | default "") -}}
 {{- $brand := .Site.Params.brandName | default "퀀트 & 입찰 인텔리전스 랩" -}}
 {{- $hubUrl := .Site.Params.hubUrl | default "https://qtilab.com/" -}}
 {{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
@@ -13,6 +15,16 @@
     {{- $desc = (.Summary | plainify | truncate 150) | default (printf "%s | %s" .Title .Site.Title) -}}
   {{- end -}}
 {{- end -}}
+{{- /* Phase 1.2 Crawl Budget & Index Hygiene: noindex low-density taxonomy/term pages & page 2+ pagination */ -}}
+{{- $isTaxOrTerm := or (eq .Kind "taxonomy") (eq .Kind "term") (ne (.Data.Singular | default "") "") (in .RelPermalink "/tags/") (in .RelPermalink "/categories/") -}}
+{{- $isPaged2Plus := false -}}
+{{- if and (not .IsPage) (not .IsHome) (not $isTaxOrTerm) -}}
+  {{- $pag := .Paginate (.Pages.ByDate.Reverse) 18 -}}
+  {{- if gt $pag.PageNumber 1 -}}
+    {{- $isPaged2Plus = true -}}
+  {{- end -}}
+{{- end -}}
+{{- $isNoIndex := or $isTaxOrTerm $isPaged2Plus -}}
 <!DOCTYPE html>
 <html lang="ko" data-theme="light">
 <head>
@@ -20,7 +32,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ if .IsHome }}{{ .Site.Title }} | {{ $brand }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
   <meta name="description" content="{{ $desc }}" />
+  {{- if $isNoIndex -}}
+  <meta name="robots" content="noindex, follow" />
+  {{- else -}}
+  <meta name="robots" content="index, follow" />
+  {{- end -}}
   <link rel="canonical" href="{{ .Permalink }}" />
+  {{- with $naverVer -}}
+  <meta name="naver-site-verification" content="{{ . }}" />
+  {{- end -}}
+  {{- with $bingVer -}}
+  <meta name="msvalidate.01" content="{{ . }}" />
+  {{- end -}}
   <meta property="og:locale" content="ko_KR" />
   <meta property="og:site_name" content="{{ $brand }} — {{ .Site.Title }}" />
   <meta property="og:type" content="{{ if and .IsPage (eq .Section "posts") }}article{{ else }}website{{ end }}" />
@@ -39,9 +62,89 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" />
   <link rel="stylesheet" href="{{ "css/tokens.css" | relURL }}" />
   <link rel="stylesheet" href="{{ "css/components.css" | relURL }}" />
+  <style>
+    /* Wave 7: Dynamic FAQ Accordion, Inline Related Recommendation Callout & Instant Filter Bar */
+    .report-faq { margin-top: 26px; padding: 20px 22px; border-radius: 12px; background: var(--surface, #FFFFFF); border: 1px solid var(--border, #E2E8F0); }
+    .report-faq-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .report-faq-head h3 { margin: 0; font-size: 17px; font-weight: 800; color: var(--ink, #0F172A); }
+    .faq-item { border: 1px solid var(--border, #E2E8F0); border-radius: 9px; background: var(--bg, #F8FAFC); margin-bottom: 10px; overflow: hidden; }
+    .faq-item:last-child { margin-bottom: 0; }
+    .faq-item summary { cursor: pointer; padding: 12px 15px; font-weight: 700; font-size: 14.5px; color: var(--ink, #0F172A); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "▾"; font-size: 13px; color: var(--muted, #64748B); transition: transform 0.15s ease; }
+    .faq-item[open] summary::after { transform: rotate(180deg); }
+    .faq-answer { padding: 0 15px 13px; font-size: 13.8px; line-height: 1.68; color: var(--text, #334155); border-top: 1px dashed var(--border, #E2E8F0); padding-top: 10px; }
+    .inline-related-callout { margin: 22px 0; padding: 15px 18px; border-radius: 11px; background: var(--surface, #F8FAFC); border: 1px solid var(--border, #CBD5E1); border-left: 4px solid var(--primary, #0F766E); }
+    .inline-related-title { font-size: 13.5px; font-weight: 800; color: var(--ink, #0F172A); margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .inline-related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+    .inline-related-link { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 8px; background: var(--bg, #FFFFFF); border: 1px solid var(--border, #E2E8F0); text-decoration: none !important; transition: transform 0.14s ease, border-color 0.14s ease; }
+    .inline-related-link:hover { transform: translateY(-1px); border-color: var(--primary, #0F766E); }
+    .instant-filter-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; padding: 12px 14px; border-radius: 11px; background: var(--surface, #FFFFFF); border: 1px solid var(--border, #E2E8F0); margin-bottom: 16px; }
+    .instant-match-pill { font-size: 12.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--bg, #F1F5F9); color: var(--ink, #0F172A); border: 1px solid var(--border, #E2E8F0); white-space: nowrap; }
+  </style>
   {{- if and .IsPage (eq .Section "posts") -}}
     {{- $ld := dict "@context" "https://schema.org" "@type" "TechArticle" "headline" .Title "description" $desc "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "mainEntityOfPage" .Permalink "publisher" (dict "@type" "Organization" "name" $brand "url" $hubUrl) -}}
     {{ printf "<script type=\"application/ld+json\">%s</script>" ($ld | jsonify) | safeHTML }}
+    {{- /* Phase 1.3 Dynamic Post-Specific FAQPage JSON-LD (1:1 matched with #report-faq in single.html) */ -}}
+    {{- $fMeta := false -}}
+    {{- $baseName := "" -}}
+    {{- with .File -}}{{- $baseName = .ContentBaseName -}}{{- end -}}
+    {{- if not $isTender -}}
+      {{- with .Site.Data.ipo_summary -}}
+        {{- range .items -}}
+          {{- if or (eq .slug $.Slug) (and (ne $baseName "") (eq .slug $baseName)) (eq .title $.Title) -}}
+            {{- $fMeta = . -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $corp := .Title -}}
+    {{- $code := "" -}}
+    {{- $band := "DART 공시 원문 표 참조" -}}
+    {{- $sched := "DART 공시 일정 참조" -}}
+    {{- $uw := "공시 원문 참조" -}}
+    {{- $compLabel := "수요예측 전(또는 공시 확인)" -}}
+    {{- $lockLabel := "수요예측 결과 공시 전(미확정)" -}}
+    {{- $fltLabel := "공시 원문 세부 표 기준" -}}
+    {{- $b0 := $desc -}}
+    {{- $b1 := "" -}}
+    {{- $b2 := "" -}}
+    {{- if $fMeta -}}
+      {{- $corp = $fMeta.corp | default .Title -}}
+      {{- $code = $fMeta.code | default "" -}}
+      {{- $band = $fMeta.band | default $band -}}
+      {{- $sched = $fMeta.schedule | default $sched -}}
+      {{- $uw = $fMeta.underwriter | default $uw -}}
+      {{- if gt $fMeta.comp_num 0.0 -}}
+        {{- $compLabel = printf "%s:1" (lang.FormatNumber 2 $fMeta.comp_num) -}}
+      {{- else if $fMeta.comp_str -}}
+        {{- $compLabel = $fMeta.comp_str -}}
+      {{- end -}}
+      {{- if gt $fMeta.lock_num 0.0 -}}
+        {{- $lockTier := cond (ge $fMeta.lock_num 50.0) "초고확약 50% 이상 구간" (cond (ge $fMeta.lock_num 30.0) "고확약 30% 기준선 상회" "30% 기준선 하회") -}}
+        {{- $lockLabel = printf "%.2f%% (%s)" $fMeta.lock_num $lockTier -}}
+      {{- end -}}
+      {{- if gt $fMeta.flt_num 0.0 -}}
+        {{- $fltLabel = printf "전체 상장예정주식수의 %.2f%%" $fMeta.flt_num -}}
+      {{- end -}}
+      {{- if gt (len $fMeta.bullets) 0 -}}{{- $b0 = index $fMeta.bullets 0 -}}{{- end -}}
+      {{- if gt (len $fMeta.bullets) 1 -}}{{- $b1 = index $fMeta.bullets 1 -}}{{- end -}}
+      {{- if gt (len $fMeta.bullets) 2 -}}{{- $b2 = index $fMeta.bullets 2 -}}{{- end -}}
+    {{- end -}}
+    {{- $corpTag := cond (ne $code "") (printf "%s(%s)" $corp $code) $corp -}}
+    {{- $q1 := printf "%s 공모주의 공모가(희망밴드), 청약일정 및 대표 주관사는 어떻게 되나요?" $corpTag -}}
+    {{- $a1 := printf "금융감독원 전자공시(DART) 원문 기준 %s의 공모가(또는 희망공모가 밴드)는 %s, 청약 및 납입 일정은 %s, 대표 주관사는 %s입니다. %s" $corpTag $band $sched $uw $b0 -}}
+    {{- $q2 := printf "%s의 기관 수요예측 경쟁률과 의무보유확약 비율은 어느 수준인가요?" $corpTag -}}
+    {{- $a2 := printf "%s의 기관 수요예측 단순경쟁률은 %s이며, 기관 의무보유확약 비율은 %s로 집계되었습니다. %s" $corpTag $compLabel $lockLabel $b1 -}}
+    {{- $q3 := printf "%s 상장 직후 유통가능물량 비중과 당일 수급 체크포인트는 무엇인가요?" $corpTag -}}
+    {{- $a3 := printf "%s의 상장일 유통가능물량 비중은 %s입니다. %s 상장 당일 개장 첫 15분(09:00~09:15) 거래량 집중도와 실질 유통비율(Net Float %%) 대비 상대 수급강도는 본 리포트 하단 7변수 가중치 시뮬레이터에서 실시간 비교할 수 있습니다." $corpTag $fltLabel $b2 -}}
+    {{- $faqEntities := slice
+      (dict "@type" "Question" "name" $q1 "acceptedAnswer" (dict "@type" "Answer" "text" $a1))
+      (dict "@type" "Question" "name" $q2 "acceptedAnswer" (dict "@type" "Answer" "text" $a2))
+      (dict "@type" "Question" "name" $q3 "acceptedAnswer" (dict "@type" "Answer" "text" $a3))
+    -}}
+    {{- $faqLd := dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $faqEntities -}}
+    {{ printf "<script type=\"application/ld+json\">%s</script>" ($faqLd | jsonify) | safeHTML }}
   {{- else if .IsHome -}}
     {{- $ld := dict "@context" "https://schema.org" "@type" "WebSite" "name" .Site.Title "alternateName" $brand "description" $desc "url" .Site.BaseURL -}}
     {{ printf "<script type=\"application/ld+json\">%s</script>" ($ld | jsonify) | safeHTML }}

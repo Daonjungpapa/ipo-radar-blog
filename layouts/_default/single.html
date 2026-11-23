@@ -7,6 +7,8 @@
 
 {{- /* Look up structured KPI metadata for current post from data JSON */ -}}
 {{- $meta := false -}}
+{{- $baseName := "" -}}
+{{- with .File -}}{{- $baseName = .ContentBaseName -}}{{- end -}}
 {{- if $isPost -}}
   {{- $items := slice -}}
   {{- if $isTender -}}
@@ -15,8 +17,25 @@
     {{- with .Site.Data.ipo_summary -}}{{- $items = .items -}}{{- end -}}
   {{- end -}}
   {{- range $items -}}
-    {{- if eq .slug $.Slug -}}
+    {{- if or (eq .slug $.Slug) (and (ne $baseName "") (eq .slug $baseName)) (eq .title $.Title) -}}
       {{- $meta = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Phase 1.4: Similarity-based Related Reports (.Site.RegularPages.Related . | first 3, fallback to latest) */ -}}
+{{- $related := slice -}}
+{{- if $isPost -}}
+  {{- $allPosts := (where .Site.RegularPages "Section" "posts").ByDate.Reverse -}}
+  {{- $relCandidates := (.Site.RegularPages.Related .) | first 6 -}}
+  {{- range $relCandidates -}}
+    {{- if and (eq .Section "posts") (ne .Permalink $.Permalink) (lt (len $related) 3) -}}
+      {{- $related = $related | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- range $allPosts -}}
+    {{- if and (ne .Permalink $.Permalink) (not (in $related .)) (lt (len $related) 3) -}}
+      {{- $related = $related | append . -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -71,20 +90,37 @@
           {{- end -}}
         {{- end -}}
 
-        {{- /* Prose with AdSense strictly AFTER first <h2> summary (NEVER under title!) */ -}}
+        {{- /* Build inline related recommendation callout for 3rd <h2> */ -}}
+        {{- $inlineRelatedHtml := "" -}}
+        {{- if and $isPost (gt (len $related) 0) -}}
+          {{- $cardsHtml := "" -}}
+          {{- range first 2 $related -}}
+            {{- $cardsHtml = printf `%s<a class="inline-related-link" href="%s"><span class="xs muted num">유사 수급 · %s</span><strong style="color:var(--ink);font-size:13.8px;line-height:1.38;">%s</strong><span class="xs" style="color:var(--primary);font-weight:700;">수급·유통물량 비교 보기 →</span></a>` $cardsHtml .RelPermalink (.Date.Format "2006-01-02") (.Title | htmlEscape) -}}
+          {{- end -}}
+          {{- $inlineRelatedHtml = printf `<aside class="inline-related-callout" aria-label="함께 비교해야 할 유사 공모주 수급 리포트"><div class="inline-related-title"><span>📌 함께 비교해야 할 유사 공모주 수급 리포트</span><a href="%s" class="xs" style="font-weight:700;">전체 아카이브 →</a></div><div class="inline-related-grid">%s</div></aside>` ("posts/" | relURL) $cardsHtml -}}
+        {{- end -}}
+
+        {{- /* Prose with AdSense strictly AFTER first <h2> summary & inline related card before 3rd <h2> */ -}}
         <div class="qti-prose">
           {{- $imgPrefix := "images/" | relURL -}}
           {{- $rendered := .Content | replaceRE "(?s)<table([^>]*)>(.*?)</table>" "<div class=\"table-wrap\"><div class=\"table-scroll-hint\" aria-hidden=\"true\">↔ 좌우로 스크롤해 전체 수치를 확인하세요</div><table$1>$2</table></div>" -}}
           {{- $rendered = $rendered | replaceRE `(<img[^>]*\ssrc=["'])/images/` (printf "${1}%s" $imgPrefix) -}}
-          {{- if and $isPost $adsense -}}
+          {{- $rendered = $rendered | replaceRE "확인 필요" "공시 원문 참조" -}}
+          {{- if $isPost -}}
             {{- $h2Parts := split $rendered "<h2" -}}
             {{- if ge (len $h2Parts) 3 -}}
-              {{- $ad1 := printf `<aside class="qti-ad qti-ad-in-article" aria-label="본문 광고 1"><span class="qti-ad-label">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block;text-align:center;width:100%%;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="%s"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></aside>` $adsense -}}
-              {{- $ad2 := printf `<aside class="qti-ad qti-ad-in-article" aria-label="본문 광고 2"><span class="qti-ad-label">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block;text-align:center;width:100%%;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="%s"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></aside>` $adsense -}}
+              {{- $ad1 := "" -}}
+              {{- $ad2 := "" -}}
+              {{- if $adsense -}}
+                {{- $ad1 = printf `<aside class="qti-ad qti-ad-in-article" aria-label="본문 광고 1"><span class="qti-ad-label">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block;text-align:center;width:100%%;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="%s"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></aside>` $adsense -}}
+                {{- $ad2 = printf `<aside class="qti-ad qti-ad-in-article" aria-label="본문 광고 2"><span class="qti-ad-label">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block;text-align:center;width:100%%;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="%s"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></aside>` $adsense -}}
+              {{- end -}}
               {{- $rebuilt := index $h2Parts 0 -}}
               {{- range $idx, $part := after 1 $h2Parts -}}
                 {{- if eq $idx 1 -}}
                   {{- $rebuilt = printf "%s%s<h2%s" $rebuilt $ad1 $part -}}
+                {{- else if eq $idx 2 -}}
+                  {{- $rebuilt = printf "%s%s<h2%s" $rebuilt $inlineRelatedHtml $part -}}
                 {{- else if eq $idx 3 -}}
                   {{- $rebuilt = printf "%s%s<h2%s" $rebuilt $ad2 $part -}}
                 {{- else -}}
@@ -106,21 +142,82 @@
             {{ partial "ipo-simulator-post.html" . }}
           {{- end -}}
 
+          {{- /* Phase 1.3: Dynamic Post-Specific 3-Q&A Accordion (1:1 matched with FAQPage JSON-LD in baseof.html) */ -}}
+          {{- $corp := .Title -}}
+          {{- $code := "" -}}
+          {{- $band := "DART 공시 원문 표 참조" -}}
+          {{- $sched := "DART 공시 일정 참조" -}}
+          {{- $uw := "공시 원문 참조" -}}
+          {{- $compLabel := "수요예측 전(또는 공시 확인)" -}}
+          {{- $lockLabel := "수요예측 결과 공시 전(미확정)" -}}
+          {{- $fltLabel := "공시 원문 세부 표 기준" -}}
+          {{- $b0 := (.Description | default (.Summary | plainify | truncate 140)) -}}
+          {{- $b1 := "" -}}
+          {{- $b2 := "" -}}
+          {{- if $meta -}}
+            {{- $corp = $meta.corp | default .Title -}}
+            {{- $code = $meta.code | default "" -}}
+            {{- $band = $meta.band | default $band -}}
+            {{- $sched = $meta.schedule | default $sched -}}
+            {{- $uw = $meta.underwriter | default $uw -}}
+            {{- if gt $meta.comp_num 0.0 -}}
+              {{- $compLabel = printf "%s:1" (lang.FormatNumber 2 $meta.comp_num) -}}
+            {{- else if $meta.comp_str -}}
+              {{- $compLabel = $meta.comp_str -}}
+            {{- end -}}
+            {{- if gt $meta.lock_num 0.0 -}}
+              {{- $lockTier := cond (ge $meta.lock_num 50.0) "초고확약 50% 이상 구간" (cond (ge $meta.lock_num 30.0) "고확약 30% 기준선 상회" "30% 기준선 하회") -}}
+              {{- $lockLabel = printf "%.2f%% (%s)" $meta.lock_num $lockTier -}}
+            {{- end -}}
+            {{- if gt $meta.flt_num 0.0 -}}
+              {{- $fltLabel = printf "전체 상장예정주식수의 %.2f%%" $meta.flt_num -}}
+            {{- end -}}
+            {{- if gt (len $meta.bullets) 0 -}}{{- $b0 = index $meta.bullets 0 -}}{{- end -}}
+            {{- if gt (len $meta.bullets) 1 -}}{{- $b1 = index $meta.bullets 1 -}}{{- end -}}
+            {{- if gt (len $meta.bullets) 2 -}}{{- $b2 = index $meta.bullets 2 -}}{{- end -}}
+          {{- end -}}
+          {{- $corpTag := cond (ne $code "") (printf "%s(%s)" $corp $code) $corp -}}
+          {{- $q1 := printf "%s 공모주의 공모가(희망밴드), 청약일정 및 대표 주관사는 어떻게 되나요?" $corpTag -}}
+          {{- $a1 := printf "금융감독원 전자공시(DART) 원문 기준 %s의 공모가(또는 희망공모가 밴드)는 %s, 청약 및 납입 일정은 %s, 대표 주관사는 %s입니다. %s" $corpTag $band $sched $uw $b0 -}}
+          {{- $q2 := printf "%s의 기관 수요예측 경쟁률과 의무보유확약 비율은 어느 수준인가요?" $corpTag -}}
+          {{- $a2 := printf "%s의 기관 수요예측 단순경쟁률은 %s이며, 기관 의무보유확약 비율은 %s로 집계되었습니다. %s" $corpTag $compLabel $lockLabel $b1 -}}
+          {{- $q3 := printf "%s 상장 직후 유통가능물량 비중과 당일 수급 체크포인트는 무엇인가요?" $corpTag -}}
+          {{- $a3 := printf "%s의 상장일 유통가능물량 비중은 %s입니다. %s 상장 당일 개장 첫 15분(09:00~09:15) 거래량 집중도와 실질 유통비율(Net Float %%) 대비 상대 수급강도는 본 리포트 하단 7변수 가중치 시뮬레이터에서 실시간 비교할 수 있습니다." $corpTag $fltLabel $b2 -}}
+
+          <section class="report-faq" id="report-faq" aria-labelledby="report-faq-heading">
+            <div class="report-faq-head">
+              <h3 id="report-faq-heading">❓ {{ $corpTag }} 핵심 수급 · 청약 Q&amp;A (DART 공시 기준)</h3>
+              <span class="qti-badge qti-b-ipo mono">SCHEMA · FAQPage</span>
+            </div>
+            <details class="faq-item" open>
+              <summary>{{ $q1 }}</summary>
+              <div class="faq-answer">{{ $a1 }}</div>
+            </details>
+            <details class="faq-item">
+              <summary>{{ $q2 }}</summary>
+              <div class="faq-answer">{{ $a2 }}</div>
+            </details>
+            <details class="faq-item">
+              <summary>{{ $q3 }}</summary>
+              <div class="faq-answer">{{ $a3 }}</div>
+            </details>
+          </section>
+
           {{ partial "subscribe-cta.html" . }}
 
-          {{- $related := where (where .Site.RegularPages "Section" "posts") "Permalink" "ne" .Permalink -}}
           {{- if gt (len $related) 0 -}}
-          <section style="margin-top:26px;" aria-labelledby="related-heading">
+          <section class="related-reports" style="margin-top:26px;" aria-labelledby="related-heading">
             <div class="qti-sec-head">
-              <h3 id="related-heading">관련 리포트</h3>
+              <h3 id="related-heading">📌 함께 비교하면 좋은 유사 수급 · 섹터 리포트</h3>
               <a href="{{ "posts/" | relURL }}">전체 리포트 →</a>
             </div>
             <div class="qti-grid qti-g3">
-              {{- range first 3 $related.ByDate.Reverse -}}
+              {{- range $related -}}
               <a class="qti-report-card" href="{{ .RelPermalink }}">
                 <span class="qti-badge {{ if $isTender }}qti-b-tender{{ else }}qti-b-ipo{{ end }} mono" style="width:fit-content;">{{ .Date.Format "2006-01-02" }}</span>
                 <strong style="color:var(--ink);font-size:14.5px;line-height:1.4;">{{ .Title | truncate 48 }}</strong>
-                <span class="xs muted">리포트 보기 →</span>
+                <p class="xs muted" style="margin:2px 0 0;">{{ (.Description | default (.Summary | plainify)) | truncate 72 }}</p>
+                <span class="xs" style="color:var(--primary);font-weight:700;margin-top:auto;">리포트 비교 보기 →</span>
               </a>
               {{- end -}}
             </div>

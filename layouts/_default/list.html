@@ -1,8 +1,10 @@
 {{ define "main" }}
 {{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
 {{- $isTax := eq .Kind "taxonomy" -}}
+{{- $isTaxOrTerm := or (eq .Kind "taxonomy") (eq .Kind "term") (ne (.Data.Singular | default "") "") (in .RelPermalink "/tags/") (in .RelPermalink "/categories/") -}}
 {{- $pages := .Pages.ByDate.Reverse -}}
-{{- $paginator := .Paginate $pages 18 -}}
+{{- $paginator := cond $isTaxOrTerm (.Paginate $pages 18) .Paginator -}}
+{{- $listedCodes := slice "475150" "468670" "476060" "462520" "250030" "266690" "451220" "480110" "386380" "439270" -}}
 
 <section class="qti-sec" data-filter-root>
   <div class="qti-in">
@@ -14,20 +16,36 @@
       {{- if eq .Section "posts" -}}{{ .Site.Params.heroSummary }}{{- else -}}"{{ .Title }}" 분류에 수록된 정량 분석 및 요약 리포트 목록입니다.{{- end -}}
     </p>
 
-    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:20px;">
-      {{- if .Site.Taxonomies.categories -}}
-      <div class="qti-chips">
-        <a class="qti-chip{{ if eq .Section "posts" }} is-active{{ end }}" href="{{ "posts/" | relURL }}">전체 ({{ len (where .Site.RegularPages "Section" "posts") }})</a>
-        {{- range .Site.Taxonomies.categories.ByCount -}}
-        <a class="qti-chip" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} ({{ .Count }})</a>
+    {{- if not $isTax -}}
+    <div class="instant-filter-toolbar" role="region" aria-label="실시간 종목·섹터·수급 조건 인스턴트 검색 및 필터 바">
+      <div class="qti-chips" role="toolbar" aria-label="공모주 수급 조건 빠른 필터">
+        <button type="button" class="qti-chip is-active" data-filter-chip="all">전체 ({{ len $paginator.Pages }})</button>
+        {{- if not $isTender -}}
+        <button type="button" class="qti-chip" data-filter-chip="lockup50">고확약 50%+</button>
+        <button type="button" class="qti-chip" data-filter-chip="lockup30">확약 30%+</button>
+        <button type="button" class="qti-chip" data-filter-chip="lowfloat">저유통 30% 미만</button>
+        <button type="button" class="qti-chip" data-filter-chip="confirmed">수요예측 확정</button>
+        <button type="button" class="qti-chip" data-filter-chip="listed">상장완료 백테스트</button>
         {{- end -}}
       </div>
-      {{- end -}}
-      <div class="qti-gnb-search" style="margin-left:auto;min-width:220px;">
-        <span aria-hidden="true">🔍</span>
-        <input type="search" id="archive-q" data-filter-search placeholder="현재 페이지 내 검색" aria-label="아카이브 검색" />
+      <div style="display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap;">
+        <div class="qti-gnb-search" style="min-width:255px;">
+          <span aria-hidden="true">🔍</span>
+          <input type="search" id="archive-q" data-filter-search placeholder="종목명·종목코드·주관사·섹터·확약비율 즉시 검색" aria-label="아카이브 즉시 검색" />
+        </div>
+        <span class="instant-match-pill">매칭 <strong class="num" data-filter-count>{{ len $paginator.Pages }}</strong>건</span>
       </div>
     </div>
+    {{- end -}}
+
+    {{- if .Site.Taxonomies.categories -}}
+    <div class="qti-chips" style="margin-bottom:18px;">
+      <a class="qti-chip{{ if eq .Section "posts" }} is-active{{ end }}" href="{{ "posts/" | relURL }}">전체 아카이브 ({{ len (where .Site.RegularPages "Section" "posts") }})</a>
+      {{- range .Site.Taxonomies.categories.ByCount -}}
+      <a class="qti-chip" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} ({{ .Count }})</a>
+      {{- end -}}
+    </div>
+    {{- end -}}
 
     {{- if $isTax -}}
     <div class="qti-grid qti-g3">
@@ -45,21 +63,54 @@
       {{- if eq $idx 6 -}}
       <div style="grid-column:1/-1;">{{ partial "ad-slot.html" (dict "page" $ "slot" "in-feed") }}</div>
       {{- end -}}
-      <article class="qti-report-card" data-filter-item data-haystack="{{ $p.Title }} {{ $p.Description }}">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
-          <span class="qti-badge {{ if $isTender }}qti-b-tender{{ else }}qti-b-ipo{{ end }} mono">{{ $.Site.Params.trackCode | default "REPORT" }}</span>
+      {{- $pMeta := false -}}
+      {{- $pBase := "" -}}
+      {{- with $p.File -}}{{- $pBase = .ContentBaseName -}}{{- end -}}
+      {{- if not $isTender -}}
+        {{- with $.Site.Data.ipo_summary -}}
+          {{- range .items -}}
+            {{- if or (eq .slug $p.Slug) (and (ne $pBase "") (eq .slug $pBase)) (eq .title $p.Title) -}}
+              {{- $pMeta = . -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $l50 := "" -}}
+      {{- $l30 := "" -}}
+      {{- $lf := "" -}}
+      {{- $cf := "" -}}
+      {{- $ls := "" -}}
+      {{- $metaHay := "" -}}
+      {{- if $pMeta -}}
+        {{- $l50 = cond (ge $pMeta.lock_num 50.0) "lockup50" "" -}}
+        {{- $l30 = cond (ge $pMeta.lock_num 30.0) "lockup30 highlock" "" -}}
+        {{- $lf = cond (and (gt $pMeta.flt_num 0.0) (lt $pMeta.flt_num 30.0)) "lowfloat" "" -}}
+        {{- $cf = cond (or (gt $pMeta.comp_num 0.0) (gt $pMeta.lock_num 0.0)) "confirmed" "" -}}
+        {{- $ls = cond (in $listedCodes $pMeta.code) "listed" "" -}}
+        {{- $metaHay = printf "%s %s %s %s 확약 %.1f%% 유통 %.1f%%" $pMeta.corp $pMeta.code $pMeta.underwriter $pMeta.band $pMeta.lock_num $pMeta.flt_num -}}
+      {{- end -}}
+      <article class="qti-report-card" data-filter-item data-tags="{{ $l50 }} {{ $l30 }} {{ $lf }} {{ $cf }} {{ $ls }}" data-haystack="{{ $p.Title }} {{ $p.Description }} {{ $metaHay }}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div style="display:flex;gap:5px;align-items:center;">
+            <span class="qti-badge {{ if $isTender }}qti-b-tender{{ else }}qti-b-ipo{{ end }} mono">{{ $.Site.Params.trackCode | default "REPORT" }}</span>
+            {{- if and $pMeta (gt $pMeta.lock_num 0.0) -}}
+            <span class="qti-badge qti-b-dday mono">확약 {{ printf "%.1f%%" $pMeta.lock_num }}</span>
+            {{- end -}}
+          </div>
           {{- if not $p.Date.IsZero -}}<time class="xs muted num" datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "2006-01-02" }}</time>{{- end -}}
         </div>
         <h3><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
         <p class="sm muted" style="margin:0;flex:1;">{{ ($p.Description | default ($p.Summary | plainify)) | truncate 110 }}</p>
         <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--border);margin-top:4px;">
-          <span class="xs muted num">읽기 약 {{ cond (lt $p.ReadingTime 1) 1 $p.ReadingTime }}분</span>
+          <span class="xs muted num">읽기 약 {{ cond (lt $p.ReadingTime 1) 1 $p.ReadingTime }}분{{- if and $pMeta (ne $pMeta.underwriter "") (ne $pMeta.underwriter "-") }} · {{ $pMeta.underwriter | truncate 12 }}{{- end -}}</span>
           <a href="{{ $p.RelPermalink }}" class="xs" style="font-weight:700;">리포트 보기 →</a>
         </div>
       </article>
       {{- end -}}
     </div>
-    <div data-filter-empty hidden style="padding:36px;text-align:center;" class="muted">검색 결과가 없습니다.</div>
+    <div data-filter-empty hidden style="padding:36px;text-align:center;" class="muted">
+      검색 조건에 일치하는 리포트가 없습니다. <button type="button" class="qti-btn qti-btn-ghost" style="margin-left:8px;padding:5px 10px;font-size:12px;" data-filter-reset>필터 초기화</button>
+    </div>
 
     {{- if gt $paginator.TotalPages 1 -}}
     <nav class="qti-pager" aria-label="페이지 이동">

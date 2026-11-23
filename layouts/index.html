@@ -143,16 +143,22 @@
         <span>추적 종목 <b class="num">{{ len $posts }}건</b></span>
       </div>
 
-      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px;">
-        <div class="qti-chips" role="toolbar" aria-label="공모주 필터">
+      {{- $listedCodes := slice "475150" "468670" "476060" "462520" "250030" "266690" "451220" "480110" "386380" "439270" -}}
+      <div class="instant-filter-toolbar" role="region" aria-label="실시간 종목·섹터·수급 조건 인스턴트 검색 및 필터 바">
+        <div class="qti-chips" role="toolbar" aria-label="공모주 수급 조건 빠른 필터">
           <button type="button" class="qti-chip is-active" data-filter-chip="all">전체 ({{ len $posts }})</button>
-          <button type="button" class="qti-chip" data-filter-chip="highlock">고확약 30%+</button>
+          <button type="button" class="qti-chip" data-filter-chip="lockup50">고확약 50%+</button>
+          <button type="button" class="qti-chip" data-filter-chip="lockup30">확약 30%+</button>
           <button type="button" class="qti-chip" data-filter-chip="lowfloat">저유통 30% 미만</button>
           <button type="button" class="qti-chip" data-filter-chip="confirmed">수요예측 확정</button>
+          <button type="button" class="qti-chip" data-filter-chip="listed">상장완료 백테스트</button>
         </div>
-        <div class="qti-gnb-search" style="margin-left:auto;min-width:210px;">
-          <span aria-hidden="true">🔍</span>
-          <input type="search" data-filter-search placeholder="종목명 · 코드 · 주관사 검색" aria-label="공모주 검색" />
+        <div style="display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap;">
+          <div class="qti-gnb-search" style="min-width:255px;">
+            <span aria-hidden="true">🔍</span>
+            <input type="search" id="home-instant-search" data-filter-search placeholder="종목명·종목코드·주관사·섹터·확약비율 즉시 검색" aria-label="종목명·종목코드·주관사·섹터·확약비율 즉시 검색" />
+          </div>
+          <span class="instant-match-pill">매칭 <strong class="num" data-filter-count>{{ len $ipo.items }}</strong>건</span>
         </div>
       </div>
 
@@ -201,10 +207,12 @@
               </thead>
               <tbody>
                 {{- range $ipo.items -}}
-                {{- $hl := cond (ge .lock_num 30.0) "highlock" "" -}}
+                {{- $l50 := cond (ge .lock_num 50.0) "lockup50" "" -}}
+                {{- $l30 := cond (ge .lock_num 30.0) "lockup30 highlock" "" -}}
                 {{- $lf := cond (and (gt .flt_num 0.0) (lt .flt_num 30.0)) "lowfloat" "" -}}
-                {{- $cf := cond (gt .comp_num 0.0) "confirmed" "" -}}
-                <tr data-filter-item data-tags="{{ $hl }} {{ $lf }} {{ $cf }}" data-haystack="{{ .corp }} {{ .code }} {{ .underwriter }} {{ .title }}">
+                {{- $cf := cond (or (gt .comp_num 0.0) (gt .lock_num 0.0)) "confirmed" "" -}}
+                {{- $ls := cond (in $listedCodes .code) "listed" "" -}}
+                <tr data-filter-item data-tags="{{ $l50 }} {{ $l30 }} {{ $lf }} {{ $cf }} {{ $ls }}" data-haystack="{{ .corp }} {{ .code }} {{ .underwriter }} {{ .title }} {{ .band }} 확약 {{ printf "%.1f%%" .lock_num }} 유통 {{ printf "%.1f%%" .flt_num }}">
                   <td class="nowrap">
                     <a href="{{ .rel }}" style="font-weight:700;color:var(--ink);">{{ .corp }}</a>
                     {{- with .code }} <span class="xs muted num">{{ . }}</span>{{ end -}}
