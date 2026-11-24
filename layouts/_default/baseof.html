@@ -24,7 +24,7 @@
     {{- $isPaged2Plus = true -}}
   {{- end -}}
 {{- end -}}
-{{- $isNoIndex := or $isTaxOrTerm $isPaged2Plus -}}
+{{- $isNoIndex := or $isTaxOrTerm $isPaged2Plus (eq .Params.noindex true) -}}
 <!DOCTYPE html>
 <html lang="ko" data-theme="light">
 <head>

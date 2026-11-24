@@ -1,0 +1,26 @@
+{{- /* 「운영·검수 방식」 안내 — 소개(about) 페이지 하단. 실제 파이프라인 사실만 적는다.
+     운영·검수 책임자 이름은 params.opsReviewer 에 값이 있을 때만 보인다(지어내지 않음). */ -}}
+{{- $isTender := eq (.Site.Params.accentRole | default "ipo") "tender" -}}
+<section class="qti-prose" id="operations" aria-labelledby="operations-heading" style="margin-top:28px;">
+  <h2 id="operations-heading">운영·검수 방식</h2>
+  <p>이 사이트의 글은 사람이 한 건씩 쓰지 않고, 아래 순서의 자동 파이프라인이 공개 자료를 정리해 발행합니다. 방문자가 내용을 직접 검증할 수 있도록 작성 방식을 그대로 공개합니다.</p>
+  <ul>
+    {{- if $isTender }}
+    <li><strong>자료 출처:</strong> 조달청 나라장터(G2B)·공공데이터포털 Open API 로 공개된 입찰 공고와 첨부 규격서입니다. 공고번호·발주기관·배정예산 등 수치는 원문 값을 그대로 옮깁니다.</li>
+    <li><strong>작성 방식:</strong> 공고를 자동 수집한 뒤 자체 서버의 언어 모델로 핵심 스펙·참가 자격을 요약하고, 표와 지표를 정리합니다.</li>
+    <li><strong>발행 전 검사:</strong> 정보통신 관련도·본문 충실도 점수가 기준에 못 미치는 공고는 발행하지 않으며, 낙찰을 단정하거나 보장하는 표현은 금지어 검사(compliance 검사)로 걸러 냅니다.</li>
+    <li><strong>발행 상한:</strong> 하루 최대 5건까지만 발행합니다.</li>
+    <li><strong>원문 확인:</strong> 요약은 참고 자료입니다. 입찰 참가·투찰 전에는 각 글의 「원문 바로가기」 또는 <a href="https://www.g2b.go.kr/" target="_blank" rel="noopener noreferrer">나라장터</a>에서 공식 공고문을 꼭 확인하세요.</li>
+    {{- else }}
+    <li><strong>자료 출처:</strong> 금융감독원 전자공시시스템(DART)에 공개된 증권신고서·투자설명서·증권발행실적보고서입니다. 공모가·확약 비율·유통 물량 등 수치는 공시 원문 값을 그대로 옮깁니다.</li>
+    <li><strong>작성 방식:</strong> 공시를 자동 수집한 뒤 자체 서버의 언어 모델로 요약하고, 공시 표의 수치로 지표와 차트를 만듭니다.</li>
+    <li><strong>발행 전 검사:</strong> 투자·청약을 권하거나 수익을 단정하는 표현은 금지어 검사(compliance 검사)로 걸러 냅니다. 이 사이트는 투자 자문을 하지 않습니다.</li>
+    <li><strong>발행 대상:</strong> DART 에 공모 관련 공시가 올라온 종목만 다룹니다.</li>
+    <li><strong>원문 확인:</strong> 요약은 참고 자료입니다. 청약 전에는 각 글의 「원문 공시 보기」 또는 <a href="https://dart.fss.or.kr/" target="_blank" rel="noopener noreferrer">DART</a>에서 공시 원문을 꼭 확인하세요.</li>
+    {{- end }}
+    <li><strong>정정 요청:</strong> 틀린 수치나 정정·취소된 {{ if $isTender }}공고{{ else }}공시{{ end }}를 발견하면 <a href="{{ "contact/" | relURL }}">문의·정정 제보 페이지</a> 또는 <a href="mailto:lastima33@gmail.com">lastima33@gmail.com</a> 으로 알려 주세요. 확인 후 글을 고치고 수정일을 표시합니다.</li>
+    {{- with .Site.Params.opsReviewer }}
+    <li><strong>운영·검수 책임:</strong> {{ . }}</li>
+    {{- end }}
+  </ul>
+</section>

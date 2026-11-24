@@ -1,0 +1,21 @@
+{{- /* AdSense 위생: 검색에 보이길 원하는 정규 URL 만 — 태그·분류 목록(noindex), noindex 글, sitemap.disable 글 제외 */ -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- range where .Pages "Sitemap.Disable" "ne" true }}
+    {{- $isTax := or (eq .Kind "taxonomy") (eq .Kind "term") (in .RelPermalink "/tags/") (in .RelPermalink "/categories/") }}
+    {{- if and .Permalink (not $isTax) (ne .Params.noindex true) (not .Draft) }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
+    {{- end }}
+    {{- with .Sitemap.ChangeFreq }}
+    <changefreq>{{ . }}</changefreq>
+    {{- end }}
+    {{- if ge .Sitemap.Priority 0.0 }}
+    <priority>{{ .Sitemap.Priority }}</priority>
+    {{- end }}
+  </url>
+    {{- end }}
+  {{- end }}
+</urlset>

@@ -3,7 +3,7 @@
 {{- $adsense := strings.TrimSpace ($page.Site.Params.adsenseClient | default "") -}}
 {{- if $adsense -}}
 <aside class="qti-ad qti-ad-{{ $slot }}" aria-label="광고 영역">
-  <span class="qti-ad-label">ADVERTISEMENT</span>
+  <span class="qti-ad-label">광고</span>
   {{- if eq $slot "in-article" -}}
   <ins class="adsbygoogle"
        style="display:block;text-align:center;width:100%;"

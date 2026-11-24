@@ -26,6 +26,7 @@ enableRobotsTXT = true
   brandName = "퀀트 & 입찰 인텔리전스 랩"
   brandEn = "Quant & Tender Intelligence Lab"
   hubUrl = "https://qtilab.com/"
+  telegramInviteUrl = "https://t.me/your_public_channel"
   siblingName = "공공입찰 시방서 인텔리전스"
   siblingUrl = "https://tender.qtilab.com/"
   trackCode = "TRACK A · DART IPO"

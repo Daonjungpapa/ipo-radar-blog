@@ -524,3 +524,42 @@ table.qti-table tbody tr.is-hl { background: var(--primary-soft); outline: 2px s
   .qti-main-rail { display: block; }
   .qti-prose { max-width: 100%; }
 }
+
+/* ── ⑩ AdSense 심사 대비 · 빈 광고 상자 / 모바일 넘침 / 터치 대상 (2026-11-24) ──
+ * 광고 코드(ins·script)는 그대로 두고 CSS 로만 처리한다.
+ * 1) 채워지지 않은 광고 숨김 — 구글 공식 방식: support.google.com/adsense/answer/10762946
+ * 2) 회색 틀·「ADVERTISEMENT」 라벨·예약 높이는 광고가 채워졌을 때(data-ad-status="filled")만 보인다.
+ *    틀 자체는 display 를 유지해 광고 코드가 폭을 잴 수 있게 한다.
+ */
+ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
+.qti-ad, .qti-ad-leaderboard, .qti-ad-in-article, .qti-ad-in-feed, .qti-ad-sidebar {
+  min-height: 0; margin: 0; padding: 0; background: transparent; border: 0;
+}
+.qti-ad .qti-ad-label { display: none; }
+.qti-ad:has(ins.adsbygoogle[data-ad-status="filled"]) {
+  margin: 22px 0; padding: 24px 12px 12px;
+  background: var(--ad-bg); border: 1px solid var(--ad-border);
+}
+.qti-ad-sidebar:has(ins.adsbygoogle[data-ad-status="filled"]) { margin: 0; }
+.qti-ad:has(ins.adsbygoogle[data-ad-status="filled"]) .qti-ad-label { display: inline; }
+
+/* 3) 가로 넘침 방지 — 격자·플렉스 자식이 긴 글자 때문에 화면보다 넓어지지 않게 */
+.qti-kpi, .g2b-sim-head > * { min-width: 0; max-width: 100%; }
+.qti-kpi-val { overflow-wrap: anywhere; }
+.qti-prose pre { overflow-x: auto; max-width: 100%; }
+.qti-prose a { overflow-wrap: anywhere; }
+.qti-prose img, .qti-prose svg, .qti-prose video, .qti-prose iframe { max-width: 100%; }
+@media (max-width: 768px) {
+  .qti-kpi-val { white-space: normal; }
+  .g2b-sim-head .qti-badge { white-space: normal; }
+}
+
+/* 4) 휴대폰 터치 대상 24×24px 이상 (WCAG 2.2 2.5.8) */
+@media (max-width: 768px) {
+  .qti-logo { min-height: 24px; }
+  .qti-breadcrumb a, a.qti-badge, .qti-sec-head > a, .inline-related-title > a {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 24px; min-width: 24px;
+  }
+  .qti-footer li a, .qti-trust-bar a, .qti-prose li > a { padding-block: 5px; }
+  input[type="range"] { min-height: 24px; }
+}
