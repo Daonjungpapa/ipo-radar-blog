@@ -1,0 +1,2512 @@
+{
+  "updated": "2026-11-26 06:59",
+  "updated_iso": "2026-11-26T06:59:07+09:00",
+  "model_version": "v4.0-blend",
+  "weights": {
+    "v1_net_float_ratio": 17.04,
+    "v2_lockup_ratio": 8.98,
+    "v3_long_term_lockup": 15.4,
+    "v4_vc_overhang": 13.01,
+    "v5_retail_momentum": 34.87,
+    "v6_inst_comp_rate": 6.7,
+    "v7_pre5d_market_temp": 4.0
+  },
+  "pool_size": 225,
+  "pool_period": "2023-06-30 ~ 2026-11-24",
+  "causal_1y": {
+    "n": 62,
+    "period": "2025-11-23 ~ 2026-11-24",
+    "direction_hits": 52,
+    "direction_rate_pct": 83.9,
+    "p10_p90_hits": 39,
+    "p10_p90_rate_pct": 62.9,
+    "shape_hits": 48,
+    "shape_rate_pct": 77.4,
+    "rel_turnover_rank_ic": 0.6449,
+    "close_p50_rank_ic": 0.6309,
+    "y1_rank_ic": 0.5458,
+    "high_freq_n": 44,
+    "high_freq_pos_rate_pct": 81.8,
+    "low_freq_n": 14,
+    "low_freq_pos_rate_pct": 28.6
+  },
+  "tracked_summary": {
+    "count": 16,
+    "transfer_count": 1,
+    "live_frozen_count": 0,
+    "retro_backtest_count": 16,
+    "direction_hits": 13,
+    "direction_rate_pct": 81.2,
+    "p10_p90_hits": 10,
+    "p10_p90_rate_pct": 62.5,
+    "iqr_hits": 6,
+    "iqr_rate_pct": 37.5,
+    "shape_hits": 12,
+    "shape_rate_pct": 75.0,
+    "deviation_tag_summary": [
+      {
+        "key": "high_lockup_defense",
+        "label": "고확약 물량잠김 (V2 ≥ 50%)",
+        "count": 9
+      },
+      {
+        "key": "deposit_surge",
+        "label": "증거금 초과수요 (I3 ≥ 90배)",
+        "count": 8
+      },
+      {
+        "key": "macro_shock",
+        "label": "거시지수 급락 충격 (V7 ≤ -3%)",
+        "count": 6
+      },
+      {
+        "key": "low_lockup_supply",
+        "label": "저확약 단기출회 (V2 < 20%)",
+        "count": 5
+      },
+      {
+        "key": "turnover_surge",
+        "label": "장중 수급집중 (+30%↑ 초과회전)",
+        "count": 5
+      },
+      {
+        "key": "high_float_pressure",
+        "label": "고유통 매물압박 (V1 ≥ 28%)",
+        "count": 5
+      },
+      {
+        "key": "iqr_close_fit",
+        "label": "종가 핵심 기준선(IQR) 안착",
+        "count": 4
+      },
+      {
+        "key": "ultra_low_float",
+        "label": "초저유통 품절 수급 (V1 ≤ 15%)",
+        "count": 3
+      }
+    ]
+  },
+  "listed_codes": [
+    "000038",
+    "0010S0",
+    "0015M0",
+    "0053F0",
+    "0153R0",
+    "0161M0",
+    "0162D0",
+    "179880",
+    "250030",
+    "266690",
+    "345290",
+    "359410",
+    "386380",
+    "420610",
+    "439270",
+    "468670",
+    "471800",
+    "498150"
+  ],
+  "by_slug": {
+    "20261118-000038-엠비디": {
+      "stock_code": "498150",
+      "listing_date": "2026-11-24",
+      "close_return_pct": -39.57,
+      "rel_turnover_pct": 490.7,
+      "y1_eok": -135.1,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20261111-471800-에이엘로봇": {
+      "stock_code": "471800",
+      "listing_date": "2026-11-18",
+      "close_return_pct": -24.32,
+      "rel_turnover_pct": 969.2,
+      "y1_eok": -166.8,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": false
+    },
+    "20261109-345290-영광와이케이엠씨": {
+      "stock_code": "345290",
+      "listing_date": "2026-11-16",
+      "close_return_pct": -16.36,
+      "rel_turnover_pct": 842.3,
+      "y1_eok": -72.9,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": false
+    },
+    "20261105-0153r0-바로팜": {
+      "stock_code": "0153R0",
+      "listing_date": "2026-11-11",
+      "close_return_pct": -28.17,
+      "rel_turnover_pct": 490.3,
+      "y1_eok": -167.4,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20261105-0162d0-동원파츠": {
+      "stock_code": "0162D0",
+      "listing_date": "2026-11-10",
+      "close_return_pct": 10.94,
+      "rel_turnover_pct": 908.0,
+      "y1_eok": 47.1,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20261027-359410-영광": {
+      "stock_code": "359410",
+      "listing_date": "2026-11-02",
+      "close_return_pct": 26.47,
+      "rel_turnover_pct": 1660.6,
+      "y1_eok": 100.8,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20261026-420610-인텔리빅스": {
+      "stock_code": "420610",
+      "listing_date": "2026-10-31",
+      "close_return_pct": 244.44,
+      "rel_turnover_pct": 3726.3,
+      "y1_eok": 295.7,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20261023-439270-크리에이츠": {
+      "stock_code": "439270",
+      "listing_date": "2026-10-29",
+      "close_return_pct": -40.0,
+      "rel_turnover_pct": 309.3,
+      "y1_eok": -310.3,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20261023-0053f0-티앤이코리아": {
+      "stock_code": "0053F0",
+      "listing_date": "2026-10-29",
+      "close_return_pct": 40.52,
+      "rel_turnover_pct": 1038.0,
+      "y1_eok": 119.6,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20261016-0015m0-디티에스": {
+      "stock_code": "0015M0",
+      "listing_date": "2026-10-23",
+      "close_return_pct": 35.14,
+      "rel_turnover_pct": 1654.2,
+      "y1_eok": 80.0,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20261007-179880-멜콘": {
+      "stock_code": "179880",
+      "listing_date": "2026-10-15",
+      "close_return_pct": 42.03,
+      "rel_turnover_pct": 886.5,
+      "y1_eok": 155.0,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20260922-468670-브릴스": {
+      "stock_code": "468670",
+      "listing_date": "2026-10-01",
+      "close_return_pct": 56.15,
+      "rel_turnover_pct": 651.6,
+      "y1_eok": 261.4,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20260921-266690-덕산넵코어스": {
+      "stock_code": "266690",
+      "listing_date": "2026-09-30",
+      "close_return_pct": 23.15,
+      "rel_turnover_pct": 685.7,
+      "y1_eok": 212.6,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20260917-0010s0-와이즈플래닛컴퍼니": {
+      "stock_code": "0010S0",
+      "listing_date": "2026-09-23",
+      "close_return_pct": 285.83,
+      "rel_turnover_pct": 1647.1,
+      "y1_eok": 495.8,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20260915-0161m0-네오사피엔스": {
+      "stock_code": "0161M0",
+      "listing_date": "2026-09-21",
+      "close_return_pct": 243.0,
+      "rel_turnover_pct": 1194.9,
+      "y1_eok": 688.9,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": true
+    },
+    "20260831-386380-스카이랩스": {
+      "stock_code": "386380",
+      "listing_date": "2026-09-04",
+      "close_return_pct": 135.0,
+      "rel_turnover_pct": 1738.9,
+      "y1_eok": 668.4,
+      "feedback_mode": "RETRO_BACKTEST",
+      "direction_match": false
+    },
+    "20261008-250030-진코스텍": {
+      "stock_code": "250030",
+      "listing_date": "2026-10-15",
+      "close_return_pct": -36.43,
+      "rel_turnover_pct": 650.8,
+      "y1_eok": -149.6,
+      "feedback_mode": "TRANSFER_RECORD",
+      "direction_match": null
+    }
+  },
+  "tracked_items": [
+    {
+      "stock_code": "498150",
+      "post_code": "000038",
+      "corp_name": "엠비디",
+      "slug": "20261118-000038-엠비디",
+      "rel": "/posts/20261118-000038-엠비디/",
+      "feedback_anchor": "/posts/20261118-000038-엠비디/#post-listing-feedback",
+      "listing_date": "2026-11-24",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 224,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 34.01,
+          "v2_lockup_ratio_pct": 0.0,
+          "v3_long_term_lockup_pct": 0.0,
+          "v4_vc_overhang_ratio_pct": 59.0,
+          "v5_retail_comp_rate": 172.9,
+          "v5_retail_deposit_trillion": 0.3,
+          "v6_inst_comp_rate": 187.1,
+          "v7_pre5d_market_temp_pct": -5.48,
+          "offering_price_krw": 7000,
+          "net_float_eok": 341.5
+        },
+        "close_p10": -39.7,
+        "close_p25": -34.77,
+        "close_p50": -25.16,
+        "close_p75": -5.23,
+        "close_p90": 33.23,
+        "close_positive_count": 3,
+        "close_positive_rate_pct": 20.0,
+        "rel_turnover_p25": 316.2,
+        "rel_turnover_p50": 490.3,
+        "rel_turnover_p75": 702.5,
+        "y1_p25": -233.0,
+        "y1_p50": -155.8,
+        "y1_p75": -24.8,
+        "y4c_p25": -5310306.0,
+        "y4c_p50": -1252931.0,
+        "y4c_p75": -306248.0,
+        "bear_fade_count": 13,
+        "bear_fade_rate_pct": 86.7,
+        "bull_hold_count": 2,
+        "bull_hold_rate_pct": 13.3,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "413390",
+            "name": "엠오티",
+            "sim": 94.2
+          },
+          {
+            "code": "474170",
+            "name": "루미르",
+            "sim": 94.1
+          },
+          {
+            "code": "0155E0",
+            "name": "해치텍",
+            "sim": 93.6
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "498150",
+        "corp_name": "엠비디",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-11-24",
+        "offering_price_krw": 7000,
+        "day1_open_krw": 5930,
+        "day1_high_krw": 6700,
+        "day1_low_krw": 4205,
+        "day1_close_krw": 4230,
+        "open_return_pct": -15.29,
+        "high_return_pct": -4.29,
+        "low_return_pct": -39.93,
+        "close_return_pct": -39.57,
+        "close_alpha_pct": -44.36,
+        "benchmark_return_pct": 4.79,
+        "upper_wick_pct": 36.87,
+        "day1_trade_value_eok": 1281.4,
+        "rel_turnover_pct": 490.7,
+        "vwap_premium_pct": -23.52,
+        "net_float_ratio_pct": 34.01,
+        "net_float_amount_eok": 341.5,
+        "lockup_ratio_pct": 0.0,
+        "long_term_lockup_pct": 0.0,
+        "vc_overhang_ratio_pct": 59.0,
+        "retail_comp_rate": 172.9,
+        "inst_comp_rate": 187.1,
+        "pre5d_market_temp_pct": -5.48,
+        "i3_deposit_to_netfloat_mult": 8.9,
+        "y1_net_float_close_gain_eok": -135.1,
+        "y2_offering_close_gain_eok": -55.4,
+        "y3a_cap_eff_per_100eok": -3.088,
+        "y4a_per_share_gain_krw": -2770,
+        "y4c_per_100m_deposit_gain_krw": -457685,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "macro_shock",
+          "label": "거시지수 급락 충격 (V7 -5.48%)",
+          "tone": "warn"
+        },
+        {
+          "key": "regime_cooling",
+          "label": "공모주 시장 냉각기 (직전 30일 중앙값 -18.3%)",
+          "tone": "warn"
+        },
+        {
+          "key": "high_float_pressure",
+          "label": "고유통 매물압박 (V1 34.0%)",
+          "tone": "warn"
+        },
+        {
+          "key": "low_lockup_supply",
+          "label": "저확약 단기출회 (V2 0.0%)",
+          "tone": "warn"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": false,
+      "shape_match": true,
+      "turnover_diff_pct": 0.1
+    },
+    {
+      "stock_code": "471800",
+      "post_code": "471800",
+      "corp_name": "에이엘로봇",
+      "slug": "20261111-471800-에이엘로봇",
+      "rel": "/posts/20261111-471800-에이엘로봇/",
+      "feedback_anchor": "/posts/20261111-471800-에이엘로봇/#post-listing-feedback",
+      "listing_date": "2026-11-18",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 223,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 32.3,
+          "v2_lockup_ratio_pct": 17.81,
+          "v3_long_term_lockup_pct": 2.68,
+          "v4_vc_overhang_ratio_pct": 46.65,
+          "v5_retail_comp_rate": 834.7,
+          "v5_retail_deposit_trillion": 4.41,
+          "v6_inst_comp_rate": 871.74,
+          "v7_pre5d_market_temp_pct": -3.39,
+          "offering_price_krw": 17600,
+          "net_float_eok": 686.0
+        },
+        "close_p10": -16.39,
+        "close_p25": 12.78,
+        "close_p50": 29.72,
+        "close_p75": 51.97,
+        "close_p90": 139.88,
+        "close_positive_count": 12,
+        "close_positive_rate_pct": 80.0,
+        "rel_turnover_p25": 528.0,
+        "rel_turnover_p50": 823.8,
+        "rel_turnover_p75": 1107.8,
+        "y1_p25": 74.2,
+        "y1_p50": 141.6,
+        "y1_p75": 303.2,
+        "y4c_p25": 26050.0,
+        "y4c_p50": 83349.0,
+        "y4c_p75": 153988.0,
+        "bear_fade_count": 14,
+        "bear_fade_rate_pct": 93.3,
+        "bull_hold_count": 1,
+        "bull_hold_rate_pct": 6.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "105760",
+            "name": "포스뱅크",
+            "sim": 89.3
+          },
+          {
+            "code": "466100",
+            "name": "클로봇",
+            "sim": 88.6
+          },
+          {
+            "code": "478340",
+            "name": "나라스페이스테크놀로지",
+            "sim": 88.4
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "471800",
+        "corp_name": "에이엘로봇",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-11-18",
+        "offering_price_krw": 17600,
+        "day1_open_krw": 15100,
+        "day1_high_krw": 18690,
+        "day1_low_krw": 13060,
+        "day1_close_krw": 13320,
+        "open_return_pct": -14.2,
+        "high_return_pct": 6.19,
+        "low_return_pct": -25.8,
+        "close_return_pct": -24.32,
+        "close_alpha_pct": -26.28,
+        "benchmark_return_pct": 1.96,
+        "upper_wick_pct": 28.73,
+        "day1_trade_value_eok": 6090.2,
+        "rel_turnover_pct": 969.2,
+        "vwap_premium_pct": -8.4,
+        "net_float_ratio_pct": 32.3,
+        "net_float_amount_eok": 686.0,
+        "lockup_ratio_pct": 17.81,
+        "long_term_lockup_pct": 2.68,
+        "vc_overhang_ratio_pct": 46.65,
+        "retail_comp_rate": 834.7,
+        "inst_comp_rate": 871.7,
+        "pre5d_market_temp_pct": -3.39,
+        "i3_deposit_to_netfloat_mult": 64.2,
+        "y1_net_float_close_gain_eok": -166.8,
+        "y2_offering_close_gain_eok": -102.7,
+        "y3a_cap_eff_per_100eok": -0.399,
+        "y4a_per_share_gain_krw": -4280,
+        "y4c_per_100m_deposit_gain_krw": -58266,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "macro_shock",
+          "label": "거시지수 급락 충격 (V7 -3.39%)",
+          "tone": "warn"
+        },
+        {
+          "key": "regime_cooling",
+          "label": "공모주 시장 냉각기 (직전 30일 중앙값 -2.7%)",
+          "tone": "warn"
+        },
+        {
+          "key": "high_float_pressure",
+          "label": "고유통 매물압박 (V1 32.3%)",
+          "tone": "warn"
+        },
+        {
+          "key": "low_lockup_supply",
+          "label": "저확약 단기출회 (V2 17.8%)",
+          "tone": "warn"
+        }
+      ],
+      "direction_match": false,
+      "in_p10_p90": false,
+      "in_iqr": false,
+      "shape_match": true,
+      "turnover_diff_pct": 17.6
+    },
+    {
+      "stock_code": "345290",
+      "post_code": "345290",
+      "corp_name": "영광와이케이엠씨",
+      "slug": "20261109-345290-영광와이케이엠씨",
+      "rel": "/posts/20261109-345290-영광와이케이엠씨/",
+      "feedback_anchor": "/posts/20261109-345290-영광와이케이엠씨/#post-listing-feedback",
+      "listing_date": "2026-11-16",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 221,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 27.95,
+          "v2_lockup_ratio_pct": 58.6,
+          "v3_long_term_lockup_pct": 10.43,
+          "v4_vc_overhang_ratio_pct": 68.46,
+          "v5_retail_comp_rate": 1342.7,
+          "v5_retail_deposit_trillion": 4.25,
+          "v6_inst_comp_rate": 1163.35,
+          "v7_pre5d_market_temp_pct": 7.39,
+          "offering_price_krw": 11000,
+          "net_float_eok": 445.3
+        },
+        "close_p10": -3.69,
+        "close_p25": 14.48,
+        "close_p50": 25.36,
+        "close_p75": 46.91,
+        "close_p90": 71.35,
+        "close_positive_count": 12,
+        "close_positive_rate_pct": 80.0,
+        "rel_turnover_p25": 574.8,
+        "rel_turnover_p50": 653.2,
+        "rel_turnover_p75": 989.1,
+        "y1_p25": 44.9,
+        "y1_p50": 155.0,
+        "y1_p75": 255.0,
+        "y4c_p25": 17786.0,
+        "y4c_p50": 37960.0,
+        "y4c_p75": 79578.0,
+        "bear_fade_count": 14,
+        "bear_fade_rate_pct": 93.3,
+        "bull_hold_count": 1,
+        "bull_hold_rate_pct": 6.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "0015S0",
+            "name": "페스카로",
+            "sim": 89.9
+          },
+          {
+            "code": "480370",
+            "name": "씨케이솔루션",
+            "sim": 86.6
+          },
+          {
+            "code": "136150",
+            "name": "원일티엔아이",
+            "sim": 82.8
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "345290",
+        "corp_name": "영광와이케이엠씨",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-11-16",
+        "offering_price_krw": 11000,
+        "day1_open_krw": 16170,
+        "day1_high_krw": 16500,
+        "day1_low_krw": 9200,
+        "day1_close_krw": 9200,
+        "open_return_pct": 47.0,
+        "high_return_pct": 50.0,
+        "low_return_pct": -16.36,
+        "close_return_pct": -16.36,
+        "close_alpha_pct": -11.5,
+        "benchmark_return_pct": -4.86,
+        "upper_wick_pct": 44.24,
+        "day1_trade_value_eok": 4336.0,
+        "rel_turnover_pct": 842.3,
+        "vwap_premium_pct": 15.62,
+        "net_float_ratio_pct": 27.95,
+        "net_float_amount_eok": 445.3,
+        "lockup_ratio_pct": 58.6,
+        "long_term_lockup_pct": 10.43,
+        "vc_overhang_ratio_pct": 68.46,
+        "retail_comp_rate": 1342.7,
+        "inst_comp_rate": 1163.3,
+        "pre5d_market_temp_pct": 7.39,
+        "i3_deposit_to_netfloat_mult": 95.4,
+        "y1_net_float_close_gain_eok": -72.9,
+        "y2_offering_close_gain_eok": -41.4,
+        "y3a_cap_eff_per_100eok": -0.377,
+        "y4a_per_share_gain_krw": -1800,
+        "y4c_per_100m_deposit_gain_krw": -24375,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "macro_tailwind",
+          "label": "거시지수 강세 동조 (V7 +7.39%)",
+          "tone": "pos"
+        },
+        {
+          "key": "regime_cooling",
+          "label": "공모주 시장 냉각기 (직전 30일 중앙값 -4.7%)",
+          "tone": "warn"
+        },
+        {
+          "key": "high_lockup_defense",
+          "label": "고확약 물량잠김 (V2 58.6%)",
+          "tone": "pos"
+        },
+        {
+          "key": "deposit_surge",
+          "label": "증거금 초과수요 (I3 95.4배)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": false,
+      "in_p10_p90": false,
+      "in_iqr": false,
+      "shape_match": true,
+      "turnover_diff_pct": 28.9
+    },
+    {
+      "stock_code": "0153R0",
+      "post_code": "0153R0",
+      "corp_name": "바로팜",
+      "slug": "20261105-0153r0-바로팜",
+      "rel": "/posts/20261105-0153r0-바로팜/",
+      "feedback_anchor": "/posts/20261105-0153r0-바로팜/#post-listing-feedback",
+      "listing_date": "2026-11-11",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 219,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 30.29,
+          "v2_lockup_ratio_pct": 0.4,
+          "v3_long_term_lockup_pct": 0.0,
+          "v4_vc_overhang_ratio_pct": 51.04,
+          "v5_retail_comp_rate": 19.3,
+          "v5_retail_deposit_trillion": 0.07,
+          "v6_inst_comp_rate": 152.36,
+          "v7_pre5d_market_temp_pct": -5.83,
+          "offering_price_krw": 16400,
+          "net_float_eok": 594.4
+        },
+        "close_p10": -36.54,
+        "close_p25": -31.73,
+        "close_p50": -17.0,
+        "close_p75": 33.2,
+        "close_p90": 50.19,
+        "close_positive_count": 6,
+        "close_positive_rate_pct": 40.0,
+        "rel_turnover_p25": 410.4,
+        "rel_turnover_p50": 553.9,
+        "rel_turnover_p75": 882.7,
+        "y1_p25": -172.2,
+        "y1_p50": -55.9,
+        "y1_p75": 137.7,
+        "y4c_p25": -2460593.0,
+        "y4c_p50": -762340.0,
+        "y4c_p75": 1532514.0,
+        "bear_fade_count": 11,
+        "bear_fade_rate_pct": 73.3,
+        "bull_hold_count": 4,
+        "bull_hold_rate_pct": 26.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "0155E0",
+            "name": "해치텍",
+            "sim": 94.0
+          },
+          {
+            "code": "318060",
+            "name": "그래피",
+            "sim": 93.8
+          },
+          {
+            "code": "177900",
+            "name": "쓰리에이로직스",
+            "sim": 93.0
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "0153R0",
+        "corp_name": "바로팜",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-11-11",
+        "offering_price_krw": 16400,
+        "day1_open_krw": 16000,
+        "day1_high_krw": 17370,
+        "day1_low_krw": 11760,
+        "day1_close_krw": 11780,
+        "open_return_pct": -2.44,
+        "high_return_pct": 5.91,
+        "low_return_pct": -28.29,
+        "close_return_pct": -28.17,
+        "close_alpha_pct": -33.79,
+        "benchmark_return_pct": 5.62,
+        "upper_wick_pct": 32.18,
+        "day1_trade_value_eok": 2353.5,
+        "rel_turnover_pct": 490.3,
+        "vwap_premium_pct": -19.24,
+        "net_float_ratio_pct": 30.29,
+        "net_float_amount_eok": 594.4,
+        "lockup_ratio_pct": 0.4,
+        "long_term_lockup_pct": 0.0,
+        "vc_overhang_ratio_pct": 51.04,
+        "retail_comp_rate": 19.3,
+        "inst_comp_rate": 152.4,
+        "pre5d_market_temp_pct": -5.83,
+        "i3_deposit_to_netfloat_mult": 1.2,
+        "y1_net_float_close_gain_eok": -167.4,
+        "y2_offering_close_gain_eok": -82.2,
+        "y3a_cap_eff_per_100eok": -1.197,
+        "y4a_per_share_gain_krw": -4620,
+        "y4c_per_100m_deposit_gain_krw": -2923792,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "iqr_fit",
+          "label": "핵심 기준선(IQR) 구간 내 체결",
+          "tone": "neutral"
+        },
+        {
+          "key": "macro_shock",
+          "label": "거시지수 급락 충격 (V7 -5.83%)",
+          "tone": "warn"
+        },
+        {
+          "key": "high_float_pressure",
+          "label": "고유통 매물압박 (V1 30.3%)",
+          "tone": "warn"
+        },
+        {
+          "key": "low_lockup_supply",
+          "label": "저확약 단기출회 (V2 0.4%)",
+          "tone": "warn"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": true,
+      "shape_match": true,
+      "turnover_diff_pct": -11.5
+    },
+    {
+      "stock_code": "0162D0",
+      "post_code": "0162D0",
+      "corp_name": "동원파츠",
+      "slug": "20261105-0162d0-동원파츠",
+      "rel": "/posts/20261105-0162d0-동원파츠/",
+      "feedback_anchor": "/posts/20261105-0162d0-동원파츠/#post-listing-feedback",
+      "listing_date": "2026-11-10",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 218,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 17.52,
+          "v2_lockup_ratio_pct": 72.93,
+          "v3_long_term_lockup_pct": 27.8,
+          "v4_vc_overhang_ratio_pct": 43.37,
+          "v5_retail_comp_rate": 1219.4,
+          "v5_retail_deposit_trillion": 8.2,
+          "v6_inst_comp_rate": 840.86,
+          "v7_pre5d_market_temp_pct": -13.39,
+          "offering_price_krw": 26500,
+          "net_float_eok": 430.3
+        },
+        "close_p10": 10.49,
+        "close_p25": 37.48,
+        "close_p50": 52.38,
+        "close_p75": 91.15,
+        "close_p90": 208.55,
+        "close_positive_count": 14,
+        "close_positive_rate_pct": 93.3,
+        "rel_turnover_p25": 629.2,
+        "rel_turnover_p50": 886.5,
+        "rel_turnover_p75": 1430.3,
+        "y1_p25": 126.9,
+        "y1_p50": 167.4,
+        "y1_p75": 367.4,
+        "y4c_p25": 48956.0,
+        "y4c_p50": 91997.0,
+        "y4c_p75": 151466.0,
+        "bear_fade_count": 11,
+        "bear_fade_rate_pct": 73.3,
+        "bull_hold_count": 4,
+        "bull_hold_rate_pct": 26.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "0007C0",
+            "name": "아크릴",
+            "sim": 81.9
+          },
+          {
+            "code": "487400",
+            "name": "케이앤에스아이앤씨",
+            "sim": 80.6
+          },
+          {
+            "code": "217590",
+            "name": "티엠씨",
+            "sim": 79.5
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "0162D0",
+        "corp_name": "동원파츠",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-11-10",
+        "offering_price_krw": 26500,
+        "day1_open_krw": 51100,
+        "day1_high_krw": 57300,
+        "day1_low_krw": 28100,
+        "day1_close_krw": 29400,
+        "open_return_pct": 92.83,
+        "high_return_pct": 116.23,
+        "low_return_pct": 6.04,
+        "close_return_pct": 10.94,
+        "close_alpha_pct": 6.46,
+        "benchmark_return_pct": 4.48,
+        "upper_wick_pct": 48.69,
+        "day1_trade_value_eok": 5585.0,
+        "rel_turnover_pct": 908.0,
+        "vwap_premium_pct": 42.93,
+        "net_float_ratio_pct": 17.52,
+        "net_float_amount_eok": 430.3,
+        "lockup_ratio_pct": 72.93,
+        "long_term_lockup_pct": 27.8,
+        "vc_overhang_ratio_pct": 43.37,
+        "retail_comp_rate": 1219.4,
+        "inst_comp_rate": 840.9,
+        "pre5d_market_temp_pct": -13.39,
+        "i3_deposit_to_netfloat_mult": 190.5,
+        "y1_net_float_close_gain_eok": 47.1,
+        "y2_offering_close_gain_eok": 58.9,
+        "y3a_cap_eff_per_100eok": 0.196,
+        "y4a_per_share_gain_krw": 2900,
+        "y4c_per_100m_deposit_gain_krw": 17949,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "macro_shock",
+          "label": "거시지수 급락 충격 (V7 -13.39%)",
+          "tone": "warn"
+        },
+        {
+          "key": "high_lockup_defense",
+          "label": "고확약 물량잠김 (V2 72.9%)",
+          "tone": "pos"
+        },
+        {
+          "key": "deposit_surge",
+          "label": "증거금 초과수요 (I3 190.5배)",
+          "tone": "pos"
+        },
+        {
+          "key": "turnover_aligned",
+          "label": "상대회전율 기준선 밀착 (+2.4%)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": false,
+      "shape_match": true,
+      "turnover_diff_pct": 2.4
+    },
+    {
+      "stock_code": "359410",
+      "post_code": "359410",
+      "corp_name": "영광",
+      "slug": "20261027-359410-영광",
+      "rel": "/posts/20261027-359410-영광/",
+      "feedback_anchor": "/posts/20261027-359410-영광/#post-listing-feedback",
+      "listing_date": "2026-11-02",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 215,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 24.74,
+          "v2_lockup_ratio_pct": 37.17,
+          "v3_long_term_lockup_pct": 24.03,
+          "v4_vc_overhang_ratio_pct": 27.26,
+          "v5_retail_comp_rate": 684.7,
+          "v5_retail_deposit_trillion": 1.64,
+          "v6_inst_comp_rate": 1000.07,
+          "v7_pre5d_market_temp_pct": -1.57,
+          "offering_price_krw": 17000,
+          "net_float_eok": 380.9
+        },
+        "close_p10": -1.3,
+        "close_p25": 19.02,
+        "close_p50": 52.38,
+        "close_p75": 108.28,
+        "close_p90": 158.33,
+        "close_positive_count": 13,
+        "close_positive_rate_pct": 86.7,
+        "rel_turnover_p25": 548.6,
+        "rel_turnover_p50": 910.6,
+        "rel_turnover_p75": 1381.5,
+        "y1_p25": 88.6,
+        "y1_p50": 163.3,
+        "y1_p75": 303.2,
+        "y4c_p25": 46142.0,
+        "y4c_p50": 122022.0,
+        "y4c_p75": 234420.0,
+        "bear_fade_count": 11,
+        "bear_fade_rate_pct": 73.3,
+        "bull_hold_count": 4,
+        "bull_hold_rate_pct": 26.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "489500",
+            "name": "엘케이켐",
+            "sim": 92.2
+          },
+          {
+            "code": "476040",
+            "name": "오가노이드사이언스",
+            "sim": 87.8
+          },
+          {
+            "code": "489460",
+            "name": "바이오비쥬",
+            "sim": 87.3
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "359410",
+        "corp_name": "영광",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-11-02",
+        "offering_price_krw": 17000,
+        "day1_open_krw": 21350,
+        "day1_high_krw": 37400,
+        "day1_low_krw": 20100,
+        "day1_close_krw": 21500,
+        "open_return_pct": 25.59,
+        "high_return_pct": 120.0,
+        "low_return_pct": 18.24,
+        "close_return_pct": 26.47,
+        "close_alpha_pct": 25.09,
+        "benchmark_return_pct": 1.38,
+        "upper_wick_pct": 42.51,
+        "day1_trade_value_eok": 10930.2,
+        "rel_turnover_pct": 1660.6,
+        "vwap_premium_pct": 72.8,
+        "net_float_ratio_pct": 24.74,
+        "net_float_amount_eok": 380.9,
+        "lockup_ratio_pct": 37.17,
+        "long_term_lockup_pct": 24.03,
+        "vc_overhang_ratio_pct": 27.26,
+        "retail_comp_rate": 684.7,
+        "inst_comp_rate": 1000.1,
+        "pre5d_market_temp_pct": -1.57,
+        "i3_deposit_to_netfloat_mult": 43.2,
+        "y1_net_float_close_gain_eok": 100.8,
+        "y2_offering_close_gain_eok": 101.7,
+        "y3a_cap_eff_per_100eok": 0.242,
+        "y4a_per_share_gain_krw": 4500,
+        "y4c_per_100m_deposit_gain_krw": 77317,
+        "intraday_shape": "BULL_HOLD"
+      },
+      "deviation_tags": [
+        {
+          "key": "iqr_close_fit",
+          "label": "종가 핵심 기준선(IQR) 안착",
+          "tone": "neutral"
+        },
+        {
+          "key": "turnover_surge",
+          "label": "장중 수급집중 (회전율 기준선 대비 +82%)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": true,
+      "shape_match": false,
+      "turnover_diff_pct": 82.4
+    },
+    {
+      "stock_code": "420610",
+      "post_code": "420610",
+      "corp_name": "인텔리빅스",
+      "slug": "20261026-420610-인텔리빅스",
+      "rel": "/posts/20261026-420610-인텔리빅스/",
+      "feedback_anchor": "/posts/20261026-420610-인텔리빅스/#post-listing-feedback",
+      "listing_date": "2026-10-31",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 214,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 11.86,
+          "v2_lockup_ratio_pct": 73.12,
+          "v3_long_term_lockup_pct": 18.31,
+          "v4_vc_overhang_ratio_pct": 16.0,
+          "v5_retail_comp_rate": 1410.9,
+          "v5_retail_deposit_trillion": 3.97,
+          "v6_inst_comp_rate": 1234.3,
+          "v7_pre5d_market_temp_pct": -1.57,
+          "offering_price_krw": 9000,
+          "net_float_eok": 121.0
+        },
+        "close_p10": 20.42,
+        "close_p25": 52.95,
+        "close_p50": 125.83,
+        "close_p75": 218.55,
+        "close_p90": 294.33,
+        "close_positive_count": 14,
+        "close_positive_rate_pct": 93.3,
+        "rel_turnover_p25": 1076.2,
+        "rel_turnover_p50": 1647.1,
+        "rel_turnover_p75": 1756.8,
+        "y1_p25": 91.3,
+        "y1_p50": 221.0,
+        "y1_p75": 406.6,
+        "y4c_p25": 81600.0,
+        "y4c_p50": 206761.0,
+        "y4c_p75": 312226.0,
+        "bear_fade_count": 7,
+        "bear_fade_rate_pct": 46.7,
+        "bull_hold_count": 8,
+        "bull_hold_rate_pct": 53.3,
+        "intraday_shape_dominant": "BULL_HOLD",
+        "top3_codes": [
+          {
+            "code": "432470",
+            "name": "케이엔에스",
+            "sim": 87.5
+          },
+          {
+            "code": "465480",
+            "name": "인스피언",
+            "sim": 81.8
+          },
+          {
+            "code": "463020",
+            "name": "뉴엔AI",
+            "sim": 81.7
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "420610",
+        "corp_name": "인텔리빅스",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-10-31",
+        "offering_price_krw": 9000,
+        "day1_open_krw": 19290,
+        "day1_high_krw": 35350,
+        "day1_low_krw": 16450,
+        "day1_close_krw": 31000,
+        "open_return_pct": 114.33,
+        "high_return_pct": 292.78,
+        "low_return_pct": 82.78,
+        "close_return_pct": 244.44,
+        "close_alpha_pct": 244.44,
+        "benchmark_return_pct": 0.0,
+        "upper_wick_pct": 12.31,
+        "day1_trade_value_eok": 11895.4,
+        "rel_turnover_pct": 3726.3,
+        "vwap_premium_pct": 163.91,
+        "net_float_ratio_pct": 11.86,
+        "net_float_amount_eok": 121.0,
+        "lockup_ratio_pct": 73.12,
+        "long_term_lockup_pct": 18.31,
+        "vc_overhang_ratio_pct": 16.0,
+        "retail_comp_rate": 1410.9,
+        "inst_comp_rate": 1234.3,
+        "pre5d_market_temp_pct": -1.57,
+        "i3_deposit_to_netfloat_mult": 328.1,
+        "y1_net_float_close_gain_eok": 295.7,
+        "y2_offering_close_gain_eok": 550.0,
+        "y3a_cap_eff_per_100eok": 2.055,
+        "y4a_per_share_gain_krw": 22000,
+        "y4c_per_100m_deposit_gain_krw": 346513,
+        "intraday_shape": "BULL_HOLD"
+      },
+      "deviation_tags": [
+        {
+          "key": "ultra_low_float",
+          "label": "초저유통 품절 수급 (V1 11.9%)",
+          "tone": "pos"
+        },
+        {
+          "key": "high_lockup_defense",
+          "label": "고확약 물량잠김 (V2 73.1%)",
+          "tone": "pos"
+        },
+        {
+          "key": "deposit_surge",
+          "label": "증거금 초과수요 (I3 328.1배)",
+          "tone": "pos"
+        },
+        {
+          "key": "turnover_surge",
+          "label": "장중 수급집중 (회전율 기준선 대비 +126%)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": false,
+      "shape_match": true,
+      "turnover_diff_pct": 126.2
+    },
+    {
+      "stock_code": "439270",
+      "post_code": "439270",
+      "corp_name": "크리에이츠",
+      "slug": "20261023-439270-크리에이츠",
+      "rel": "/posts/20261023-439270-크리에이츠/",
+      "feedback_anchor": "/posts/20261023-439270-크리에이츠/#post-listing-feedback",
+      "listing_date": "2026-10-29",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 212,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 39.43,
+          "v2_lockup_ratio_pct": 0.48,
+          "v3_long_term_lockup_pct": 0.0,
+          "v4_vc_overhang_ratio_pct": 73.03,
+          "v5_retail_comp_rate": 6.9,
+          "v5_retail_deposit_trillion": 0.02,
+          "v6_inst_comp_rate": 240.46,
+          "v7_pre5d_market_temp_pct": -0.45,
+          "offering_price_krw": 15000,
+          "net_float_eok": 775.8
+        },
+        "close_p10": -38.71,
+        "close_p25": -34.77,
+        "close_p50": -24.93,
+        "close_p75": 2.3,
+        "close_p90": 29.69,
+        "close_positive_count": 4,
+        "close_positive_rate_pct": 26.7,
+        "rel_turnover_p25": 187.1,
+        "rel_turnover_p50": 366.4,
+        "rel_turnover_p75": 552.6,
+        "y1_p25": -225.7,
+        "y1_p50": -148.2,
+        "y1_p75": 38.4,
+        "y4c_p25": -3835780.0,
+        "y4c_p50": -762340.0,
+        "y4c_p75": -30160.0,
+        "bear_fade_count": 12,
+        "bear_fade_rate_pct": 80.0,
+        "bull_hold_count": 3,
+        "bull_hold_rate_pct": 20.0,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "440110",
+            "name": "파두",
+            "sim": 93.9
+          },
+          {
+            "code": "483350",
+            "name": "딜리셔스",
+            "sim": 93.6
+          },
+          {
+            "code": "373160",
+            "name": "데이원컴퍼니",
+            "sim": 92.8
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "439270",
+        "corp_name": "크리에이츠",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-10-29",
+        "offering_price_krw": 15000,
+        "day1_open_krw": 12000,
+        "day1_high_krw": 12700,
+        "day1_low_krw": 9000,
+        "day1_close_krw": 9000,
+        "open_return_pct": -20.0,
+        "high_return_pct": -15.33,
+        "low_return_pct": -40.0,
+        "close_return_pct": -40.0,
+        "close_alpha_pct": -37.66,
+        "benchmark_return_pct": -2.34,
+        "upper_wick_pct": 29.13,
+        "day1_trade_value_eok": 1707.5,
+        "rel_turnover_pct": 309.3,
+        "vwap_premium_pct": -28.83,
+        "net_float_ratio_pct": 39.43,
+        "net_float_amount_eok": 775.8,
+        "lockup_ratio_pct": 0.48,
+        "long_term_lockup_pct": 0.0,
+        "vc_overhang_ratio_pct": 73.03,
+        "retail_comp_rate": 6.9,
+        "inst_comp_rate": 240.5,
+        "pre5d_market_temp_pct": -0.45,
+        "i3_deposit_to_netfloat_mult": 0.2,
+        "y1_net_float_close_gain_eok": -310.3,
+        "y2_offering_close_gain_eok": -84.0,
+        "y3a_cap_eff_per_100eok": -2.343,
+        "y4a_per_share_gain_krw": -6000,
+        "y4c_per_100m_deposit_gain_krw": -11560694,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "high_float_pressure",
+          "label": "고유통 매물압박 (V1 39.4%)",
+          "tone": "warn"
+        },
+        {
+          "key": "low_lockup_supply",
+          "label": "저확약 단기출회 (V2 0.5%)",
+          "tone": "warn"
+        },
+        {
+          "key": "weak_deposit",
+          "label": "청약수요 부진 (I3 0.2배)",
+          "tone": "warn"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": false,
+      "in_iqr": false,
+      "shape_match": true,
+      "turnover_diff_pct": -15.6
+    },
+    {
+      "stock_code": "0053F0",
+      "post_code": "0053F0",
+      "corp_name": "티앤이코리아",
+      "slug": "20261023-0053f0-티앤이코리아",
+      "rel": "/posts/20261023-0053f0-티앤이코리아/",
+      "feedback_anchor": "/posts/20261023-0053f0-티앤이코리아/#post-listing-feedback",
+      "listing_date": "2026-10-29",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 212,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 17.0,
+          "v2_lockup_ratio_pct": 90.15,
+          "v3_long_term_lockup_pct": 44.62,
+          "v4_vc_overhang_ratio_pct": 59.71,
+          "v5_retail_comp_rate": 1253.4,
+          "v5_retail_deposit_trillion": 2.88,
+          "v6_inst_comp_rate": 1041.02,
+          "v7_pre5d_market_temp_pct": -0.45,
+          "offering_price_krw": 15300,
+          "net_float_eok": 295.2
+        },
+        "close_p10": 21.31,
+        "close_p25": 41.31,
+        "close_p50": 58.06,
+        "close_p75": 94.32,
+        "close_p90": 157.33,
+        "close_positive_count": 14,
+        "close_positive_rate_pct": 93.3,
+        "rel_turnover_p25": 594.8,
+        "rel_turnover_p50": 1023.1,
+        "rel_turnover_p75": 1285.3,
+        "y1_p25": 111.1,
+        "y1_p50": 218.1,
+        "y1_p75": 372.1,
+        "y4c_p25": 61744.0,
+        "y4c_p50": 91997.0,
+        "y4c_p75": 182422.0,
+        "bear_fade_count": 11,
+        "bear_fade_rate_pct": 73.3,
+        "bull_hold_count": 4,
+        "bull_hold_rate_pct": 26.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "0035S0",
+            "name": "빅웨이브로보틱스",
+            "sim": 87.1
+          },
+          {
+            "code": "136150",
+            "name": "원일티엔아이",
+            "sim": 83.4
+          },
+          {
+            "code": "0015G0",
+            "name": "그린광학",
+            "sim": 81.4
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "0053F0",
+        "corp_name": "티앤이코리아",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-10-29",
+        "offering_price_krw": 15300,
+        "day1_open_krw": 30350,
+        "day1_high_krw": 34500,
+        "day1_low_krw": 20200,
+        "day1_close_krw": 21500,
+        "open_return_pct": 98.37,
+        "high_return_pct": 125.49,
+        "low_return_pct": 32.03,
+        "close_return_pct": 40.52,
+        "close_alpha_pct": 42.86,
+        "benchmark_return_pct": -2.34,
+        "upper_wick_pct": 37.68,
+        "day1_trade_value_eok": 5390.8,
+        "rel_turnover_pct": 1038.0,
+        "vwap_premium_pct": 75.95,
+        "net_float_ratio_pct": 17.0,
+        "net_float_amount_eok": 295.2,
+        "lockup_ratio_pct": 90.15,
+        "long_term_lockup_pct": 44.62,
+        "vc_overhang_ratio_pct": 59.71,
+        "retail_comp_rate": 1253.4,
+        "inst_comp_rate": 1041.0,
+        "pre5d_market_temp_pct": -0.45,
+        "i3_deposit_to_netfloat_mult": 97.5,
+        "y1_net_float_close_gain_eok": 119.6,
+        "y2_offering_close_gain_eok": 148.8,
+        "y3a_cap_eff_per_100eok": 0.752,
+        "y4a_per_share_gain_krw": 6200,
+        "y4c_per_100m_deposit_gain_krw": 64661,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "high_lockup_defense",
+          "label": "고확약 물량잠김 (V2 90.2%)",
+          "tone": "pos"
+        },
+        {
+          "key": "deposit_surge",
+          "label": "증거금 초과수요 (I3 97.5배)",
+          "tone": "pos"
+        },
+        {
+          "key": "turnover_aligned",
+          "label": "상대회전율 기준선 밀착 (+1.5%)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": false,
+      "shape_match": true,
+      "turnover_diff_pct": 1.5
+    },
+    {
+      "stock_code": "0015M0",
+      "post_code": "0015M0",
+      "corp_name": "디티에스",
+      "slug": "20261016-0015m0-디티에스",
+      "rel": "/posts/20261016-0015m0-디티에스/",
+      "feedback_anchor": "/posts/20261016-0015m0-디티에스/#post-listing-feedback",
+      "listing_date": "2026-10-23",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 211,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 8.27,
+          "v2_lockup_ratio_pct": 61.0,
+          "v3_long_term_lockup_pct": 12.18,
+          "v4_vc_overhang_ratio_pct": 1.78,
+          "v5_retail_comp_rate": 986.9,
+          "v5_retail_deposit_trillion": 2.54,
+          "v6_inst_comp_rate": 983.98,
+          "v7_pre5d_market_temp_pct": 0.19,
+          "offering_price_krw": 18500,
+          "net_float_eok": 227.8
+        },
+        "close_p10": -10.8,
+        "close_p25": 33.07,
+        "close_p50": 81.67,
+        "close_p75": 120.2,
+        "close_p90": 236.24,
+        "close_positive_count": 13,
+        "close_positive_rate_pct": 86.7,
+        "rel_turnover_p25": 912.1,
+        "rel_turnover_p50": 1177.2,
+        "rel_turnover_p75": 1671.8,
+        "y1_p25": 66.5,
+        "y1_p50": 187.6,
+        "y1_p75": 308.8,
+        "y4c_p25": 78570.0,
+        "y4c_p50": 169921.0,
+        "y4c_p75": 288472.0,
+        "bear_fade_count": 8,
+        "bear_fade_rate_pct": 53.3,
+        "bull_hold_count": 7,
+        "bull_hold_rate_pct": 46.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "481070",
+            "name": "에이유브랜즈",
+            "sim": 84.4
+          },
+          {
+            "code": "484810",
+            "name": "티엑스알로보틱스",
+            "sim": 84.0
+          },
+          {
+            "code": "452280",
+            "name": "한선엔지니어링",
+            "sim": 83.5
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "0015M0",
+        "corp_name": "디티에스",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-10-23",
+        "offering_price_krw": 18500,
+        "day1_open_krw": 32350,
+        "day1_high_krw": 40750,
+        "day1_low_krw": 23850,
+        "day1_close_krw": 25000,
+        "open_return_pct": 74.86,
+        "high_return_pct": 120.27,
+        "low_return_pct": 28.92,
+        "close_return_pct": 35.14,
+        "close_alpha_pct": 36.76,
+        "benchmark_return_pct": -1.62,
+        "upper_wick_pct": 38.65,
+        "day1_trade_value_eok": 7035.8,
+        "rel_turnover_pct": 1654.2,
+        "vwap_premium_pct": 86.75,
+        "net_float_ratio_pct": 8.27,
+        "net_float_amount_eok": 227.8,
+        "lockup_ratio_pct": 61.0,
+        "long_term_lockup_pct": 12.18,
+        "vc_overhang_ratio_pct": 1.78,
+        "retail_comp_rate": 986.9,
+        "inst_comp_rate": 984.0,
+        "pre5d_market_temp_pct": 0.19,
+        "i3_deposit_to_netfloat_mult": 111.7,
+        "y1_net_float_close_gain_eok": 80.0,
+        "y2_offering_close_gain_eok": 144.9,
+        "y3a_cap_eff_per_100eok": 0.499,
+        "y4a_per_share_gain_krw": 6500,
+        "y4c_per_100m_deposit_gain_krw": 71204,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "iqr_close_fit",
+          "label": "종가 핵심 기준선(IQR) 안착",
+          "tone": "neutral"
+        },
+        {
+          "key": "ultra_low_float",
+          "label": "초저유통 품절 수급 (V1 8.3%)",
+          "tone": "pos"
+        },
+        {
+          "key": "high_lockup_defense",
+          "label": "고확약 물량잠김 (V2 61.0%)",
+          "tone": "pos"
+        },
+        {
+          "key": "deposit_surge",
+          "label": "증거금 초과수요 (I3 111.7배)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": true,
+      "shape_match": true,
+      "turnover_diff_pct": 40.5
+    },
+    {
+      "stock_code": "179880",
+      "post_code": "179880",
+      "corp_name": "멜콘",
+      "slug": "20261007-179880-멜콘",
+      "rel": "/posts/20261007-179880-멜콘/",
+      "feedback_anchor": "/posts/20261007-179880-멜콘/#post-listing-feedback",
+      "listing_date": "2026-10-15",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 208,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 23.79,
+          "v2_lockup_ratio_pct": 73.94,
+          "v3_long_term_lockup_pct": 18.62,
+          "v4_vc_overhang_ratio_pct": 63.28,
+          "v5_retail_comp_rate": 1741.5,
+          "v5_retail_deposit_trillion": 6.69,
+          "v6_inst_comp_rate": 1136.84,
+          "v7_pre5d_market_temp_pct": -11.34,
+          "offering_price_krw": 12300,
+          "net_float_eok": 368.7
+        },
+        "close_p10": -1.09,
+        "close_p25": 18.23,
+        "close_p50": 25.36,
+        "close_p75": 70.47,
+        "close_p90": 99.99,
+        "close_positive_count": 13,
+        "close_positive_rate_pct": 86.7,
+        "rel_turnover_p25": 546.0,
+        "rel_turnover_p50": 606.0,
+        "rel_turnover_p75": 698.3,
+        "y1_p25": 70.1,
+        "y1_p50": 162.7,
+        "y1_p75": 262.6,
+        "y4c_p25": 20978.0,
+        "y4c_p50": 37960.0,
+        "y4c_p75": 91837.0,
+        "bear_fade_count": 14,
+        "bear_fade_rate_pct": 93.3,
+        "bull_hold_count": 1,
+        "bull_hold_rate_pct": 6.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "458350",
+            "name": "에스팀",
+            "sim": 83.2
+          },
+          {
+            "code": "488280",
+            "name": "에스투더블유",
+            "sim": 82.0
+          },
+          {
+            "code": "468530",
+            "name": "프로티나",
+            "sim": 81.8
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "179880",
+        "corp_name": "멜콘",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-10-15",
+        "offering_price_krw": 12300,
+        "day1_open_krw": 27400,
+        "day1_high_krw": 28800,
+        "day1_low_krw": 15780,
+        "day1_close_krw": 17470,
+        "open_return_pct": 122.76,
+        "high_return_pct": 134.15,
+        "low_return_pct": 28.29,
+        "close_return_pct": 42.03,
+        "close_alpha_pct": 49.68,
+        "benchmark_return_pct": -7.65,
+        "upper_wick_pct": 39.34,
+        "day1_trade_value_eok": 5548.4,
+        "rel_turnover_pct": 886.5,
+        "vwap_premium_pct": 69.76,
+        "net_float_ratio_pct": 23.79,
+        "net_float_amount_eok": 368.7,
+        "lockup_ratio_pct": 73.94,
+        "long_term_lockup_pct": 18.62,
+        "vc_overhang_ratio_pct": 63.28,
+        "retail_comp_rate": 1741.5,
+        "inst_comp_rate": 1136.8,
+        "pre5d_market_temp_pct": -11.34,
+        "i3_deposit_to_netfloat_mult": 181.6,
+        "y1_net_float_close_gain_eok": 155.0,
+        "y2_offering_close_gain_eok": 129.2,
+        "y3a_cap_eff_per_100eok": 0.758,
+        "y4a_per_share_gain_krw": 5170,
+        "y4c_per_100m_deposit_gain_krw": 48272,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "iqr_close_fit",
+          "label": "종가 핵심 기준선(IQR) 안착",
+          "tone": "neutral"
+        },
+        {
+          "key": "macro_shock",
+          "label": "거시지수 급락 충격 (V7 -11.34%)",
+          "tone": "warn"
+        },
+        {
+          "key": "high_lockup_defense",
+          "label": "고확약 물량잠김 (V2 73.9%)",
+          "tone": "pos"
+        },
+        {
+          "key": "deposit_surge",
+          "label": "증거금 초과수요 (I3 181.6배)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": true,
+      "shape_match": true,
+      "turnover_diff_pct": 46.3
+    },
+    {
+      "stock_code": "468670",
+      "post_code": "468670",
+      "corp_name": "브릴스",
+      "slug": "20260922-468670-브릴스",
+      "rel": "/posts/20260922-468670-브릴스/",
+      "feedback_anchor": "/posts/20260922-468670-브릴스/#post-listing-feedback",
+      "listing_date": "2026-10-01",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 207,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 21.01,
+          "v2_lockup_ratio_pct": 85.39,
+          "v3_long_term_lockup_pct": 20.77,
+          "v4_vc_overhang_ratio_pct": 83.03,
+          "v5_retail_comp_rate": 1676.3,
+          "v5_retail_deposit_trillion": 2.45,
+          "v6_inst_comp_rate": 1187.74,
+          "v7_pre5d_market_temp_pct": 0.92,
+          "offering_price_krw": 19500,
+          "net_float_eok": 465.5
+        },
+        "close_p10": 13.91,
+        "close_p25": 42.18,
+        "close_p50": 60.0,
+        "close_p75": 78.14,
+        "close_p90": 144.5,
+        "close_positive_count": 14,
+        "close_positive_rate_pct": 93.3,
+        "rel_turnover_p25": 568.8,
+        "rel_turnover_p50": 659.6,
+        "rel_turnover_p75": 1162.7,
+        "y1_p25": 142.6,
+        "y1_p50": 224.2,
+        "y1_p75": 298.3,
+        "y4c_p25": 50578.0,
+        "y4c_p50": 73554.0,
+        "y4c_p75": 102900.0,
+        "bear_fade_count": 13,
+        "bear_fade_rate_pct": 86.7,
+        "bull_hold_count": 2,
+        "bull_hold_rate_pct": 13.3,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "365660",
+            "name": "레몬헬스케어",
+            "sim": 90.2
+          },
+          {
+            "code": "408470",
+            "name": "한패스",
+            "sim": 89.9
+          },
+          {
+            "code": "387690",
+            "name": "레메디",
+            "sim": 88.3
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "468670",
+        "corp_name": "브릴스",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-10-01",
+        "offering_price_krw": 19500,
+        "day1_open_krw": 61800,
+        "day1_high_krw": 62100,
+        "day1_low_krw": 30050,
+        "day1_close_krw": 30450,
+        "open_return_pct": 216.92,
+        "high_return_pct": 218.46,
+        "low_return_pct": 54.1,
+        "close_return_pct": 56.15,
+        "close_alpha_pct": 51.67,
+        "benchmark_return_pct": 4.48,
+        "upper_wick_pct": 50.97,
+        "day1_trade_value_eok": 6226.7,
+        "rel_turnover_pct": 651.6,
+        "vwap_premium_pct": 105.27,
+        "net_float_ratio_pct": 21.01,
+        "net_float_amount_eok": 465.5,
+        "lockup_ratio_pct": 85.39,
+        "long_term_lockup_pct": 20.77,
+        "vc_overhang_ratio_pct": 83.03,
+        "retail_comp_rate": 1676.3,
+        "inst_comp_rate": 1187.7,
+        "pre5d_market_temp_pct": 0.92,
+        "i3_deposit_to_netfloat_mult": 52.7,
+        "y1_net_float_close_gain_eok": 261.4,
+        "y2_offering_close_gain_eok": 131.4,
+        "y3a_cap_eff_per_100eok": 0.902,
+        "y4a_per_share_gain_krw": 10950,
+        "y4c_per_100m_deposit_gain_krw": 66999,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "iqr_fit",
+          "label": "핵심 기준선(IQR) 구간 내 체결",
+          "tone": "neutral"
+        },
+        {
+          "key": "high_lockup_defense",
+          "label": "고확약 물량잠김 (V2 85.4%)",
+          "tone": "pos"
+        },
+        {
+          "key": "turnover_aligned",
+          "label": "상대회전율 기준선 밀착 (-1.2%)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": true,
+      "shape_match": true,
+      "turnover_diff_pct": -1.2
+    },
+    {
+      "stock_code": "266690",
+      "post_code": "266690",
+      "corp_name": "덕산넵코어스",
+      "slug": "20260921-266690-덕산넵코어스",
+      "rel": "/posts/20260921-266690-덕산넵코어스/",
+      "feedback_anchor": "/posts/20260921-266690-덕산넵코어스/#post-listing-feedback",
+      "listing_date": "2026-09-30",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 206,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 33.29,
+          "v2_lockup_ratio_pct": 57.26,
+          "v3_long_term_lockup_pct": 23.75,
+          "v4_vc_overhang_ratio_pct": 72.79,
+          "v5_retail_comp_rate": 332.8,
+          "v5_retail_deposit_trillion": 1.82,
+          "v6_inst_comp_rate": 868.64,
+          "v7_pre5d_market_temp_pct": 1.82,
+          "offering_price_krw": 14600,
+          "net_float_eok": 918.3
+        },
+        "close_p10": -34.77,
+        "close_p25": -9.31,
+        "close_p50": 13.0,
+        "close_p75": 31.67,
+        "close_p90": 73.21,
+        "close_positive_count": 9,
+        "close_positive_rate_pct": 60.0,
+        "rel_turnover_p25": 289.0,
+        "rel_turnover_p50": 434.7,
+        "rel_turnover_p75": 726.0,
+        "y1_p25": -137.0,
+        "y1_p50": 96.5,
+        "y1_p75": 122.1,
+        "y4c_p25": -82638.0,
+        "y4c_p50": 65638.0,
+        "y4c_p75": 309990.0,
+        "bear_fade_count": 11,
+        "bear_fade_rate_pct": 73.3,
+        "bull_hold_count": 4,
+        "bull_hold_rate_pct": 26.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "417030",
+            "name": "니어스랩",
+            "sim": 87.3
+          },
+          {
+            "code": "464490",
+            "name": "쿼드메디슨",
+            "sim": 85.4
+          },
+          {
+            "code": "240550",
+            "name": "동방메디컬",
+            "sim": 84.9
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "266690",
+        "corp_name": "덕산넵코어스",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-09-30",
+        "offering_price_krw": 14600,
+        "day1_open_krw": 27100,
+        "day1_high_krw": 28700,
+        "day1_low_krw": 16810,
+        "day1_close_krw": 17980,
+        "open_return_pct": 85.62,
+        "high_return_pct": 96.58,
+        "low_return_pct": 15.14,
+        "close_return_pct": 23.15,
+        "close_alpha_pct": 22.43,
+        "benchmark_return_pct": 0.72,
+        "upper_wick_pct": 37.35,
+        "day1_trade_value_eok": 9305.0,
+        "rel_turnover_pct": 685.7,
+        "vwap_premium_pct": 47.78,
+        "net_float_ratio_pct": 33.29,
+        "net_float_amount_eok": 918.3,
+        "lockup_ratio_pct": 57.26,
+        "long_term_lockup_pct": 23.75,
+        "vc_overhang_ratio_pct": 72.79,
+        "retail_comp_rate": 332.8,
+        "inst_comp_rate": 868.6,
+        "pre5d_market_temp_pct": 1.82,
+        "i3_deposit_to_netfloat_mult": 19.8,
+        "y1_net_float_close_gain_eok": 212.6,
+        "y2_offering_close_gain_eok": 101.4,
+        "y3a_cap_eff_per_100eok": 0.249,
+        "y4a_per_share_gain_krw": 3380,
+        "y4c_per_100m_deposit_gain_krw": 139118,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "iqr_close_fit",
+          "label": "종가 핵심 기준선(IQR) 안착",
+          "tone": "neutral"
+        },
+        {
+          "key": "high_float_pressure",
+          "label": "고유통 매물압박 (V1 33.3%)",
+          "tone": "warn"
+        },
+        {
+          "key": "high_lockup_defense",
+          "label": "고확약 물량잠김 (V2 57.3%)",
+          "tone": "pos"
+        },
+        {
+          "key": "turnover_surge",
+          "label": "장중 수급집중 (회전율 기준선 대비 +58%)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": true,
+      "in_iqr": true,
+      "shape_match": true,
+      "turnover_diff_pct": 57.7
+    },
+    {
+      "stock_code": "0010S0",
+      "post_code": "0010S0",
+      "corp_name": "와이즈플래닛컴퍼니",
+      "slug": "20260917-0010s0-와이즈플래닛컴퍼니",
+      "rel": "/posts/20260917-0010s0-와이즈플래닛컴퍼니/",
+      "feedback_anchor": "/posts/20260917-0010s0-와이즈플래닛컴퍼니/#post-listing-feedback",
+      "listing_date": "2026-09-23",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 203,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 14.42,
+          "v2_lockup_ratio_pct": 55.61,
+          "v3_long_term_lockup_pct": 9.72,
+          "v4_vc_overhang_ratio_pct": 35.47,
+          "v5_retail_comp_rate": 1477.7,
+          "v5_retail_deposit_trillion": 1.77,
+          "v6_inst_comp_rate": 1248.47,
+          "v7_pre5d_market_temp_pct": 3.66,
+          "offering_price_krw": 12000,
+          "net_float_eok": 173.4
+        },
+        "close_p10": 12.22,
+        "close_p25": 36.71,
+        "close_p50": 74.84,
+        "close_p75": 152.91,
+        "close_p90": 257.4,
+        "close_positive_count": 13,
+        "close_positive_rate_pct": 86.7,
+        "rel_turnover_p25": 869.0,
+        "rel_turnover_p50": 1368.0,
+        "rel_turnover_p75": 1982.5,
+        "y1_p25": 88.2,
+        "y1_p50": 156.2,
+        "y1_p75": 367.2,
+        "y4c_p25": 67472.0,
+        "y4c_p50": 104697.0,
+        "y4c_p75": 241740.0,
+        "bear_fade_count": 9,
+        "bear_fade_rate_pct": 60.0,
+        "bull_hold_count": 6,
+        "bull_hold_rate_pct": 40.0,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "464280",
+            "name": "티디에스팜",
+            "sim": 83.2
+          },
+          {
+            "code": "418250",
+            "name": "시큐레터",
+            "sim": 82.7
+          },
+          {
+            "code": "487400",
+            "name": "케이앤에스아이앤씨",
+            "sim": 80.8
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "0010S0",
+        "corp_name": "와이즈플래닛컴퍼니",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-09-23",
+        "offering_price_krw": 12000,
+        "day1_open_krw": 42750,
+        "day1_high_krw": 48000,
+        "day1_low_krw": 33350,
+        "day1_close_krw": 46300,
+        "open_return_pct": 256.25,
+        "high_return_pct": 300.0,
+        "low_return_pct": 177.92,
+        "close_return_pct": 285.83,
+        "close_alpha_pct": 284.62,
+        "benchmark_return_pct": 1.21,
+        "upper_wick_pct": 3.54,
+        "day1_trade_value_eok": 10046.3,
+        "rel_turnover_pct": 1647.1,
+        "vwap_premium_pct": 251.66,
+        "net_float_ratio_pct": 14.42,
+        "net_float_amount_eok": 173.4,
+        "lockup_ratio_pct": 55.61,
+        "long_term_lockup_pct": 9.72,
+        "vc_overhang_ratio_pct": 35.47,
+        "retail_comp_rate": 1477.7,
+        "inst_comp_rate": 1248.5,
+        "pre5d_market_temp_pct": 3.66,
+        "i3_deposit_to_netfloat_mult": 102.2,
+        "y1_net_float_close_gain_eok": 495.8,
+        "y2_offering_close_gain_eok": 548.8,
+        "y3a_cap_eff_per_100eok": 2.845,
+        "y4a_per_share_gain_krw": 34300,
+        "y4c_per_100m_deposit_gain_krw": 386876,
+        "intraday_shape": "BULL_HOLD"
+      },
+      "deviation_tags": [
+        {
+          "key": "macro_tailwind",
+          "label": "거시지수 강세 동조 (V7 +3.66%)",
+          "tone": "pos"
+        },
+        {
+          "key": "ultra_low_float",
+          "label": "초저유통 품절 수급 (V1 14.4%)",
+          "tone": "pos"
+        },
+        {
+          "key": "high_lockup_defense",
+          "label": "고확약 물량잠김 (V2 55.6%)",
+          "tone": "pos"
+        },
+        {
+          "key": "deposit_surge",
+          "label": "증거금 초과수요 (I3 102.2배)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": false,
+      "in_iqr": false,
+      "shape_match": false,
+      "turnover_diff_pct": 20.4
+    },
+    {
+      "stock_code": "0161M0",
+      "post_code": "0161M0",
+      "corp_name": "네오사피엔스",
+      "slug": "20260915-0161m0-네오사피엔스",
+      "rel": "/posts/20260915-0161m0-네오사피엔스/",
+      "feedback_anchor": "/posts/20260915-0161m0-네오사피엔스/#post-listing-feedback",
+      "listing_date": "2026-09-21",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 202,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 23.21,
+          "v2_lockup_ratio_pct": 44.02,
+          "v3_long_term_lockup_pct": 0.0,
+          "v4_vc_overhang_ratio_pct": 52.74,
+          "v5_retail_comp_rate": 1047.8,
+          "v5_retail_deposit_trillion": 2.62,
+          "v6_inst_comp_rate": 219.56,
+          "v7_pre5d_market_temp_pct": 0.48,
+          "offering_price_krw": 10000,
+          "net_float_eok": 283.5
+        },
+        "close_p10": -13.6,
+        "close_p25": 0.93,
+        "close_p50": 15.0,
+        "close_p75": 38.13,
+        "close_p90": 59.68,
+        "close_positive_count": 11,
+        "close_positive_rate_pct": 73.3,
+        "rel_turnover_p25": 555.4,
+        "rel_turnover_p50": 718.8,
+        "rel_turnover_p75": 824.5,
+        "y1_p25": 6.8,
+        "y1_p50": 75.0,
+        "y1_p75": 196.1,
+        "y4c_p25": 1954.0,
+        "y4c_p50": 33491.0,
+        "y4c_p75": 100623.0,
+        "bear_fade_count": 14,
+        "bear_fade_rate_pct": 93.3,
+        "bull_hold_count": 1,
+        "bull_hold_rate_pct": 6.7,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "462350",
+            "name": "이노스페이스",
+            "sim": 86.2
+          },
+          {
+            "code": "105760",
+            "name": "포스뱅크",
+            "sim": 84.2
+          },
+          {
+            "code": "107640",
+            "name": "한중엔시에스",
+            "sim": 84.2
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "0161M0",
+        "corp_name": "네오사피엔스",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-09-21",
+        "offering_price_krw": 10000,
+        "day1_open_krw": 25250,
+        "day1_high_krw": 34750,
+        "day1_low_krw": 25000,
+        "day1_close_krw": 34300,
+        "open_return_pct": 152.5,
+        "high_return_pct": 247.5,
+        "low_return_pct": 150.0,
+        "close_return_pct": 243.0,
+        "close_alpha_pct": 241.89,
+        "benchmark_return_pct": 1.11,
+        "upper_wick_pct": 1.29,
+        "day1_trade_value_eok": 9781.7,
+        "rel_turnover_pct": 1194.9,
+        "vwap_premium_pct": 188.77,
+        "net_float_ratio_pct": 23.21,
+        "net_float_amount_eok": 283.5,
+        "lockup_ratio_pct": 44.02,
+        "long_term_lockup_pct": 0.0,
+        "vc_overhang_ratio_pct": 52.74,
+        "retail_comp_rate": 1047.8,
+        "inst_comp_rate": 219.6,
+        "pre5d_market_temp_pct": 0.48,
+        "i3_deposit_to_netfloat_mult": 92.4,
+        "y1_net_float_close_gain_eok": 688.9,
+        "y2_offering_close_gain_eok": 486.0,
+        "y3a_cap_eff_per_100eok": 2.484,
+        "y4a_per_share_gain_krw": 24300,
+        "y4c_per_100m_deposit_gain_krw": 463838,
+        "intraday_shape": "BULL_HOLD"
+      },
+      "deviation_tags": [
+        {
+          "key": "deposit_surge",
+          "label": "증거금 초과수요 (I3 92.4배)",
+          "tone": "pos"
+        },
+        {
+          "key": "turnover_surge",
+          "label": "장중 수급집중 (회전율 기준선 대비 +66%)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": true,
+      "in_p10_p90": false,
+      "in_iqr": false,
+      "shape_match": false,
+      "turnover_diff_pct": 66.2
+    },
+    {
+      "stock_code": "386380",
+      "post_code": "386380",
+      "corp_name": "스카이랩스",
+      "slug": "20260831-386380-스카이랩스",
+      "rel": "/posts/20260831-386380-스카이랩스/",
+      "feedback_anchor": "/posts/20260831-386380-스카이랩스/#post-listing-feedback",
+      "listing_date": "2026-09-04",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "RETRO_BACKTEST",
+      "pre": {
+        "model_version": "v4.0-blend",
+        "captured_at": "2026-11-26T06:59:07+09:00",
+        "pool_size": 201,
+        "peer_count": 15,
+        "weights": {
+          "v1_net_float_ratio": 17.04,
+          "v2_lockup_ratio": 8.98,
+          "v3_long_term_lockup": 15.4,
+          "v4_vc_overhang": 13.01,
+          "v5_retail_momentum": 34.87,
+          "v6_inst_comp_rate": 6.7,
+          "v7_pre5d_market_temp": 4.0
+        },
+        "inputs": {
+          "v1_net_float_ratio_pct": 26.39,
+          "v2_lockup_ratio_pct": 10.93,
+          "v3_long_term_lockup_pct": 0.0,
+          "v4_vc_overhang_ratio_pct": 62.92,
+          "v5_retail_comp_rate": 2.9,
+          "v5_retail_deposit_trillion": 0.01,
+          "v6_inst_comp_rate": 63.41,
+          "v7_pre5d_market_temp_pct": -5.41,
+          "offering_price_krw": 10000,
+          "net_float_eok": 495.1
+        },
+        "close_p10": -37.96,
+        "close_p25": -31.73,
+        "close_p50": -24.93,
+        "close_p75": 7.68,
+        "close_p90": 33.22,
+        "close_positive_count": 4,
+        "close_positive_rate_pct": 26.7,
+        "rel_turnover_p25": 316.2,
+        "rel_turnover_p50": 423.5,
+        "rel_turnover_p75": 642.5,
+        "y1_p25": -208.5,
+        "y1_p50": -138.6,
+        "y1_p75": 35.2,
+        "y4c_p25": -4885400.0,
+        "y4c_p50": -1156283.0,
+        "y4c_p75": 32192.0,
+        "bear_fade_count": 13,
+        "bear_fade_rate_pct": 86.7,
+        "bull_hold_count": 2,
+        "bull_hold_rate_pct": 13.3,
+        "intraday_shape_dominant": "BEAR_FADE",
+        "top3_codes": [
+          {
+            "code": "473980",
+            "name": "노머스",
+            "sim": 94.5
+          },
+          {
+            "code": "0155E0",
+            "name": "해치텍",
+            "sim": 91.7
+          },
+          {
+            "code": "413390",
+            "name": "엠오티",
+            "sim": 91.5
+          }
+        ]
+      },
+      "actual": {
+        "stock_code": "386380",
+        "corp_name": "스카이랩스",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-09-04",
+        "offering_price_krw": 10000,
+        "day1_open_krw": 8500,
+        "day1_high_krw": 28750,
+        "day1_low_krw": 8200,
+        "day1_close_krw": 23500,
+        "open_return_pct": -15.0,
+        "high_return_pct": 187.5,
+        "low_return_pct": -18.0,
+        "close_return_pct": 135.0,
+        "close_alpha_pct": 132.05,
+        "benchmark_return_pct": 2.95,
+        "upper_wick_pct": 18.26,
+        "day1_trade_value_eok": 16718.6,
+        "rel_turnover_pct": 1738.9,
+        "vwap_premium_pct": 94.19,
+        "net_float_ratio_pct": 26.39,
+        "net_float_amount_eok": 495.1,
+        "lockup_ratio_pct": 10.93,
+        "long_term_lockup_pct": 0.0,
+        "vc_overhang_ratio_pct": 62.92,
+        "retail_comp_rate": 2.9,
+        "inst_comp_rate": 63.4,
+        "pre5d_market_temp_pct": -5.41,
+        "i3_deposit_to_netfloat_mult": 0.1,
+        "y1_net_float_close_gain_eok": 668.4,
+        "y2_offering_close_gain_eok": 270.0,
+        "y3a_cap_eff_per_100eok": 0.807,
+        "y4a_per_share_gain_krw": 13500,
+        "y4c_per_100m_deposit_gain_krw": 94736842,
+        "intraday_shape": "BULL_HOLD"
+      },
+      "deviation_tags": [
+        {
+          "key": "macro_shock",
+          "label": "거시지수 급락 충격 (V7 -5.41%)",
+          "tone": "warn"
+        },
+        {
+          "key": "low_lockup_supply",
+          "label": "저확약 단기출회 (V2 10.9%)",
+          "tone": "warn"
+        },
+        {
+          "key": "weak_deposit",
+          "label": "청약수요 부진 (I3 0.1배)",
+          "tone": "warn"
+        },
+        {
+          "key": "turnover_surge",
+          "label": "장중 수급집중 (회전율 기준선 대비 +311%)",
+          "tone": "pos"
+        }
+      ],
+      "direction_match": false,
+      "in_p10_p90": false,
+      "in_iqr": false,
+      "shape_match": false,
+      "turnover_diff_pct": 310.6
+    }
+  ],
+  "transfer_items": [
+    {
+      "stock_code": "250030",
+      "post_code": "250030",
+      "corp_name": "진코스텍",
+      "slug": "20261008-250030-진코스텍",
+      "rel": "/posts/20261008-250030-진코스텍/",
+      "feedback_anchor": "/posts/20261008-250030-진코스텍/#post-listing-feedback",
+      "listing_date": "2026-10-15",
+      "market_type": "KOSDAQ",
+      "feedback_mode": "TRANSFER_RECORD",
+      "pre": {},
+      "actual": {
+        "stock_code": "250030",
+        "corp_name": "진코스텍",
+        "market_type": "KOSDAQ",
+        "listing_date": "2026-10-15",
+        "offering_price_krw": 23500,
+        "day1_open_krw": 24000,
+        "day1_high_krw": 30800,
+        "day1_low_krw": 14610,
+        "day1_close_krw": 14940,
+        "open_return_pct": 2.13,
+        "high_return_pct": 31.06,
+        "low_return_pct": -37.83,
+        "close_return_pct": -36.43,
+        "close_alpha_pct": -28.78,
+        "benchmark_return_pct": -7.65,
+        "upper_wick_pct": 51.49,
+        "day1_trade_value_eok": 2434.4,
+        "rel_turnover_pct": 650.8,
+        "vwap_premium_pct": -8.95,
+        "net_float_ratio_pct": 46.16,
+        "net_float_amount_eok": 410.8,
+        "lockup_ratio_pct": 72.75,
+        "long_term_lockup_pct": 49.46,
+        "vc_overhang_ratio_pct": 77.85,
+        "retail_comp_rate": 685.8,
+        "inst_comp_rate": 1097.6,
+        "pre5d_market_temp_pct": -11.34,
+        "i3_deposit_to_netfloat_mult": 41.8,
+        "y1_net_float_close_gain_eok": -149.6,
+        "y2_offering_close_gain_eok": -72.9,
+        "y3a_cap_eff_per_100eok": -1.496,
+        "y4a_per_share_gain_krw": -8560,
+        "y4c_per_100m_deposit_gain_krw": -106223,
+        "intraday_shape": "BEAR_FADE"
+      },
+      "deviation_tags": [
+        {
+          "key": "transfer_relist",
+          "label": "코넥스 이전상장 (직상장 캘리브레이션 제외)",
+          "tone": "neutral"
+        }
+      ]
+    }
+  ]
+}

@@ -138,20 +138,21 @@
       <p class="muted" style="margin:0 0 14px;max-width:72ch;">{{ .Site.Params.heroSummary }}</p>
       <div class="qti-trust-bar" style="margin-bottom:18px;">
         <span>기준일 <b class="num">{{ $ipo.updated | default (now.Format "2006-01-02 06:30") }}</b></span>
-        <span>출처 <b>금융감독원 전자공시(DART) · KIND</b></span>
-        <span>방법론 <b>v3.0</b></span>
+        <span>출처 <b>금융감독원 전자공시(DART) · KIND · KRX</b></span>
+        <span>방법론 <b>Blend v4.0 (225건 실측)</b></span>
         <span>추적 종목 <b class="num">{{ len $posts }}건</b></span>
       </div>
 
-      {{- /* Wave 8: Mobile & Desktop 3-Second Hook Above-the-Fold Hot IPO Strip + /calendar/ Pillar Link */ -}}
+      {{- /* Wave 8: Mobile & Desktop 3-Second Hook Above-the-Fold Hot IPO Strip + /calendar/ & /scorecard/ Pillar Links */ -}}
       <section class="mobile-hot-strip" id="mobile-hot-ipo-strip" aria-label="최신 주목 공모주 즉시 열람 및 11·12월 청약 캘린더">
         <div class="mobile-hot-strip-head">
           <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;">
-            <span class="qti-badge qti-b-ipo mono">🔥 HOT IPO · 3초 요약</span>
-            <strong style="font-size:14.5px;color:var(--ink);">지금 주목해야 할 최신 DART 공모주 리포트</strong>
+            <span class="qti-badge qti-b-ipo mono">HOT IPO · 3초 요약</span>
+            <strong style="font-size:14.5px;color:var(--ink);">최신 DART 공모주 리포트 &amp; 상장일 사후 복기</strong>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <a class="qti-btn qti-btn-primary" href="{{ "calendar/" | relURL }}" style="padding:6px 11px;font-size:12.5px;">📅 11·12월 청약 캘린더 총정리 →</a>
+            <a class="qti-btn qti-btn-primary" href="{{ "scorecard/" | relURL }}" style="padding:6px 11px;font-size:12.5px;">📊 사후 복기 성적표 →</a>
+            <a class="qti-btn qti-btn-ghost" href="{{ "calendar/" | relURL }}" style="padding:6px 11px;font-size:12.5px;">📅 11·12월 캘린더</a>
             <a class="qti-btn qti-btn-ghost" href="#home-ipo-quant-simulator" style="padding:6px 11px;font-size:12.5px;">🧮 7변수 시뮬레이터</a>
           </div>
         </div>
@@ -173,7 +174,9 @@
         </div>
       </section>
 
-      {{- $listedCodes := slice "475150" "468670" "476060" "462520" "250030" "266690" "451220" "480110" "386380" "439270" -}}
+      {{- $sc := .Site.Data.ipo_scorecard -}}
+      {{- $listedCodes := cond (and $sc $sc.listed_codes) $sc.listed_codes (slice) -}}
+      {{- $fbBySlug := cond (and $sc $sc.by_slug) $sc.by_slug (dict) -}}
       <div class="instant-filter-toolbar" role="region" aria-label="실시간 종목·섹터·수급 조건 인스턴트 검색 및 필터 바">
         <div class="qti-chips" role="toolbar" aria-label="공모주 수급 조건 빠른 필터">
           <button type="button" class="qti-chip is-active" data-filter-chip="all">전체 ({{ len $posts }})</button>
@@ -181,7 +184,7 @@
           <button type="button" class="qti-chip" data-filter-chip="lockup30">확약 30%+</button>
           <button type="button" class="qti-chip" data-filter-chip="lowfloat">저유통 30% 미만</button>
           <button type="button" class="qti-chip" data-filter-chip="confirmed">수요예측 확정</button>
-          <button type="button" class="qti-chip" data-filter-chip="listed">상장완료 백테스트</button>
+          <button type="button" class="qti-chip" data-filter-chip="listed">상장완료 사후복기 ({{ len $fbBySlug }})</button>
         </div>
         <div style="display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap;">
           <div class="qti-gnb-search" style="min-width:255px;">
@@ -241,12 +244,14 @@
                 {{- $l30 := cond (ge .lock_num 30.0) "lockup30 highlock" "" -}}
                 {{- $lf := cond (and (gt .flt_num 0.0) (lt .flt_num 30.0)) "lowfloat" "" -}}
                 {{- $cf := cond (or (gt .comp_num 0.0) (gt .lock_num 0.0)) "confirmed" "" -}}
-                {{- $ls := cond (in $listedCodes .code) "listed" "" -}}
+                {{- $rowFb := index $fbBySlug .slug -}}
+                {{- $ls := cond (or $rowFb (in $listedCodes .code)) "listed" "" -}}
                 <tr data-filter-item data-tags="{{ $l50 }} {{ $l30 }} {{ $lf }} {{ $cf }} {{ $ls }}" data-haystack="{{ .corp }} {{ .code }} {{ .underwriter }} {{ .title }} {{ .band }} 확약 {{ printf "%.1f%%" .lock_num }} 유통 {{ printf "%.1f%%" .flt_num }}">
                   <td class="nowrap">
                     <a href="{{ .rel }}" style="font-weight:700;color:var(--ink);">{{ .corp }}</a>
                     {{- with .code }} <span class="xs muted num">{{ . }}</span>{{ end -}}
-                    <div class="xs muted">{{ .underwriter }}</div>
+                    {{- if $rowFb }} <a href="{{ .rel }}#post-listing-feedback" class="qti-badge {{ if gt $rowFb.close_return_pct 0.0 }}qti-b-ipo{{ else }}qti-b-dday{{ end }} mono" style="font-size:10.5px;padding:1px 6px;">복기 {{ printf "%+.1f%%" $rowFb.close_return_pct }}</a>{{ end -}}
+                    <div class="xs muted">{{ .underwriter }}{{ if $rowFb }} · 상장 {{ $rowFb.listing_date }}{{ end }}</div>
                   </td>
                   <td class="mh num muted nowrap">{{ .date }}</td>
                   <td class="r mh num nowrap">{{ .band }}</td>

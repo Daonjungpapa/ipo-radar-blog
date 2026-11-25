@@ -4,7 +4,9 @@
 {{- $isTaxOrTerm := or (eq .Kind "taxonomy") (eq .Kind "term") (ne (.Data.Singular | default "") "") (in .RelPermalink "/tags/") (in .RelPermalink "/categories/") -}}
 {{- $pages := .Pages.ByDate.Reverse -}}
 {{- $paginator := cond $isTaxOrTerm (.Paginate $pages 18) .Paginator -}}
-{{- $listedCodes := slice "475150" "468670" "476060" "462520" "250030" "266690" "451220" "480110" "386380" "439270" -}}
+{{- $sc := .Site.Data.ipo_scorecard -}}
+{{- $listedCodes := cond (and $sc $sc.listed_codes) $sc.listed_codes (slice) -}}
+{{- $fbBySlug := cond (and $sc $sc.by_slug) $sc.by_slug (dict) -}}
 
 <section class="qti-sec" data-filter-root>
   <div class="qti-in">
@@ -81,20 +83,25 @@
       {{- $cf := "" -}}
       {{- $ls := "" -}}
       {{- $metaHay := "" -}}
+      {{- $pFb := false -}}
       {{- if $pMeta -}}
+        {{- $pFb = index $fbBySlug $pMeta.slug -}}
         {{- $l50 = cond (ge $pMeta.lock_num 50.0) "lockup50" "" -}}
         {{- $l30 = cond (ge $pMeta.lock_num 30.0) "lockup30 highlock" "" -}}
         {{- $lf = cond (and (gt $pMeta.flt_num 0.0) (lt $pMeta.flt_num 30.0)) "lowfloat" "" -}}
         {{- $cf = cond (or (gt $pMeta.comp_num 0.0) (gt $pMeta.lock_num 0.0)) "confirmed" "" -}}
-        {{- $ls = cond (in $listedCodes $pMeta.code) "listed" "" -}}
+        {{- $ls = cond (or $pFb (in $listedCodes $pMeta.code)) "listed" "" -}}
         {{- $metaHay = printf "%s %s %s %s 확약 %.1f%% 유통 %.1f%%" $pMeta.corp $pMeta.code $pMeta.underwriter $pMeta.band $pMeta.lock_num $pMeta.flt_num -}}
       {{- end -}}
       <article class="qti-report-card" data-filter-item data-tags="{{ $l50 }} {{ $l30 }} {{ $lf }} {{ $cf }} {{ $ls }}" data-haystack="{{ $p.Title }} {{ $p.Description }} {{ $metaHay }}">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-          <div style="display:flex;gap:5px;align-items:center;">
+          <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;">
             <span class="qti-badge {{ if $isTender }}qti-b-tender{{ else }}qti-b-ipo{{ end }} mono">{{ $.Site.Params.trackCode | default "REPORT" }}</span>
             {{- if and $pMeta (gt $pMeta.lock_num 0.0) -}}
             <span class="qti-badge qti-b-dday mono">확약 {{ printf "%.1f%%" $pMeta.lock_num }}</span>
+            {{- end -}}
+            {{- if $pFb -}}
+            <span class="qti-badge {{ if gt $pFb.close_return_pct 0.0 }}qti-b-ipo{{ else }}qti-b-done{{ end }} mono">실측 {{ printf "%+.1f%%" $pFb.close_return_pct }}</span>
             {{- end -}}
           </div>
           {{- if not $p.Date.IsZero -}}<time class="xs muted num" datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "2006-01-02" }}</time>{{- end -}}

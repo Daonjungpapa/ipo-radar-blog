@@ -52,20 +52,40 @@
           <span>{{ .Title | truncate 42 }}</span>
         </nav>
 
+{{- $fb := false -}}
+{{- if and $isPost (not $isTender) -}}
+  {{- with .Site.Data.ipo_scorecard -}}
+    {{- with .by_slug -}}
+      {{- with (index . $.Slug) -}}{{- $fb = . -}}{{- end -}}
+      {{- if and (not $fb) (ne $baseName "") -}}
+        {{- with (index . $baseName) -}}{{- $fb = . -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
         <header style="margin-bottom:20px;">
           <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px;">
             <span class="qti-badge {{ if $isTender }}qti-b-tender{{ else }}qti-b-ipo{{ end }} mono">
               {{ .Site.Params.trackCode | default "QTI LAB" }}
             </span>
             <span class="qti-badge qti-b-done mono">읽기 약 {{ $readTime }}분</span>
+            {{- if $fb -}}
+            <a href="#post-listing-feedback" class="qti-badge qti-b-dday mono" style="text-decoration:none;">
+              상장 완료 ({{ $fb.listing_date }}) · 종가 {{ printf "%+.2f%%" $fb.close_return_pct }} 사후 복기 ↓
+            </a>
+            {{- end -}}
           </div>
           <h1 style="font-size:clamp(24px,3vw,33px);margin-bottom:12px;">{{ .Title }}</h1>
           <div class="qti-trust-bar">
             {{- if not .Date.IsZero -}}
-            <span>기준일 <b class="num">{{ .Date.Format "2006-01-02 15:04" }}</b></span>
+            <span>최초 공시 <b class="num">{{ .Date.Format "2006-01-02 15:04" }}</b></span>
             {{- end -}}
-            <span>출처 <b>{{ if $isTender }}조달청 나라장터(G2B){{ else }}금융감독원 전자공시(DART){{ end }}</b></span>
-            <span>방법론 <b>v2.1</b></span>
+            {{- if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) -}}
+            <span>복기 갱신 <b class="num">{{ .Lastmod.Format "2006-01-02 15:04" }}</b></span>
+            {{- end -}}
+            <span>출처 <b>{{ if $isTender }}조달청 나라장터(G2B){{ else }}금융감독원 전자공시(DART) · KRX{{ end }}</b></span>
+            <span>방법론 <b>{{ if $isTender }}v2.1{{ else }}Blend v4.0{{ end }}</b></span>
             {{- if and $meta $meta.source_url -}}
             <span><a href="{{ $meta.source_url }}" target="_blank" rel="noopener noreferrer" style="font-weight:700;">원문 공시 보기 ↗</a></span>
             {{- end -}}
@@ -140,9 +160,6 @@
         {{- if $isPost -}}
           {{- if not $isTender -}}
             {{ partial "report-3d-kpi.html" . }}
-            {{- if in .Title "266690" -}}
-              {{ partial "ipo-alpha-266690.html" . }}
-            {{- end -}}
             {{ partial "ipo-simulator-post.html" . }}
           {{- end -}}
 
