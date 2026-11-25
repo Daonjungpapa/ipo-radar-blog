@@ -81,6 +81,26 @@
     .inline-related-link:hover { transform: translateY(-1px); border-color: var(--primary, #0F766E); }
     .instant-filter-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; padding: 12px 14px; border-radius: 11px; background: var(--surface, #FFFFFF); border: 1px solid var(--border, #E2E8F0); margin-bottom: 16px; }
     .instant-match-pill { font-size: 12.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--bg, #F1F5F9); color: var(--ink, #0F172A); border: 1px solid var(--border, #E2E8F0); white-space: nowrap; }
+    /* Wave 8: Mobile 3-Second Hook Strip & Compact Simulator Toggle */
+    .mobile-hot-strip { margin-bottom: 16px; padding: 14px 16px; border-radius: 12px; background: var(--surface, #FFFFFF); border: 1px solid var(--border, #CBD5E1); border-left: 4px solid var(--primary, #0F766E); }
+    .mobile-hot-strip-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+    .mobile-hot-strip-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .mobile-hot-card { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 9px; background: var(--bg, #F8FAFC); border: 1px solid var(--border, #E2E8F0); text-decoration: none; color: inherit; transition: border-color .15s ease; }
+    .mobile-hot-card:hover { border-color: var(--primary, #0F766E); }
+    .sim-mobile-toggle-wrap { display: none; margin: 12px 0; }
+    .sim-mobile-toggle-btn { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 14px; border-radius: 10px; border: 1.5px solid var(--primary, #0F766E); background: var(--primary-soft, #ECFDF5); color: var(--primary, #0F766E); font-weight: 800; font-size: 13.5px; cursor: pointer; }
+    @media (max-width: 640px) {
+      .mobile-hot-strip-grid { grid-template-columns: 1fr; gap: 8px; }
+      .sim-mobile-toggle-wrap { display: block; }
+      .quant-sim-widget.is-mobile-collapsed .sim-preset-bar,
+      .quant-sim-widget.is-mobile-collapsed .weight-alloc-panel,
+      .quant-sim-widget.is-mobile-collapsed .sim-controls-grid { display: none !important; }
+      .quant-sim-widget { padding: 16px 14px !important; }
+      .qti-3d-stage { height: 210px !important; }
+      .qti-cal { font-size: 11px; }
+      .instant-filter-toolbar { padding: 10px 11px; gap: 8px; }
+      .instant-filter-toolbar .qti-gnb-search { min-width: 100% !important; max-width: 100% !important; }
+    }
   </style>
   {{- if and .IsPage (eq .Section "posts") -}}
     {{- $ld := dict "@context" "https://schema.org" "@type" "TechArticle" "headline" .Title "description" $desc "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "mainEntityOfPage" .Permalink "publisher" (dict "@type" "Organization" "name" $brand "url" $hubUrl) -}}
@@ -148,6 +168,13 @@
   {{- else if .IsHome -}}
     {{- $ld := dict "@context" "https://schema.org" "@type" "WebSite" "name" .Site.Title "alternateName" $brand "description" $desc "url" .Site.BaseURL -}}
     {{ printf "<script type=\"application/ld+json\">%s</script>" ($ld | jsonify) | safeHTML }}
+  {{- else if eq .RelPermalink "/calendar/" -}}
+    {{- $calFaq := dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" (slice
+      (dict "@type" "Question" "name" "공모주 의무보유확약 비율은 몇 % 이상이 수급상 유리한 기준선인가요?" "acceptedAnswer" (dict "@type" "Answer" "text" "과거 상장 완료 10종목 실측 데이터 기준 최종 배정 의무보유확약 30% 이상 구간은 평균 시초가 +67.15%, 윗꼬리 밀림폭 -8.46%를 기록한 반면 20% 미만 저확약 구간은 평균 시초가 +9.67%로 개장 15분 내 고점 형성 후 매물 출회 빈도가 높았습니다."))
+      (dict "@type" "Question" "name" "공모주 청약 시 최소 청약증거금은 어떻게 계산하나요?" "acceptedAnswer" (dict "@type" "Answer" "text" "일반적으로 최소 청약 수량 10주 × 확정 공모가 × 증거금률 50%로 산출됩니다. 확정 공모가가 20,000원이라면 10주 균등 청약 최소 증거금은 100,000원입니다."))
+      (dict "@type" "Question" "name" "상장 당일 최고가(Intraday High)는 주로 어느 시간대에 형성되나요?" "acceptedAnswer" (dict "@type" "Answer" "text" "상장 완료 10종목 통계상 확약 30% 이상 종목은 09:15~10:00 구간에 최고가가 가장 빈번하게 형성되었고, 확약 25% 미만 종목은 09:00~09:15 개장 직후 초단기 고점을 기록하는 비중이 높았습니다."))
+    ) -}}
+    {{ printf "<script type=\"application/ld+json\">%s</script>" ($calFaq | jsonify) | safeHTML }}
   {{- end -}}
   {{- with $adsense -}}
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ . }}" crossorigin="anonymous"></script>
@@ -161,7 +188,20 @@
   <div id="qti-reading-progress" aria-hidden="true"></div>
   {{ partial "header.html" . }}
   {{ block "above_main" . }}{{ end }}
+  {{- if $isTender -}}
   {{ partial "subnav.html" . }}
+  {{- else -}}
+  <nav class="qti-subnav" aria-label="트랙 세부 메뉴">
+    <div class="qti-in">
+      <a href="{{ .Site.Home.RelPermalink }}"{{ if .IsHome }} class="is-active"{{ end }}>홈 · 수급표</a>
+      <a href="{{ "calendar/" | relURL }}"{{ if eq .RelPermalink "/calendar/" }} class="is-active" aria-current="page"{{ end }}>📅 11·12월 청약 캘린더</a>
+      <a href="{{ "posts/" | relURL }}"{{ if eq .Section "posts" }} class="is-active"{{ end }}>전체 리포트</a>
+      <a href="{{ .Site.Home.RelPermalink }}#home-ipo-quant-simulator">🧮 7변수 시뮬레이터</a>
+      <a href="{{ "about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="is-active"{{ end }}>방법론 v3.0</a>
+      <a href="{{ "contact/" | relURL }}"{{ if eq .RelPermalink "/contact/" }} class="is-active"{{ end }}>문의·제보</a>
+    </div>
+  </nav>
+  {{- end -}}
   <main id="main-content">
     {{ block "main" . }}{{ end }}
   </main>
@@ -173,5 +213,130 @@
   {{- if not $isTender -}}
   <script defer src="{{ "js/ipo-quant-sim.js" | relURL }}"></script>
   {{- end -}}
+  <script>
+  /* Wave 8: Mobile Compact Simulator Toggle + GA4 qti_engage Custom Engagement Tracker */
+  (function () {
+    "use strict";
+    var firedActions = {};
+    function trackQtiEngage(action, label, onceKey) {
+      if (onceKey) {
+        if (firedActions[onceKey]) return;
+        firedActions[onceKey] = true;
+      }
+      if (typeof window.gtag === "function") {
+        try {
+          window.gtag("event", "qti_engage", {
+            action: action,
+            event_label: (label || "").slice(0, 80),
+            device_type: window.innerWidth <= 640 ? "mobile" : "desktop",
+            page_path: location.pathname,
+            transport_type: "beacon"
+          });
+        } catch (_) {}
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      /* 1) Mobile <=640px Simulator Compact Toggle (KPI summary first + 1-tap slider expand) */
+      document.querySelectorAll(".quant-sim-widget").forEach(function (widget, idx) {
+        if (widget.querySelector(".sim-mobile-toggle-wrap")) return;
+        var kpiGrid = widget.querySelector(".alpha-kpi-grid");
+        var toggleWrap = document.createElement("div");
+        toggleWrap.className = "sim-mobile-toggle-wrap";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sim-mobile-toggle-btn";
+        btn.setAttribute("aria-expanded", "false");
+        btn.textContent = "🧮 7변수 가중치 상세 조절 펼치기";
+        toggleWrap.appendChild(btn);
+
+        if (window.innerWidth <= 640) {
+          widget.classList.add("is-mobile-collapsed");
+        }
+        if (kpiGrid && kpiGrid.parentNode) {
+          kpiGrid.parentNode.insertBefore(toggleWrap, kpiGrid);
+        } else {
+          widget.insertBefore(toggleWrap, widget.firstChild);
+        }
+
+        btn.addEventListener("click", function () {
+          var collapsed = widget.classList.toggle("is-mobile-collapsed");
+          btn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+          btn.textContent = collapsed ? "🧮 7변수 가중치 상세 조절 펼치기" : "▲ 7변수 가중치 상세 조절 접기";
+          trackQtiEngage("simulator_mobile_toggle", (collapsed ? "collapse:" : "expand:") + (widget.id || idx));
+        });
+
+        widget.addEventListener("input", function (ev) {
+          if (ev.target && ev.target.matches("input")) {
+            trackQtiEngage("simulator_interact", ev.target.getAttribute("data-weight-slider") || ev.target.getAttribute("data-sim-num") || "slider", "sim_input_" + idx);
+          }
+        });
+        widget.addEventListener("click", function (ev) {
+          var t = ev.target && ev.target.closest("[data-weight-preset],[data-sim-preset]");
+          if (t) {
+            trackQtiEngage("simulator_preset", t.getAttribute("data-weight-preset") || t.getAttribute("data-sim-preset") || "preset");
+          }
+        });
+      });
+
+      /* 2) TOC clicks */
+      var tocEl = document.getElementById("qti-toc-list");
+      if (tocEl) {
+        tocEl.addEventListener("click", function (ev) {
+          var a = ev.target && ev.target.closest("a");
+          if (a) trackQtiEngage("toc_click", (a.textContent || "").trim());
+        });
+      }
+
+      /* 3) FAQ Accordion toggle */
+      document.querySelectorAll("#report-faq details.faq-item").forEach(function (det, i) {
+        det.addEventListener("toggle", function () {
+          if (det.open) {
+            var sum = det.querySelector("summary");
+            trackQtiEngage("faq_toggle", sum ? (sum.textContent || "").trim() : "faq_" + i);
+          }
+        });
+      });
+
+      /* 4) Instant Search & Filter Chips */
+      document.querySelectorAll("[data-filter-chip]").forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          trackQtiEngage("search_filter_chip", chip.getAttribute("data-filter-chip") || "all");
+        });
+      });
+      var searchTimer = null;
+      document.querySelectorAll("[data-filter-search]").forEach(function (inp) {
+        inp.addEventListener("input", function () {
+          clearTimeout(searchTimer);
+          var v = (inp.value || "").trim();
+          if (!v) return;
+          searchTimer = setTimeout(function () {
+            trackQtiEngage("search_filter_input", v, "search_used");
+          }, 500);
+        });
+      });
+
+      /* 5) Internal circulation CTA clicks (inline related, bottom related, hot strip, calendar) */
+      document.addEventListener("click", function (ev) {
+        var link = ev.target && ev.target.closest(".inline-related-callout a, .related-reports a, .mobile-hot-strip a, a[href*='/calendar/']");
+        if (link) {
+          trackQtiEngage("internal_nav_click", link.getAttribute("href") || "");
+        }
+      });
+
+      /* 6) 50% Scroll Depth Engagement Trigger (fires once per page) */
+      function onScrollDepth() {
+        var docH = document.documentElement.scrollHeight - window.innerHeight;
+        if (docH <= 120) return;
+        var pct = ((window.pageYOffset || document.documentElement.scrollTop || 0) / docH) * 100;
+        if (pct >= 50) {
+          trackQtiEngage("scroll_50", location.pathname, "scroll_50");
+          window.removeEventListener("scroll", onScrollDepth);
+        }
+      }
+      window.addEventListener("scroll", onScrollDepth, { passive: true });
+    });
+  })();
+  </script>
 </body>
 </html>

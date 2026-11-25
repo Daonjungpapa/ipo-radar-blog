@@ -139,9 +139,39 @@
       <div class="qti-trust-bar" style="margin-bottom:18px;">
         <span>기준일 <b class="num">{{ $ipo.updated | default (now.Format "2006-01-02 06:30") }}</b></span>
         <span>출처 <b>금융감독원 전자공시(DART) · KIND</b></span>
-        <span>방법론 <b>v2.1</b></span>
+        <span>방법론 <b>v3.0</b></span>
         <span>추적 종목 <b class="num">{{ len $posts }}건</b></span>
       </div>
+
+      {{- /* Wave 8: Mobile & Desktop 3-Second Hook Above-the-Fold Hot IPO Strip + /calendar/ Pillar Link */ -}}
+      <section class="mobile-hot-strip" id="mobile-hot-ipo-strip" aria-label="최신 주목 공모주 즉시 열람 및 11·12월 청약 캘린더">
+        <div class="mobile-hot-strip-head">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;">
+            <span class="qti-badge qti-b-ipo mono">🔥 HOT IPO · 3초 요약</span>
+            <strong style="font-size:14.5px;color:var(--ink);">지금 주목해야 할 최신 DART 공모주 리포트</strong>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <a class="qti-btn qti-btn-primary" href="{{ "calendar/" | relURL }}" style="padding:6px 11px;font-size:12.5px;">📅 11·12월 청약 캘린더 총정리 →</a>
+            <a class="qti-btn qti-btn-ghost" href="#home-ipo-quant-simulator" style="padding:6px 11px;font-size:12.5px;">🧮 7변수 시뮬레이터</a>
+          </div>
+        </div>
+        <div class="mobile-hot-strip-grid">
+          {{- range first 3 $ipo.items -}}
+          <a class="mobile-hot-card" href="{{ .rel }}">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
+              <strong style="font-size:14px;color:var(--ink);">{{ .corp }} <span class="xs muted num">{{ .code }}</span></strong>
+              {{- if gt .lock_num 0.0 -}}
+              <span class="qti-badge qti-b-dday mono">확약 {{ printf "%.1f%%" .lock_num }}</span>
+              {{- else -}}
+              <span class="qti-badge qti-b-ipo mono">청약예정</span>
+              {{- end -}}
+            </div>
+            <div class="xs muted num">공모가 {{ .band | truncate 22 }} · 경쟁률 {{ if gt .comp_num 0.0 }}{{ lang.FormatNumber 1 .comp_num }}:1{{ else }}수요예측 전{{ end }}</div>
+            <div class="xs" style="color:var(--primary);font-weight:700;margin-top:2px;">청약일정 · 유통물량 분석 보기 →</div>
+          </a>
+          {{- end -}}
+        </div>
+      </section>
 
       {{- $listedCodes := slice "475150" "468670" "476060" "462520" "250030" "266690" "451220" "480110" "386380" "439270" -}}
       <div class="instant-filter-toolbar" role="region" aria-label="실시간 종목·섹터·수급 조건 인스턴트 검색 및 필터 바">
