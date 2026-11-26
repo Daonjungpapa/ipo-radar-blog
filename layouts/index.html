@@ -11,6 +11,21 @@
       <span>기준 <b class="num">{{ $td.updated | default (now.Format "2006-01-02 06:30") }}</b></span>
     </div>
   </div>
+{{- else -}}
+  {{- $dm := .Site.Data.ipo_daily_macro -}}
+  {{- if and $dm $dm.hub_ticker_summary -}}
+  {{- $ht := $dm.hub_ticker_summary -}}
+  <div class="qti-ticker" role="region" aria-label="매일 07:50 글로벌 거시 및 IPO 시장온도 티커">
+    <div class="qti-in">
+      <span><a href="{{ "daily/" | relURL }}" style="color:inherit;text-decoration:none;font-weight:700;">🌐 {{ $ht.date }} 거시×IPO 온도</a></span>
+      <span>V7 <b>{{ if ne $ht.v7_pct nil }}{{ printf "%+.2f%%" $ht.v7_pct }}{{ else }}—{{ end }}</b> ({{ $ht.regime_label }})</span>
+      <span>미10Y <b>{{ if $ht.us10y_pct }}{{ printf "%.2f%%" $ht.us10y_pct }}{{ else }}—{{ end }}</b></span>
+      <span>원/달러 <b>{{ if $ht.usdkrw }}{{ lang.FormatNumber 0 $ht.usdkrw }}원{{ else }}—{{ end }}</b></span>
+      <span>7일 확약해제 <b>{{ $ht.lockup_7d_count | default 0 }}건 ({{ printf "%.0f억" ($ht.lockup_7d_eok | default 0) }})</b></span>
+      <span><a href="{{ "daily/" | relURL }}" style="color:var(--accent);font-weight:700;text-decoration:underline;">데일리 브리프 보기 →</a></span>
+    </div>
+  </div>
+  {{- end -}}
 {{- end -}}
 {{ end }}
 
@@ -151,7 +166,8 @@
             <strong style="font-size:14.5px;color:var(--ink);">최신 DART 공모주 리포트 &amp; 상장일 사후 복기</strong>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <a class="qti-btn qti-btn-primary" href="{{ "scorecard/" | relURL }}" style="padding:6px 11px;font-size:12.5px;">📊 사후 복기 성적표 →</a>
+            <a class="qti-btn qti-btn-primary" href="{{ "daily/" | relURL }}" style="padding:6px 11px;font-size:12.5px;">🌐 데일리 거시·V7 →</a>
+            <a class="qti-btn qti-btn-ghost" href="{{ "scorecard/" | relURL }}" style="padding:6px 11px;font-size:12.5px;">📊 사후 복기 성적표</a>
             <a class="qti-btn qti-btn-ghost" href="{{ "calendar/" | relURL }}" style="padding:6px 11px;font-size:12.5px;">📅 11·12월 캘린더</a>
             <a class="qti-btn qti-btn-ghost" href="#home-ipo-quant-simulator" style="padding:6px 11px;font-size:12.5px;">🧮 7변수 시뮬레이터</a>
           </div>

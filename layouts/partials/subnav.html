@@ -9,6 +9,7 @@
       <a href="{{ "contact/" | relURL }}"{{ if eq .RelPermalink "/contact/" }} class="is-active"{{ end }}>문의·제보</a>
     {{- else -}}
       <a href="{{ .Site.Home.RelPermalink }}"{{ if .IsHome }} class="is-active"{{ end }}>청약 캘린더</a>
+      <a href="{{ "daily/" | relURL }}"{{ if eq .RelPermalink "/daily/" }} class="is-active"{{ end }}>데일리 거시</a>
       <a href="{{ "posts/" | relURL }}"{{ if eq .Section "posts" }} class="is-active"{{ end }}>리포트</a>
       <a href="{{ "scorecard/" | relURL }}"{{ if eq .RelPermalink "/scorecard/" }} class="is-active"{{ end }}>사후 복기 성적표</a>
       <a href="{{ .Site.Home.RelPermalink }}#home-ipo-quant-simulator">7변수 시뮬레이터</a>

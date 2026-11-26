@@ -16,6 +16,8 @@
         <ul>
           <li><a href="{{ $hub }}">통합 리서치 허브 (qtilab.com)</a></li>
           <li><a href="https://ipo.qtilab.com/">IPO 퀀트 수급 레이더</a></li>
+          <li><a href="https://ipo.qtilab.com/daily/">데일리 거시 × IPO 시장온도 (07:50)</a></li>
+          <li><a href="https://ipo.qtilab.com/scorecard/">IPO 사후 복기 성적표</a></li>
           <li><a href="https://tender.qtilab.com/">공공입찰 시방서 인텔리전스</a></li>
           <li><a href="{{ $hub }}b2b/">마스터 엑셀 구독 · B2B 구축</a></li>
         </ul>
@@ -27,8 +29,9 @@
           <li><a href="{{ "privacy/" | relURL }}">개인정보처리방침</a></li>
           <li><a href="{{ "terms/" | relURL }}">이용약관 · 면책조항</a></li>
           <li><a href="{{ "contact/" | relURL }}">문의 · 데이터 정정 제보 (lastima33@gmail.com)</a></li>
-          {{- with .Site.Params.telegramInviteUrl }}
-          <li><a href="{{ . }}" target="_blank" rel="noopener">텔레그램 새 글 알림 채널 ↗</a></li>
+          {{- $tgUrl := strings.TrimSpace (.Site.Params.telegramInviteUrl | default "") -}}
+          {{- if and $tgUrl (not (in $tgUrl "your_public_channel")) }}
+          <li><a href="{{ $tgUrl }}" target="_blank" rel="noopener">텔레그램 새 글 알림 채널 ↗</a></li>
           {{- end }}
         </ul>
       </div>

@@ -1,0 +1,538 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-27",
+  "generated_at_kst": "2026-11-27 05:43 KST",
+  "generated_iso_kst": "2026-11-27T05:43:08+09:00",
+  "disclaimer": "본 페이지는 미 연준(FRED)·글로벌 시장 확정 수치·기획재정부/금융감독원 공식 발표·OpenDART·KRX 공개 데이터를 매일 평일 07:50 KST 자동 집계하는 단일 상시 갱신 브리핑입니다. 특정 종목·시장에 대한 투자 권유가 아니며 과거 통계 분포는 미래 수익을 보장하지 않습니다.",
+  "global_markets": [
+    {
+      "key": "sp500",
+      "label": "미국 S&P 500",
+      "symbol": ".INX",
+      "value": 7182.78,
+      "unit": "pt",
+      "chg_1d_pct": -0.25,
+      "chg_5d_pct": -1.92,
+      "as_of": "2026-11-25",
+      "source": "NYSE 정규장 마감",
+      "ipo_checkpoint": "대형 성장주 위험선호 점검",
+      "stale": false
+    },
+    {
+      "key": "nasdaq",
+      "label": "미국 NASDAQ 종합",
+      "symbol": ".IXIC",
+      "value": 23585.8,
+      "unit": "pt",
+      "chg_1d_pct": -0.62,
+      "chg_5d_pct": -3.46,
+      "as_of": "2026-11-25",
+      "source": "NASDAQ 정규장 마감",
+      "ipo_checkpoint": "국내 코스닥 기술·성장 IPO 동조 변수",
+      "stale": false
+    },
+    {
+      "key": "sox",
+      "label": "필라델피아 반도체 (SOX)",
+      "symbol": ".SOX",
+      "value": 8774.86,
+      "unit": "pt",
+      "chg_1d_pct": -0.65,
+      "chg_5d_pct": -9.1,
+      "as_of": "2026-11-25",
+      "source": "NASDAQ 정규장 마감",
+      "ipo_checkpoint": "AI·반도체·소부장 공모주 섹터 온도",
+      "stale": false
+    },
+    {
+      "key": "us10y",
+      "label": "미국 국채 10년물",
+      "symbol": "US10YT=RR",
+      "value": 4.85,
+      "unit": "%",
+      "chg_1d_pct": -1.1,
+      "chg_5d_pct": -4.3,
+      "as_of": "2026-11-25",
+      "source": "미 국채 시장 · FRED",
+      "ipo_checkpoint": "고금리 지속 시 성장주 밸류에이션 부담",
+      "stale": false
+    },
+    {
+      "key": "vix",
+      "label": "변동성 지수 (VIX)",
+      "symbol": ".VIX",
+      "value": 28.29,
+      "unit": "pt",
+      "chg_1d_pct": 7.32,
+      "chg_5d_pct": 15.19,
+      "as_of": "2026-11-25",
+      "source": "CBOE 마감 · FRED",
+      "ipo_checkpoint": "25 상회 시 단기 위험회피 심화 구간",
+      "stale": false
+    },
+    {
+      "key": "usdkrw",
+      "label": "원/달러 환율 (USD/KRW)",
+      "symbol": "FX_USDKRW",
+      "value": 1344.0,
+      "unit": "원",
+      "chg_1d_pct": -0.11,
+      "chg_5d_pct": 0.64,
+      "as_of": "2026-11-26",
+      "source": "서울외환시장 · FRED",
+      "ipo_checkpoint": "외국인 코스닥 수급 연동 핵심 변수",
+      "stale": false
+    }
+  ],
+  "fred_rates": {
+    "dgs10": {
+      "value": 4.91,
+      "prev": 4.92,
+      "chg_bp": -1.0,
+      "as_of": "2026-11-24",
+      "stale": false
+    },
+    "dgs2": {
+      "value": 4.63,
+      "prev": 4.63,
+      "chg_bp": 0.0,
+      "as_of": "2026-11-24",
+      "stale": false
+    },
+    "spread_10y_2y_bp": 28.0,
+    "dff": {
+      "value": 3.88,
+      "prev": 3.88,
+      "chg_bp": 0.0,
+      "as_of": "2026-11-24",
+      "stale": false
+    },
+    "cpi_yoy_pct": {
+      "value": 4.08,
+      "index": 337.476,
+      "as_of": "2026-10-01",
+      "stale": false
+    },
+    "dtwexbgs": {
+      "value": 123.6,
+      "as_of": "2026-11-20",
+      "stale": false
+    }
+  },
+  "korea_v7": {
+    "as_of": "2026-11-26",
+    "kospi_close": 4711.21,
+    "kospi_1d_pct": 0.29,
+    "kospi_5d_pct": -8.3,
+    "kosdaq_close": 655.71,
+    "kosdaq_1d_pct": 0.78,
+    "kosdaq_5d_pct": -4.25,
+    "v7_pct": -5.46,
+    "regime_key": "MACRO_SHOCK",
+    "regime_label": "V7 ≤ -3.0% (거시 급락 충격)",
+    "regime_short": "거시 급락 충격",
+    "regime_badge_class": "qti-b-dday",
+    "stale": false
+  },
+  "v7_regime_benchmarks": [
+    {
+      "key": "MACRO_SHOCK",
+      "label": "V7 ≤ -3.0% (거시 급락 충격)",
+      "is_current": true,
+      "n": 43,
+      "close_p50_pct": 8.5,
+      "close_mean_pct": 35.8,
+      "pos_rate_pct": 55.8,
+      "y1_p50_eok": 33.2,
+      "bear_fade_pct": 81.4,
+      "upper_wick_p50_pct": 32.2
+    },
+    {
+      "key": "CAUTIOUS_PULLBACK",
+      "label": "-3.0% < V7 < 0.0% (약세 · 조정)",
+      "is_current": false,
+      "n": 75,
+      "close_p50_pct": 38.6,
+      "close_mean_pct": 63.0,
+      "pos_rate_pct": 76.0,
+      "y1_p50_eok": 160.0,
+      "bear_fade_pct": 73.3,
+      "upper_wick_p50_pct": 28.8
+    },
+    {
+      "key": "NORMAL_CONSTRUCTIVE",
+      "label": "0.0% ≤ V7 < +3.0% (평시 · 완만 강세)",
+      "is_current": false,
+      "n": 80,
+      "close_p50_pct": 54.7,
+      "close_mean_pct": 81.5,
+      "pos_rate_pct": 80.0,
+      "y1_p50_eok": 200.9,
+      "bear_fade_pct": 68.8,
+      "upper_wick_p50_pct": 26.9
+    },
+    {
+      "key": "SHORT_TERM_SURGE",
+      "label": "V7 ≥ +3.0% (단기 급등 랠리)",
+      "is_current": false,
+      "n": 27,
+      "close_p50_pct": 25.7,
+      "close_mean_pct": 65.0,
+      "pos_rate_pct": 77.8,
+      "y1_p50_eok": 75.0,
+      "bear_fade_pct": 74.1,
+      "upper_wick_p50_pct": 26.7
+    }
+  ],
+  "trailing_30d_ipo": {
+    "window_days": 30,
+    "pool_total_n": 225,
+    "count": 13,
+    "close_p50_pct": -20.24,
+    "pos_count": 5,
+    "pos_rate_pct": 38.5,
+    "regime_label": "공모주 시장 냉각기",
+    "recent_items": [
+      {
+        "corp_name": "엠비디",
+        "stock_code": "498150",
+        "listing_date": "2026-11-24",
+        "close_return_pct": -39.57,
+        "post_rel": "/posts/20261118-000038-엠비디/#post-listing-feedback"
+      },
+      {
+        "corp_name": "에이엘로봇",
+        "stock_code": "471800",
+        "listing_date": "2026-11-18",
+        "close_return_pct": -24.32,
+        "post_rel": "/posts/20261111-471800-에이엘로봇/#post-listing-feedback"
+      },
+      {
+        "corp_name": "옵토닉스",
+        "stock_code": "493260",
+        "listing_date": "2026-11-17",
+        "close_return_pct": 51.42,
+        "post_rel": ""
+      },
+      {
+        "corp_name": "영광와이케이엠씨",
+        "stock_code": "345290",
+        "listing_date": "2026-11-16",
+        "close_return_pct": -16.36,
+        "post_rel": "/posts/20261109-345290-영광와이케이엠씨/#post-listing-feedback"
+      },
+      {
+        "corp_name": "넥스아이",
+        "stock_code": "493410",
+        "listing_date": "2026-11-12",
+        "close_return_pct": -39.88,
+        "post_rel": ""
+      },
+      {
+        "corp_name": "바로팜",
+        "stock_code": "0153R0",
+        "listing_date": "2026-11-11",
+        "close_return_pct": -28.17,
+        "post_rel": "/posts/20261105-0153r0-바로팜/#post-listing-feedback"
+      }
+    ]
+  },
+  "lockup_radar": {
+    "window_7d_count": 6,
+    "window_7d_total_eok": 269.8,
+    "window_30d_count": 14,
+    "window_30d_total_eok": 603.0,
+    "items": [
+      {
+        "release_date": "2026-11-27",
+        "d_day": 0,
+        "d_day_label": "D-0",
+        "corp_name": "넥스아이",
+        "stock_code": "493410",
+        "listing_date": "2026-11-12",
+        "bucket_key": "15d",
+        "bucket_label": "15일 확약",
+        "shares": 155000,
+        "pct_of_listed": 0.34,
+        "offer_value_eok": 12.4,
+        "day1_close_return_pct": -39.88,
+        "post_rel": ""
+      },
+      {
+        "release_date": "2026-11-28",
+        "d_day": 1,
+        "d_day_label": "D-1",
+        "corp_name": "티앤이코리아",
+        "stock_code": "0053F0",
+        "listing_date": "2026-10-29",
+        "bucket_key": "1m",
+        "bucket_label": "1개월 확약",
+        "shares": 233924,
+        "pct_of_listed": 2.06,
+        "offer_value_eok": 35.8,
+        "day1_close_return_pct": 40.52,
+        "post_rel": "/posts/20261023-0053f0-티앤이코리아/#post-listing-feedback"
+      },
+      {
+        "release_date": "2026-11-30",
+        "d_day": 3,
+        "d_day_label": "D-3",
+        "corp_name": "인텔리빅스",
+        "stock_code": "420610",
+        "listing_date": "2026-10-31",
+        "bucket_key": "1m",
+        "bucket_label": "1개월 확약",
+        "shares": 173890,
+        "pct_of_listed": 1.53,
+        "offer_value_eok": 15.7,
+        "day1_close_return_pct": 244.44,
+        "post_rel": "/posts/20261026-420610-인텔리빅스/#post-listing-feedback"
+      },
+      {
+        "release_date": "2026-12-01",
+        "d_day": 4,
+        "d_day_label": "D-4",
+        "corp_name": "영광와이케이엠씨",
+        "stock_code": "345290",
+        "listing_date": "2026-11-16",
+        "bucket_key": "15d",
+        "bucket_label": "15일 확약",
+        "shares": 789085,
+        "pct_of_listed": 5.45,
+        "offer_value_eok": 86.8,
+        "day1_close_return_pct": -16.36,
+        "post_rel": "/posts/20261109-345290-영광와이케이엠씨/#post-listing-feedback"
+      },
+      {
+        "release_date": "2026-12-02",
+        "d_day": 5,
+        "d_day_label": "D-5",
+        "corp_name": "옵토닉스",
+        "stock_code": "493260",
+        "listing_date": "2026-11-17",
+        "bucket_key": "15d",
+        "bucket_label": "15일 확약",
+        "shares": 597678,
+        "pct_of_listed": 6.25,
+        "offer_value_eok": 71.7,
+        "day1_close_return_pct": 51.42,
+        "post_rel": ""
+      },
+      {
+        "release_date": "2026-12-03",
+        "d_day": 6,
+        "d_day_label": "D-6",
+        "corp_name": "에이엘로봇",
+        "stock_code": "471800",
+        "listing_date": "2026-11-18",
+        "bucket_key": "15d",
+        "bucket_label": "15일 확약",
+        "shares": 269294,
+        "pct_of_listed": 2.23,
+        "offer_value_eok": 47.4,
+        "day1_close_return_pct": -24.32,
+        "post_rel": "/posts/20261111-471800-에이엘로봇/#post-listing-feedback"
+      },
+      {
+        "release_date": "2026-12-05",
+        "d_day": 8,
+        "d_day_label": "D-8",
+        "corp_name": "피스피스스튜디오",
+        "stock_code": "0117P0",
+        "listing_date": "2026-06-08",
+        "bucket_key": "6m",
+        "bucket_label": "6개월 확약",
+        "shares": 294512,
+        "pct_of_listed": 2.08,
+        "offer_value_eok": 63.3,
+        "day1_close_return_pct": -36.14,
+        "post_rel": ""
+      },
+      {
+        "release_date": "2026-12-10",
+        "d_day": 13,
+        "d_day_label": "D-13",
+        "corp_name": "동원파츠",
+        "stock_code": "0162D0",
+        "listing_date": "2026-11-10",
+        "bucket_key": "1m",
+        "bucket_label": "1개월 확약",
+        "shares": 208446,
+        "pct_of_listed": 2.25,
+        "offer_value_eok": 55.2,
+        "day1_close_return_pct": 10.94,
+        "post_rel": "/posts/20261105-0162d0-동원파츠/#post-listing-feedback"
+      },
+      {
+        "release_date": "2026-12-16",
+        "d_day": 19,
+        "d_day_label": "D-19",
+        "corp_name": "영광와이케이엠씨",
+        "stock_code": "345290",
+        "listing_date": "2026-11-16",
+        "bucket_key": "1m",
+        "bucket_label": "1개월 확약",
+        "shares": 27351,
+        "pct_of_listed": 0.19,
+        "offer_value_eok": 3.0,
+        "day1_close_return_pct": -16.36,
+        "post_rel": "/posts/20261109-345290-영광와이케이엠씨/#post-listing-feedback"
+      },
+      {
+        "release_date": "2026-12-17",
+        "d_day": 20,
+        "d_day_label": "D-20",
+        "corp_name": "옵토닉스",
+        "stock_code": "493260",
+        "listing_date": "2026-11-17",
+        "bucket_key": "1m",
+        "bucket_label": "1개월 확약",
+        "shares": 276024,
+        "pct_of_listed": 2.89,
+        "offer_value_eok": 33.1,
+        "day1_close_return_pct": 51.42,
+        "post_rel": ""
+      },
+      {
+        "release_date": "2026-12-18",
+        "d_day": 21,
+        "d_day_label": "D-21",
+        "corp_name": "에이엘로봇",
+        "stock_code": "471800",
+        "listing_date": "2026-11-18",
+        "bucket_key": "1m",
+        "bucket_label": "1개월 확약",
+        "shares": 3008,
+        "pct_of_listed": 0.02,
+        "offer_value_eok": 0.5,
+        "day1_close_return_pct": -24.32,
+        "post_rel": "/posts/20261111-471800-에이엘로봇/#post-listing-feedback"
+      },
+      {
+        "release_date": "2026-12-22",
+        "d_day": 25,
+        "d_day_label": "D-25",
+        "corp_name": "와이즈플래닛컴퍼니",
+        "stock_code": "0010S0",
+        "listing_date": "2026-09-23",
+        "bucket_key": "3m",
+        "bucket_label": "3개월 확약",
+        "shares": 12413,
+        "pct_of_listed": 0.12,
+        "offer_value_eok": 1.5,
+        "day1_close_return_pct": 285.83,
+        "post_rel": "/posts/20260917-0010s0-와이즈플래닛컴퍼니/#post-listing-feedback"
+      },
+      {
+        "release_date": "2026-12-26",
+        "d_day": 29,
+        "d_day_label": "D-29",
+        "corp_name": "져스텍",
+        "stock_code": "153890",
+        "listing_date": "2026-06-29",
+        "bucket_key": "6m",
+        "bucket_label": "6개월 확약",
+        "shares": 192075,
+        "pct_of_listed": 1.59,
+        "offer_value_eok": 24.0,
+        "day1_close_return_pct": 40.24,
+        "post_rel": ""
+      },
+      {
+        "release_date": "2026-12-27",
+        "d_day": 30,
+        "d_day_label": "D-30",
+        "corp_name": "스트라드비젼",
+        "stock_code": "475040",
+        "listing_date": "2026-06-30",
+        "bucket_key": "6m",
+        "bucket_label": "6개월 확약",
+        "shares": 1271808,
+        "pct_of_listed": 2.39,
+        "offer_value_eok": 152.6,
+        "day1_close_return_pct": -40.0,
+        "post_rel": ""
+      }
+    ]
+  },
+  "official_bulletins": {
+    "global": [
+      {
+        "source": "ECB",
+        "date": "2026-11-26",
+        "title": "Meeting of 28-29 October 2026",
+        "url": "https://www.ecb.europa.eu//press/accounts/2026/html/ecb.mg261126~ccf28c8071.en.html"
+      },
+      {
+        "source": "Fed",
+        "date": "2026-11-25",
+        "title": "Agencies announce dollar thresholds for applicability of truth in lending and consumer leasing rules for consumer credit and lease transacti",
+        "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20261125b.htm"
+      },
+      {
+        "source": "Fed",
+        "date": "2026-11-25",
+        "title": "Agencies announce dollar thresholds for smaller loan exemption from appraisal requirements for higher-priced mortgage loans",
+        "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20261125a.htm"
+      },
+      {
+        "source": "ECB",
+        "date": "2026-11-25",
+        "title": "ECB and Sveriges Riksbank conclude agreement for Sweden to join T2",
+        "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261125_1~6333a90f3a.en.html"
+      },
+      {
+        "source": "BLS",
+        "date": "2026-11-20",
+        "title": "Major Economic Indicators Latest Numbers",
+        "url": "https://www.bls.gov/bls/"
+      }
+    ],
+    "korea": [
+      {
+        "source": "기획재정부",
+        "date": "2026-11-26",
+        "title": "개인투자용 국채 12월 발행 미실시",
+        "url": "https://www.moef.go.kr/nw/nes/detailNesDtaView.do?searchBbsId1=MOSFBBS_000000000028&searchNttId1=MOSF_000000000080049&menuNo=4010100"
+      },
+      {
+        "source": "기획재정부",
+        "date": "2026-11-26",
+        "title": "AI시대, 전략산업의 미래를 위한 정책과제 제안",
+        "url": "https://www.moef.go.kr/nw/nes/detailNesDtaView.do?searchBbsId1=MOSFBBS_000000000028&searchNttId1=MOSF_000000000080058&menuNo=4010100"
+      },
+      {
+        "source": "기획재정부",
+        "date": "2026-11-26",
+        "title": "26.12월 국고채, 재정증권, 원화표시 외평채 발행 계획",
+        "url": "https://www.moef.go.kr/nw/nes/detailNesDtaView.do?searchBbsId1=MOSFBBS_000000000028&searchNttId1=MOSF_000000000080077&menuNo=4010100"
+      },
+      {
+        "source": "금융감독원",
+        "date": "2026-11-26",
+        "title": "금융에 이야기와 상상을 더하다 제21회 금융공모전 시상식 개최",
+        "url": "https://www.fss.or.kr/fss/bbs/B0000188/view.do?nttId=250034&menuNo=200218&pageIndex=1"
+      },
+      {
+        "source": "금융감독원",
+        "date": "2026-11-26",
+        "title": "건전성 규제 금융 공급 연체채권 관리체계를 종합적으로 정비해 일회성이 아닌 지속가능한 포용금융을 실현하겠습니다.",
+        "url": "https://www.fss.or.kr/fss/bbs/B0000188/view.do?nttId=250028&menuNo=200218&pageIndex=1"
+      }
+    ]
+  },
+  "hub_ticker_summary": {
+    "date": "2026-11-27",
+    "updated_kst": "05:43 KST",
+    "v7_pct": -5.46,
+    "regime_label": "거시 급락 충격",
+    "regime_badge_class": "qti-b-dday",
+    "us10y_pct": 4.85,
+    "usdkrw": 1344.0,
+    "vix": 28.29,
+    "nasdaq_1d_pct": -0.62,
+    "lockup_7d_count": 6,
+    "lockup_7d_eok": 269.8,
+    "daily_url": "https://ipo.qtilab.com/daily/"
+  }
+}
