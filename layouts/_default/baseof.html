@@ -89,7 +89,75 @@
     .mobile-hot-card:hover { border-color: var(--primary, #0F766E); }
     .sim-mobile-toggle-wrap { display: none; margin: 12px 0; }
     .sim-mobile-toggle-btn { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 14px; border-radius: 10px; border: 1.5px solid var(--primary, #0F766E); background: var(--primary-soft, #ECFDF5); color: var(--primary, #0F766E); font-weight: 800; font-size: 13.5px; cursor: pointer; }
+    /* Wave 9: Mobile Sticky Thumb Bar (.mobile-sticky-bar) & Taxonomy Rescue Banner (.taxonomy-rescue-banner) */
+    .mobile-sticky-bar { display: none; }
+    .taxonomy-rescue-banner {
+      margin: 0 0 18px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: var(--primary-soft, #ECFDF5);
+      border: 1.5px solid var(--primary, #0F766E);
+      border-left: 5px solid var(--primary, #0F766E);
+      color: var(--ink, #0F172A);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.65;
+      box-shadow: 0 2px 8px rgba(15, 118, 110, 0.08);
+    }
+    .taxonomy-rescue-banner a {
+      display: inline-block;
+      color: var(--primary, #0F766E);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .taxonomy-rescue-banner a:hover { color: var(--primary-hover, #115E59); }
     @media (max-width: 640px) {
+      body { padding-bottom: 68px; }
+      #qti-back-to-top { bottom: 76px; right: 14px; }
+      .mobile-sticky-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 55;
+        padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+        background: var(--surface, #FFFFFF);
+        border-top: 1px solid var(--border-strong, #CBD5E1);
+        box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.12);
+      }
+      .mobile-sticky-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        min-height: 44px;
+        padding: 9px 10px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1.2;
+        text-align: center;
+        text-decoration: none !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+      }
+      .mobile-sticky-btn-sim {
+        border: 1.5px solid var(--primary, #0F766E);
+        background: var(--primary-soft, #ECFDF5);
+        color: var(--primary, #0F766E);
+      }
+      .mobile-sticky-btn-next {
+        border: 1.5px solid var(--primary, #0F766E);
+        background: var(--primary, #0F766E);
+        color: var(--primary-ink, #FFFFFF) !important;
+      }
+      .taxonomy-rescue-banner { padding: 12px 14px; font-size: 13.2px; }
       .mobile-hot-strip-grid { grid-template-columns: 1fr; gap: 8px; }
       .sim-mobile-toggle-wrap { display: block; }
       .quant-sim-widget.is-mobile-collapsed .sim-preset-bar,
@@ -100,6 +168,9 @@
       .qti-cal { font-size: 11px; }
       .instant-filter-toolbar { padding: 10px 11px; gap: 8px; }
       .instant-filter-toolbar .qti-gnb-search { min-width: 100% !important; max-width: 100% !important; }
+    }
+    @media print {
+      .mobile-sticky-bar { display: none !important; }
     }
   </style>
   {{- if and .IsPage (eq .Section "posts") -}}
@@ -316,12 +387,37 @@
         });
       });
 
-      /* 5) Internal circulation CTA clicks (inline related, bottom related, hot strip, calendar) */
+      /* 5) Internal circulation CTA clicks (inline related, bottom related, hot strip, rescue banner, calendar) */
       document.addEventListener("click", function (ev) {
-        var link = ev.target && ev.target.closest(".inline-related-callout a, .related-reports a, .mobile-hot-strip a, a[href*='/calendar/']");
+        var link = ev.target && ev.target.closest(".inline-related-callout a, .related-reports a, .mobile-hot-strip a, .taxonomy-rescue-banner a, a[href*='/calendar/']");
         if (link) {
           trackQtiEngage("internal_nav_click", link.getAttribute("href") || "");
         }
+      });
+
+      /* 5b) Wave 9 Mobile Sticky Thumb Bar actions */
+      document.querySelectorAll("[data-sticky-sim-jump]").forEach(function (simJumpBtn) {
+        simJumpBtn.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          var simEl = document.getElementById("post-ipo-quant-simulator");
+          if (simEl) {
+            if (simEl.classList.contains("is-mobile-collapsed")) {
+              simEl.classList.remove("is-mobile-collapsed");
+              var mBtn = simEl.querySelector(".sim-mobile-toggle-btn");
+              if (mBtn) {
+                mBtn.setAttribute("aria-expanded", "true");
+                mBtn.textContent = "▲ 7변수 가중치 상세 조절 접기";
+              }
+            }
+            simEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+          trackQtiEngage("sticky_sim_jump", location.pathname);
+        });
+      });
+      document.querySelectorAll("[data-sticky-next-post]").forEach(function (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+          trackQtiEngage("sticky_next_post", nextBtn.getAttribute("href") || "");
+        });
       });
 
       /* 6) 50% Scroll Depth Engagement Trigger (fires once per page) */

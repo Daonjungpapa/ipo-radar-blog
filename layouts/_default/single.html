@@ -270,4 +270,17 @@
     </div>
   </div>
 </section>
+{{- if and $isPost (not $isTender) -}}
+  {{- $nextPostUrl := ("posts/" | absURL) -}}
+  {{- $nextPostTitle := "다음 핵심 공모주 리포트" -}}
+  {{- if gt (len $related) 0 -}}
+    {{- $firstRel := index $related 0 -}}
+    {{- $nextPostUrl = $firstRel.Permalink -}}
+    {{- $nextPostTitle = $firstRel.Title -}}
+  {{- end -}}
+  <nav class="mobile-sticky-bar" aria-label="모바일 빠른 실행 바">
+    <button type="button" class="mobile-sticky-btn mobile-sticky-btn-sim" data-sticky-sim-jump aria-controls="post-ipo-quant-simulator">🧮 7변수 수급 시뮬레이터</button>
+    <a class="mobile-sticky-btn mobile-sticky-btn-next" href="{{ $nextPostUrl }}" data-sticky-next-post title="{{ $nextPostTitle }}">🔥 다음 핵심 공모주 →</a>
+  </nav>
+{{- end -}}
 {{ end }}

@@ -18,6 +18,12 @@
       {{- if eq .Section "posts" -}}{{ .Site.Params.heroSummary }}{{- else -}}"{{ .Title }}" 분류에 수록된 정량 분석 및 요약 리포트 목록입니다.{{- end -}}
     </p>
 
+    {{- if and $isTaxOrTerm (not $isTender) -}}
+    <aside class="taxonomy-rescue-banner" role="region" aria-label="공모주 총정리 캘린더 및 시뮬레이터 바로가기">
+      🎯 찾으시는 공모주의 전체 청약일정·확약 비교는 <a href="{{ "calendar/" | relURL }}">📅 2026년 11·12월 공모주 총정리 캘린더</a> 및 <a href="{{ .Site.Home.RelPermalink }}#home-ipo-quant-simulator">🧮 7변수 수급 시뮬레이터</a>에서 한눈에 확인하세요 →
+    </aside>
+    {{- end -}}
+
     {{- if not $isTax -}}
     <div class="instant-filter-toolbar" role="region" aria-label="실시간 종목·섹터·수급 조건 인스턴트 검색 및 필터 바">
       <div class="qti-chips" role="toolbar" aria-label="공모주 수급 조건 빠른 필터">
