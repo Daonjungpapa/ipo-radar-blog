@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-26 06:59",
-  "updated_iso": "2026-11-26T06:59:07+09:00",
+  "updated": "2026-11-26 16:35",
+  "updated_iso": "2026-11-26T16:35:06+09:00",
   "model_version": "v4.0-blend",
   "weights": {
     "v1_net_float_ratio": 17.04,
@@ -274,7 +274,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 224,
         "peer_count": 15,
         "weights": {
@@ -413,7 +413,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 223,
         "peer_count": 15,
         "weights": {
@@ -552,7 +552,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 221,
         "peer_count": 15,
         "weights": {
@@ -691,7 +691,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 219,
         "peer_count": 15,
         "weights": {
@@ -830,7 +830,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 218,
         "peer_count": 15,
         "weights": {
@@ -969,7 +969,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 215,
         "peer_count": 15,
         "weights": {
@@ -1098,7 +1098,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 214,
         "peer_count": 15,
         "weights": {
@@ -1237,7 +1237,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 212,
         "peer_count": 15,
         "weights": {
@@ -1371,7 +1371,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 212,
         "peer_count": 15,
         "weights": {
@@ -1505,7 +1505,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 211,
         "peer_count": 15,
         "weights": {
@@ -1644,7 +1644,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 208,
         "peer_count": 15,
         "weights": {
@@ -1783,7 +1783,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 207,
         "peer_count": 15,
         "weights": {
@@ -1917,7 +1917,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 206,
         "peer_count": 15,
         "weights": {
@@ -2056,7 +2056,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 203,
         "peer_count": 15,
         "weights": {
@@ -2195,7 +2195,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 202,
         "peer_count": 15,
         "weights": {
@@ -2324,7 +2324,7 @@
       "feedback_mode": "RETRO_BACKTEST",
       "pre": {
         "model_version": "v4.0-blend",
-        "captured_at": "2026-11-26T06:59:07+09:00",
+        "captured_at": "2026-11-26T16:35:06+09:00",
         "pool_size": 201,
         "peer_count": 15,
         "weights": {
